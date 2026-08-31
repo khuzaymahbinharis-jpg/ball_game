@@ -1,0 +1,21 @@
+Track the Game — implementation notes (chronological)
+=====================================================
+
+2026-08-30 — Started from an effectively empty repository. The non-negotiable boundary is that semantics come from a VLM, while classical methods may only associate localizations afterward. I avoided YOLO/SAM/detector dependencies entirely and wrote this boundary into AGENTS.md so later work does not accidentally erode it.
+
+I chose normalized boxes for players because an under-foot marker needs the bottom-centre, while boxes retain more future drawing/tracking information than a single point. The ball is a point for now. Responses have frame IDs, per-object confidences, team, and a single possession flag. A dependency-free strict parser rejects unknown keys, bad types, impossible boxes, and inconsistent ball fields. Pydantic was considered, but a small explicit parser keeps the scaffold understandable and install-light. A generated JSON Schema could be added when the actual provider's structured-output dialect is known.
+
+The ruler is a new canvas with top/left margins and decimal ticks. Importantly, reported values describe the original content in normalized 0–1 coordinates, not the larger ruled bitmap. This convention must be repeated in the real prompt. The original image is copied and remains untouched. Rulers are toggled in configuration for a clean ablation.
+
+For sampling I used every N frames plus the final frame. It is predictable, exposes a single useful ablation parameter, and bounds VLM calls. It does not react to scene cuts or unusually fast play; adaptive sampling is a later experiment only if evidence supports it.
+
+For identity I started with explainable greedy nearest-neighbour association at players' foot points, with a maximum normalized distance and optional hard team constraint. IDs are created by the tracker, not trusted from independent VLM calls. I considered Hungarian assignment and a Kalman filter, but they add dependencies/state before there is real footage showing greedy conflicts. Greedy matching can switch IDs at crossings, fail after camera motion, and cannot model velocity. Tracks have a configurable short missed-anchor memory, though interpolated output currently includes only tracks observed at both endpoints.
+
+Between anchors I linearly interpolate boxes, confidence, and ball positions for IDs present at both ends. Possession switches at the temporal midpoint. This is deliberately transparent, but is weak under curved motion, camera cuts, occlusion, and rapid possession changes. Tomorrow's qualitative failures should decide whether propagation, optical flow, or motion models are justified.
+
+Pillow drawing uses wide colored ellipses below feet rather than debug boxes: cyan Team A, red Team B, a yellow possession pointer, and a conspicuous ball ring. Debug IDs are optional. Scale derives from frame size, with minimum radii for readability.
+
+The mock provider is deterministic and explicitly ignores pixels. That makes end-to-end tests meaningful for data flow and identity persistence without pretending detection occurred. No API adapter, key lookup, network request, measured price, latency, or visual-success claim was added tonight.
+
+Experiment logs are append-only JSONL. Unknown real measurements stay null rather than being invented. Configuration is nested so tomorrow's one-variable-at-a-time ruler, sampling, model, and tracking ablations are straightforward. The ffmpeg boundary handles local decoding/encoding but audio preservation remains future work.
+
