@@ -1,0 +1,72 @@
+{
+  "anchor_frame_interval": 90,
+  "api_batch_seconds": 11.128538500051945,
+  "completed_at": "2026-09-03T05:20:51.615915+00:00",
+  "errors": {
+    "630": "OpenRouterError: OpenRouter response failed schema validation",
+    "810": "OpenRouterError: OpenRouter response failed schema validation"
+  },
+  "experiment_id": "test-2-full-clip-3s-anchors",
+  "failed_calls": 2,
+  "human_evaluation": {
+    "ball_localization_quality": null,
+    "notes": null,
+    "obvious_detection_failures": null,
+    "player_localization_quality": null,
+    "team_assignment_quality": null
+  },
+  "id_switches": null,
+  "known_input_tokens": 23289,
+  "known_minimum_openrouter_cost_usd": 0.02308575,
+  "known_output_tokens": 11509,
+  "lost_tracks": null,
+  "measured_processing_seconds": 21.741562600131147,
+  "missing_anchor_frames": [
+    630,
+    810
+  ],
+  "model": "google/gemini-3.1-flash-lite",
+  "openrouter_cost_is_complete": false,
+  "output_video": "C:\\Users\\salar\\Documents\\Codex\\2026-08-31\\build-x20\\outputs\\ball_game\\outputs\\spurs_thunder_test2_annotated.mp4",
+  "output_video_info": {
+    "duration_seconds": 30.0,
+    "fps": 30.0,
+    "frame_count": 900,
+    "height": 1080,
+    "width": 1920
+  },
+  "planned_anchor_frames": [
+    0,
+    90,
+    180,
+    270,
+    360,
+    450,
+    540,
+    630,
+    720,
+    810,
+    899
+  ],
+  "recovered_tracks": null,
+  "render_seconds": 10.613024100079201,
+  "retries": 0,
+  "schema_validation_failed_calls": 2,
+  "schema_validation_successful_calls": 9,
+  "source_clip": "C:\\Users\\salar\\Documents\\Codex\\2026-08-31\\build-x20\\outputs\\ball_game\\clips\\dev\\spurs_thunder_test.mp4",
+  "status": "completed_with_anchor_errors",
+  "successful_anchor_frames": [
+    0,
+    90,
+    180,
+    270,
+    360,
+    450,
+    540,
+    720,
+    899
+  ],
+  "successful_calls": 9,
+  "unique_track_ids": 21,
+  "vlm_calls_attempted": 11
+}

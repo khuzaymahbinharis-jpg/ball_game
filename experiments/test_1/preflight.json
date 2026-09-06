@@ -1,0 +1,73 @@
+{
+  "approval_gate": "One call only after explicit user approval; no automatic retries.",
+  "clip": {
+    "duration_seconds": 30.0,
+    "fps": 30.0,
+    "frame_count": 900,
+    "height": 1080,
+    "width": 1920
+  },
+  "cost_estimate": {
+    "assumptions": {
+      "expected_tokens": {
+        "input": 2800,
+        "output_including_reasoning": 1600
+      },
+      "high_tokens": {
+        "input": 4500,
+        "output_including_reasoning": 4096
+      },
+      "image_token_estimate": "about 1,548 tokens (six 768px tiles at 258 tokens each)",
+      "low_tokens": {
+        "input": 2000,
+        "output_including_reasoning": 600
+      },
+      "note": "Approximate: provider tokenization and Gemini thinking usage are not known before the call.",
+      "prompt_image": "one 1984x1144 PNG (1920x1080 frame plus 64px rulers)",
+      "vlm_calls": 1
+    },
+    "expected_usd": 0.0031,
+    "high_usd": 0.008,
+    "low_usd": 0.0014
+  },
+  "experiment_id": "test-1-single-ruler-frame",
+  "max_output_tokens": 4096,
+  "model": "google/gemini-3.1-flash-lite",
+  "original_image_resolution": [
+    1920,
+    1080
+  ],
+  "actual_cost_usd": 0.00220325,
+  "actual_input_tokens": 1403,
+  "actual_output_tokens": 1235,
+  "actual_total_wall_clock_seconds": 7.128848000022117,
+  "actual_vlm_latency_seconds": 5.859991200035438,
+  "paid_request_attempted": true,
+  "paid_request_succeeded": true,
+  "prepared_at": "2026-08-31T08:57:09.400713+00:00",
+  "pricing_snapshot": {
+    "captured_at": "2026-08-31T08:35:57.5229179Z",
+    "currency": "USD",
+    "higher_provider_input_per_million_tokens": 0.275,
+    "higher_provider_output_per_million_tokens": 1.65,
+    "listed_image_input_per_million_tokens": 0.25,
+    "listed_input_per_million_tokens": 0.25,
+    "listed_output_per_million_tokens": 1.5,
+    "model": "google/gemini-3.1-flash-lite",
+    "source": "https://openrouter.ai/google/gemini-3.1-flash-lite/pricing"
+  },
+  "prompt_image_resolution": [
+    1984,
+    1144
+  ],
+  "prompt_version": "test1-ruler-v1",
+  "reasoning": {
+    "effort": "minimal",
+    "exclude": true
+  },
+  "ruler_grounding": true,
+  "schema_version": "frame-detection-v2",
+  "source_clip": "clips\\dev\\spurs_thunder_test.mp4",
+  "source_frame_number": 450,
+  "source_timestamp_seconds": 15.0
+}

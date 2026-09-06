@@ -1,0 +1,98 @@
+{
+  "anchor_frame_interval": 90,
+  "anchor_frames": [
+    0,
+    90,
+    180,
+    270,
+    360,
+    450,
+    540,
+    630,
+    720,
+    810,
+    899
+  ],
+  "anchor_interval_seconds": 3.0,
+  "approval_gate": "Requires explicit approval for exactly 11 calls.",
+  "automatic_retries": 0,
+  "batch_attempted_at": "2026-09-03T05:17:57.450543+00:00",
+  "batch_finished_at": "2026-09-03T05:18:08.590020+00:00",
+  "clip": {
+    "duration_seconds": 30.0,
+    "fps": 30.0,
+    "frame_count": 900,
+    "height": 1080,
+    "width": 1920
+  },
+  "cost_estimate": {
+    "assumptions": {
+      "basis": "Test 1 observed usage for the same resolution, prompt, schema, and model.",
+      "input_tokens_per_call_expected": 1403,
+      "note": "Approximate: scene complexity and provider tokenization can change output usage.",
+      "output_tokens_per_call_expected": 1235,
+      "vlm_calls": 11
+    },
+    "expected_usd": 0.0242,
+    "high_usd": 0.088,
+    "low_usd": 0.0154
+  },
+  "experiment_id": "test-2-full-clip-3s-anchors",
+  "known_minimum_openrouter_cost_usd": 0.02308575,
+  "latency_estimate": {
+    "approximate_range_seconds": [
+      22.0,
+      30.0
+    ],
+    "expected_end_to_end_seconds": 24.0,
+    "measured_local_render_seconds": 16.18,
+    "note": "All 11 independent anchors use one bounded parallel wave; provider queueing may vary.",
+    "test1_vlm_request_seconds": 5.86
+  },
+  "max_concurrency": 11,
+  "max_output_tokens": 4096,
+  "measured_render_seconds": 10.613024100079201,
+  "missing_anchor_frames": [
+    630,
+    810
+  ],
+  "model": "google/gemini-3.1-flash-lite",
+  "openrouter_cost_is_complete": false,
+  "original_image_resolution": [
+    1920,
+    1080
+  ],
+  "output_rendered_from_successful_anchors": true,
+  "paid_batch_succeeded": false,
+  "paid_requests_attempted": 11,
+  "prepared_at": "2026-09-03T05:17:57.437534+00:00",
+  "pricing_snapshot": {
+    "captured_at": "2026-09-03T02:59:35.0119534Z",
+    "currency": "USD",
+    "listed_image_input_per_million_tokens": 0.25,
+    "listed_input_per_million_tokens": 0.25,
+    "listed_output_per_million_tokens": 1.5,
+    "model": "google/gemini-3.1-flash-lite",
+    "source": "https://openrouter.ai/google/gemini-3.1-flash-lite/pricing"
+  },
+  "prompt_image_resolution": [
+    1984,
+    1144
+  ],
+  "prompt_version": "fullclip-ruler-v1",
+  "reasoning": {
+    "effort": "minimal",
+    "exclude": true
+  },
+  "ruler_grounding": true,
+  "schema_version": "frame-detection-v2",
+  "source_clip": "clips\\dev\\spurs_thunder_test.mp4",
+  "tracker": {
+    "interpolation": "linear",
+    "max_missed_anchors": 2,
+    "max_normalized_distance": 0.2,
+    "method": "greedy nearest explicit foot point",
+    "team_constraint": true
+  },
+  "vlm_calls": 11
+}

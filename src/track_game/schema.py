@@ -1,14 +1,19 @@
-"""Strict, dependency-free response models for the future VLM boundary."""
+"""Strict structured response models for the VLM boundary."""
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from enum import Enum
 from typing import Any
+
+
+SCHEMA_VERSION = "frame-detection-v2"
 
 
 class Team(str, Enum):
     A = "A"
     B = "B"
-    UNKNOWN = "unknown"
+    UNCERTAIN = "uncertain"
+    # Compatibility alias for the original scaffold.
+    UNKNOWN = "uncertain"
 
 
 def _number(value: Any, name: str) -> float:
@@ -20,6 +25,12 @@ def _number(value: Any, name: str) -> float:
     return value
 
 
+def _exact_fields(data: Any, fields: set[str], name: str) -> dict[str, Any]:
+    if not isinstance(data, dict) or set(data) != fields:
+        raise ValueError(f"{name} requires exactly {', '.join(sorted(fields))}")
+    return data
+
+
 @dataclass(frozen=True)
 class Point:
     x: float
@@ -27,8 +38,7 @@ class Point:
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "Point":
-        if set(data) != {"x", "y"}:
-            raise ValueError("point requires exactly x and y")
+        data = _exact_fields(data, {"x", "y"}, "point")
         return cls(_number(data["x"], "x"), _number(data["y"], "y"))
 
 
@@ -51,9 +61,8 @@ class Box:
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "Box":
-        required = {"left", "top", "right", "bottom"}
-        if set(data) != required:
-            raise ValueError("box requires exactly left, top, right, bottom")
+        fields = {"left", "top", "right", "bottom"}
+        data = _exact_fields(data, fields, "box")
         return cls(*(_number(data[k], k) for k in ("left", "top", "right", "bottom")))
 
 
@@ -62,59 +71,207 @@ class PlayerDetection:
     detection_id: str
     team: Team
     box: Box
+    foot: Point
     confidence: float
+    team_confidence: float
     possesses_ball: bool = False
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "PlayerDetection":
-        allowed = {"detection_id", "team", "box", "confidence", "possesses_ball"}
-        if set(data) - allowed or not {
+        fields = {
             "detection_id",
             "team",
             "box",
+            "foot",
             "confidence",
-        } <= set(data):
-            raise ValueError("invalid player fields")
+            "team_confidence",
+        }
+        data = _exact_fields(data, fields, "player")
         if not isinstance(data["detection_id"], str) or not data["detection_id"]:
             raise ValueError("detection_id must be a non-empty string")
-        if "possesses_ball" in data and not isinstance(data["possesses_ball"], bool):
-            raise ValueError("possesses_ball must be boolean")
         return cls(
             data["detection_id"],
             Team(data["team"]),
             Box.from_dict(data["box"]),
+            Point.from_dict(data["foot"]),
             _number(data["confidence"], "confidence"),
-            data.get("possesses_ball", False),
+            _number(data["team_confidence"], "team_confidence"),
         )
+
+
+@dataclass(frozen=True)
+class BallDetection:
+    center: Point
+    box: Box | None
+    confidence: float
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> "BallDetection":
+        data = _exact_fields(data, {"center", "box", "confidence"}, "ball")
+        return cls(
+            Point.from_dict(data["center"]),
+            None if data["box"] is None else Box.from_dict(data["box"]),
+            _number(data["confidence"], "ball confidence"),
+        )
+
+
+@dataclass(frozen=True)
+class PossessionDetection:
+    player_detection_id: str
+    confidence: float
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> "PossessionDetection":
+        data = _exact_fields(
+            data, {"player_detection_id", "confidence"}, "possession"
+        )
+        player_id = data["player_detection_id"]
+        if not isinstance(player_id, str) or not player_id:
+            raise ValueError("possession player_detection_id must be non-empty")
+        return cls(player_id, _number(data["confidence"], "possession confidence"))
 
 
 @dataclass(frozen=True)
 class FrameDetection:
     frame_id: int
     players: tuple[PlayerDetection, ...]
-    ball: Point | None
-    ball_confidence: float | None
+    ball_detection: BallDetection | None
+    possession: PossessionDetection | None
+    uncertainty_notes: tuple[str, ...]
+
+    @property
+    def ball(self) -> Point | None:
+        return None if self.ball_detection is None else self.ball_detection.center
+
+    @property
+    def ball_confidence(self) -> float | None:
+        return None if self.ball_detection is None else self.ball_detection.confidence
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "FrameDetection":
-        required = {"frame_id", "players", "ball", "ball_confidence"}
+        fields = {"frame_id", "players", "ball", "possession", "uncertainty_notes"}
+        data = _exact_fields(data, fields, "frame response")
         if (
-            set(data) != required
-            or isinstance(data["frame_id"], bool)
+            isinstance(data["frame_id"], bool)
             or not isinstance(data["frame_id"], int)
+            or data["frame_id"] < 0
+            or not isinstance(data["players"], list)
         ):
-            raise ValueError("invalid frame response fields")
-        if data["frame_id"] < 0 or not isinstance(data["players"], list):
             raise ValueError("invalid frame_id or players")
-        ball = None if data["ball"] is None else Point.from_dict(data["ball"])
-        confidence = (
-            None
-            if data["ball_confidence"] is None
-            else _number(data["ball_confidence"], "ball_confidence")
-        )
-        if (ball is None) != (confidence is None):
-            raise ValueError("ball and ball_confidence must both be present or absent")
+        if not isinstance(data["uncertainty_notes"], list) or not all(
+            isinstance(note, str) for note in data["uncertainty_notes"]
+        ):
+            raise ValueError("uncertainty_notes must be a list of strings")
         players = tuple(PlayerDetection.from_dict(p) for p in data["players"])
-        if sum(p.possesses_ball for p in players) > 1:
-            raise ValueError("at most one player may possess the ball")
-        return cls(data["frame_id"], players, ball, confidence)
+        ids = [player.detection_id for player in players]
+        if len(ids) != len(set(ids)):
+            raise ValueError("player detection IDs must be unique")
+        ball = None if data["ball"] is None else BallDetection.from_dict(data["ball"])
+        possession = (
+            None
+            if data["possession"] is None
+            else PossessionDetection.from_dict(data["possession"])
+        )
+        if possession is not None:
+            if possession.player_detection_id not in ids:
+                raise ValueError("possession must reference a returned player")
+            players = tuple(
+                replace(
+                    player,
+                    possesses_ball=player.detection_id
+                    == possession.player_detection_id,
+                )
+                for player in players
+            )
+        return cls(
+            data["frame_id"],
+            players,
+            ball,
+            possession,
+            tuple(data["uncertainty_notes"]),
+        )
+
+
+def frame_detection_json_schema() -> dict[str, Any]:
+    """Return the strict JSON Schema sent through OpenRouter structured outputs."""
+
+    point = {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": {
+            "x": {"type": "number", "minimum": 0, "maximum": 1},
+            "y": {"type": "number", "minimum": 0, "maximum": 1},
+        },
+        "required": ["x", "y"],
+    }
+    box = {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": {
+            key: {"type": "number", "minimum": 0, "maximum": 1}
+            for key in ("left", "top", "right", "bottom")
+        },
+        "required": ["left", "top", "right", "bottom"],
+    }
+    confidence = {"type": "number", "minimum": 0, "maximum": 1}
+    return {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": {
+            "frame_id": {"type": "integer", "minimum": 0},
+            "players": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "additionalProperties": False,
+                    "properties": {
+                        "detection_id": {"type": "string", "minLength": 1},
+                        "team": {"type": "string", "enum": ["A", "B", "uncertain"]},
+                        "box": box,
+                        "foot": point,
+                        "confidence": confidence,
+                        "team_confidence": confidence,
+                    },
+                    "required": [
+                        "detection_id",
+                        "team",
+                        "box",
+                        "foot",
+                        "confidence",
+                        "team_confidence",
+                    ],
+                },
+            },
+            "ball": {
+                "anyOf": [
+                    {"type": "null"},
+                    {
+                        "type": "object",
+                        "additionalProperties": False,
+                        "properties": {
+                            "center": point,
+                            "box": {"anyOf": [{"type": "null"}, box]},
+                            "confidence": confidence,
+                        },
+                        "required": ["center", "box", "confidence"],
+                    },
+                ]
+            },
+            "possession": {
+                "anyOf": [
+                    {"type": "null"},
+                    {
+                        "type": "object",
+                        "additionalProperties": False,
+                        "properties": {
+                            "player_detection_id": {"type": "string", "minLength": 1},
+                            "confidence": confidence,
+                        },
+                        "required": ["player_detection_id", "confidence"],
+                    },
+                ]
+            },
+            "uncertainty_notes": {"type": "array", "items": {"type": "string"}},
+        },
+        "required": ["frame_id", "players", "ball", "possession", "uncertainty_notes"],
+    }

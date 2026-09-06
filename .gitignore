@@ -1,12 +1,16 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.pytest-tmp/
 .venv/
 dist/
 build/
 *.egg-info/
 .env
 outputs/
+clips/
+experiments/*/artifacts/
 experiments/*.jsonl
+experiments/*/*.jsonl
 !experiments/.gitkeep
 

@@ -1,6 +1,6 @@
 # Track the Game
 
-A deliberately small foundation for Zeta Solutions internship Task 02. It turns sampled, **VLM-provided** sports detections into persistent player tracks and FIFA-style Pillow overlays. Tonight's implementation is offline: the deterministic provider does not inspect the image and no API, key, model, or paid service is used.
+A deliberately small foundation for Zeta Solutions internship Task 02. It turns sampled, **VLM-provided** sports detections into persistent player tracks and FIFA-style Pillow overlays. Semantic interpretation stays at the VLM boundary; the optional improved path uses only post-detection data association and VLM-initialized classical optical flow.
 
 ## Architecture
 
@@ -10,23 +10,26 @@ video -> Pillow frames -> anchor sampler -> optional prompt-only rulers
       -> Pillow markers -> encoded video
 ```
 
-The separation is an important constraint. A future VLM is responsible for all semantic interpretation: identifying players, teams, the ball, and possession. `NearestNeighbourTracker` only associates already-localized detections. There is no object detector, segmentation model, or classical semantic detector.
+The separation is a hard constraint. A VLM through OpenRouter is responsible for all semantic interpretation: identifying players, teams, the ball, and possession. `NearestNeighbourTracker` only associates already-localized detections. There is no object detector, segmentation model, or classical semantic detector.
 
 ### Package map
 
-- `schema.py`: strict normalized response boundary (`FrameDetection`, player boxes, ball and confidence).
+- `schema.py`: strict normalized response boundary plus the JSON Schema sent as OpenRouter structured output.
 - `ruler.py`: optional visible 0–1 axes for the prompt image and coordinate conversion against the untouched frame.
 - `sampling.py`: deterministic anchor selection, including the last frame when configured.
-- `provider.py`: provider protocol plus deterministic mock.
-- `tracking.py`: greedy nearest-foot association constrained by team, explicit integer track IDs, missed-anchor tolerance, and linear interpolation.
+- `provider.py`: deterministic mock plus a one-request OpenRouter adapter with no automatic retries.
+- `tracking.py`: configurable greedy or Hungarian association, persistent IDs, soft stabilized team evidence, and active/lost/expired lifecycle accounting.
+- `ball_tracking.py`: VLM-initialized pyramidal LK tracking with optional Kalman smoothing, bounded prediction, and explicit lost/recovered states.
+- `comparison.py`: fixed 2 FPS baseline and improved configurations for controlled A/B runs.
 - `drawing.py`: colored under-player ellipses, possession indicator, highlighted ball, and optional IDs.
-- `video.py`: local `ffmpeg` decode/encode boundary.
-- `experiments.py`: append-only JSONL records whose unknown real measurements remain `null`.
+- `video.py`: local ffmpeg trim, probe, frame extraction, decode, and encode boundary.
+- `experiments.py`: append-only JSONL records for usage, cost, latency, validation, and later tracking evaluation.
+- `test1.py`: zero-cost artifact preparation, explicit one-call approval gate, response validation, and preview rendering.
 - `pipeline.py`: in-memory mock end-to-end composition.
 
 ## Setup and tests
 
-Python 3.11+, Pillow, and pytest are required. `ffmpeg`/`ffprobe` are needed only for real local video I/O.
+Python 3.11+ is required. The project dependency set includes Pillow, HTTP/environment support, and an isolated ffmpeg binary for reproducible local video work.
 
 ```bash
 python -m venv .venv
@@ -35,20 +38,68 @@ python -m pip install -e '.[dev]'
 pytest
 ```
 
-An offline smoke test can construct Pillow frames and call `MockPipeline.process_frames`. Inputs are copied before rulers and drawing; final annotations therefore never contain prompt rulers.
+On Windows PowerShell, activate with `.\.venv\Scripts\Activate.ps1`. An offline smoke test can construct Pillow frames and call `MockPipeline.process_frames`. Inputs are copied before rulers and drawing; final annotations therefore never contain prompt rulers.
 
-## Configuration and ablations
+## Test 1: one ruler-grounded frame
 
-`PipelineConfig` groups sampling, ruler, model, and tracking settings. Record each run with `ExperimentRecord` in `experiments/*.jsonl` (ignored by Git). For controlled experiments, copy a baseline configuration and change exactly one field: model, `every_n_frames`, `ruler.enabled`, matching distance, or team constraint.
+The local source was trimmed from 3:11 through 3:41 and normalized to exactly 30.000 seconds, 30 FPS, and 900 frames at `clips/dev/spurs_thunder_test.mp4`. Clips and generated image artifacts are ignored by Git.
 
-## Tomorrow: adding real inference safely
+Prepare or refresh all zero-cost Test 1 artifacts:
 
-1. Add a separate OpenRouter provider implementing `VLMProvider`. It should accept an explicitly supplied credential at runtime, request JSON matching `FrameDetection`, validate it, retry only bounded transient/validation failures, and never log the key.
-2. Keep the configured Gemini-family model name in `ModelConfig`; do not move HTTP logic into tracking or the pipeline.
-3. Batch/parallelize independent anchor requests with bounded concurrency, then reorder by `frame_id` before tracking.
-4. Decode a short local clip through `read_video_frames`, run the pipeline, then use `write_video_frames`. Preserve audio in a later, explicit muxing step.
-5. Log observed latency, token usage, price, retries, and errors from provider metadata. Never estimate missing values: leave them `null`.
-6. Inspect identity switches, occlusion, camera cuts, ball misses, team confusion, and interpolation drift. Only after the basic method is measured should Hungarian assignment, motion prediction, optical flow, or correlation tracking be considered.
+```bash
+python -m track_game.test1 prepare
+```
 
-Current limitations are intentional: greedy matching has no velocity model; tracks visible in only one endpoint disappear between anchors; linear interpolation cannot follow nonlinear motion or cuts; the mock provider demonstrates plumbing rather than visual quality; video encoding currently omits audio. No benchmark, latency, cost, or quality claim is made.
+This writes the untouched midpoint frame (frame 450), the 64-pixel top/left ruler image, versioned prompt, strict JSON Schema, and preflight manifest under `experiments/test_1/`. The prompt explicitly defines all normalized coordinates relative to the untouched 1920×1080 content, not the 1984×1144 ruler canvas.
 
+Before an approved real run, create a repository-root `.env` containing:
+
+```dotenv
+OPENROUTER_API_KEY=...
+```
+
+`.env` is ignored by Git and the application never serializes or logs the key. Preparing artifacts is not approval to run. After a fresh model-pricing preflight and explicit approval for one request, the single-call command is:
+
+```bash
+python -m track_game.test1 run --approved-call-count 1
+```
+
+The runner refuses any approved count other than exactly one and never retries a failed request automatically. It sends only the ruler-enhanced frame, validates the structured response, renders the result on the original frame with Pillow, and appends returned usage/cost fields to `experiments/test_1/runs.jsonl`. Test 1 returned seven players, a ball, and a possession player with valid schema; its measured cost was $0.00220325.
+
+## Configuration and next steps
+
+`PipelineConfig` groups sampling, ruler, model, and tracking settings. Controlled experiments should change exactly one field at a time. After Test 1, first evaluate its response and preview; then use observed token usage, latency, cost, and grounding failures to decide the next single-variable experiment. Do not jump directly to a full-video run.
+
+## Prepared full-clip Test 2
+
+Test 2 samples 11 ruler-enhanced anchors at frames 0, 90, …, 810, and 899 (three-second spacing plus the exact final frame). It fixes Team A as Oklahoma City blue and Team B as San Antonio black/white across every independent request, associates explicit foot points with the baseline tracker, linearly interpolates all 900 frames, draws compact transparent layers with Pillow, and uses ffmpeg only for compositing/encoding and audio preservation.
+
+```bash
+python -m track_game.fullclip prepare
+```
+
+Preparation is zero-cost. The paid runner requires a separate preflight approval for exactly 11 calls and refuses a duplicate batch when call records already exist:
+
+```bash
+python -m track_game.fullclip run --approved-call-count 11
+```
+
+The approved Test 2 batch made exactly 11 calls with no retries. Nine anchors passed strict validation; frames 630 and 810 failed validation. A degraded output was rendered from the nine valid saved anchors, spanning all 900 frames and preserving audio. The known cost from successful responses is $0.02308575; total cost is incomplete because the two invalid responses' usage was not retained by the original adapter. Measured API batch plus final local render time was 21.74 seconds.
+
+Current limitations are intentional: greedy matching has no velocity model; tracks visible in only one endpoint disappear between anchors; player interpolation cannot follow nonlinear motion or cuts; and optical flow declares the ball lost when its VLM-localized patch cannot be tracked reliably. Test 1 is an interface/grounding result, not a tracking benchmark.
+
+## Prepared 2 FPS tracker comparison
+
+The next experiment holds the clip, model, ruler prompt, schema, and 15-frame sampling interval fixed. One shared set of 61 VLM anchors feeds both the baseline (greedy, hard team constraint, linear ball interpolation) and improved path (Hungarian multi-cue association, soft team history, lost-track reassociation, and VLM-initialized LK/Kalman ball tracking). This avoids paying for duplicate detections.
+
+```bash
+python -m track_game.experiment3 prepare
+```
+
+Preparation is local and cannot call OpenRouter. The paid command is separately gated and must not be run until its current model, exact 61-call count, pricing estimate, and experiment purpose have been shown and explicitly approved:
+
+```bash
+python -m track_game.experiment3 run --approved-call-count 61
+```
+
+Per-anchor usage is append-only. Each variant writes machine metrics for IDs over time, track creation/loss/recovery/expiration, ball loss/recovery, cost, and timing. Manual ID switches, fragmentation, ball misses, team mistakes, and reviewer notes remain `null` until a person evaluates the output.

@@ -5,7 +5,7 @@ from .drawing import annotate_frame
 from .provider import MockVLMProvider, VLMProvider
 from .ruler import add_normalized_rulers
 from .sampling import sample_frame_indices
-from .tracking import NearestNeighbourTracker, TrackedFrame, interpolate_sequence
+from .tracking import TrackedFrame, build_player_tracker, interpolate_sequence
 
 
 class MockPipeline:
@@ -26,10 +26,9 @@ class MockPipeline:
             self.config.sampling.include_last,
         )
         c = self.config.tracking
-        tracker = NearestNeighbourTracker(
-            c.max_normalized_distance, c.team_constraint, c.max_missed_anchors
-        )
+        tracker = build_player_tracker(c)
         anchors = []
+        detections = {}
         for frame_id in indices:
             source = frames[frame_id]
             prompt_image = (
@@ -39,8 +38,21 @@ class MockPipeline:
                 if self.config.ruler.enabled
                 else source.copy()
             )
-            anchors.append(tracker.update(self.provider.detect(frame_id, prompt_image)))
+            detection = self.provider.detect(frame_id, prompt_image)
+            detections[frame_id] = detection
+            anchors.append(tracker.update(detection))
         timeline = interpolate_sequence(anchors)
+        if self.config.ball_tracking.enabled:
+            from .ball_tracking import VLMInitializedBallTracker, apply_ball_track
+
+            ball_anchors = {
+                frame_id: detection.ball_detection
+                for frame_id, detection in detections.items()
+            }
+            ball_result = VLMInitializedBallTracker(
+                self.config.ball_tracking
+            ).track_pil_frames(frames, ball_anchors, timeline)
+            timeline = apply_ball_track(timeline, ball_result)
         by_id = {frame.frame_id: frame for frame in timeline}
         annotated = [
             annotate_frame(image, by_id[i], show_ids)

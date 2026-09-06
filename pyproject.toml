@@ -7,14 +7,27 @@ name = "track-the-game"
 version = "0.1.0"
 description = "VLM-grounded sports tracking pipeline scaffold"
 requires-python = ">=3.11"
-dependencies = ["Pillow>=10"]
+dependencies = [
+    "httpx>=0.28",
+    "imageio-ffmpeg>=0.6",
+    "numpy>=2.1",
+    "opencv-python-headless>=4.10",
+    "Pillow>=10",
+    "python-dotenv>=1.1",
+]
 
 [project.optional-dependencies]
 dev = ["pytest>=8"]
 
+[project.scripts]
+track-game-test1 = "track_game.test1:main"
+track-game-fullclip = "track_game.fullclip:main"
+track-game-experiment3 = "track_game.experiment3:main"
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
+addopts = "--basetemp=.pytest-tmp"
 
 [tool.setuptools.packages.find]
 where = ["src"]
