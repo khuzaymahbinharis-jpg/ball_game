@@ -22,7 +22,7 @@ def draw_player_marker(
 ) -> None:
     x, y = normalized_to_pixel(player.foot.x, player.foot.y, *size)
     radius = max(8, round(min(size) * 0.018))
-    color = TEAM_COLORS[player.team]
+    color = TEAM_COLORS[player.team] if player.tracking_state == "confirmed" else "#b8b8b8"
     draw.ellipse(
         (x - radius * 2, y - radius // 2, x + radius * 2, y + radius // 2),
         outline=color,
@@ -41,7 +41,7 @@ def draw_player_marker(
     if show_id:
         draw.text(
             (x + radius * 2 + 2, y - radius),
-            f"P{player.track_id}",
+            f"P{player.track_id}{'?' if player.tracking_state == 'uncertain' else ''}",
             fill="white",
             stroke_width=2,
             stroke_fill="black",
@@ -95,7 +95,7 @@ def annotation_overlay(
     font = _annotation_font(max(8, round(18 * scale)))
     for player in frame.players:
         x, y = normalized_to_pixel(player.foot.x, player.foot.y, width, height)
-        color = TEAM_COLORS[player.team]
+        color = TEAM_COLORS[player.team] if player.tracking_state == "confirmed" else "#b8b8b8"
         draw.ellipse(
             (x - radius * 2, y - radius // 2, x + radius * 2, y + radius // 2),
             outline=color,
@@ -114,7 +114,7 @@ def annotation_overlay(
         if show_ids:
             draw.text(
                 (x + radius * 2 + 1, y - radius),
-                f"P{player.track_id}",
+                f"P{player.track_id}{'?' if player.tracking_state == 'uncertain' else ''}",
                 fill="white",
                 font=font,
                 stroke_width=1,

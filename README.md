@@ -6,11 +6,12 @@ A deliberately small foundation for Zeta Solutions internship Task 02. It turns 
 
 ```text
 video -> Pillow frames -> anchor sampler -> optional prompt-only rulers
-      -> structured VLM provider -> team-aware association -> interpolation
-      -> Pillow markers -> encoded video
+      -> structured VLM provider -> team-aware anchor association
+      -> VLM-initialized player/ball flow + camera motion + cut guards
+      -> confidence-aware Pillow markers -> encoded video
 ```
 
-The separation is a hard constraint. A VLM through OpenRouter is responsible for all semantic interpretation: identifying players, teams, the ball, and possession. `NearestNeighbourTracker` only associates already-localized detections. There is no object detector, segmentation model, or classical semantic detector.
+The separation is a hard constraint. A VLM through OpenRouter is responsible for all semantic interpretation: identifying players, teams, the ball, and possession. Classical CV may follow only player/ball regions already localized by the VLM, perform geometric association, or estimate non-semantic global image motion and scene changes. It cannot discover a new player or ball, assign a team from jersey pixels, or replace the VLM detector. There is no object detector, segmentation model, or classical semantic detector.
 
 ### Package map
 
@@ -19,6 +20,9 @@ The separation is a hard constraint. A VLM through OpenRouter is responsible for
 - `sampling.py`: deterministic anchor selection, including the last frame when configured.
 - `provider.py`: deterministic mock plus a one-request OpenRouter adapter with no automatic retries.
 - `tracking.py`: configurable greedy or Hungarian association, persistent IDs, soft stabilized team evidence, and active/lost/expired lifecycle accounting.
+- `camera_motion.py`: generic Shi–Tomasi/LK keypoints, robust translation or partial-affine estimation, confidence, and identity fallback.
+- `player_cv_tracking.py`: one batched sparse-LK call per frame over features inside VLM player boxes, camera fallback, bounded coasting, anchor correction, and confidence logging. It has no path for discovering a player.
+- `scene_cut.py`: non-semantic frame-difference and grayscale-histogram cut scoring.
 - `ball_tracking.py`: VLM-initialized pyramidal LK tracking with optional Kalman smoothing, bounded prediction, and explicit lost/recovered states.
 - `comparison.py`: fixed 2 FPS baseline and improved configurations for controlled A/B runs.
 - `drawing.py`: colored under-player ellipses, possession indicator, highlighted ball, and optional IDs.
@@ -70,6 +74,8 @@ The runner refuses any approved count other than exactly one and never retries a
 
 `PipelineConfig` groups sampling, ruler, model, and tracking settings. Controlled experiments should change exactly one field at a time. After Test 1, first evaluate its response and preview; then use observed token usage, latency, cost, and grounding failures to decide the next single-variable experiment. Do not jump directly to a full-video run.
 
+The tracking controls are independent: `association_method` selects greedy or Hungarian matching; `team_constraint` selects hard or soft team treatment; `player_cv_tracking.enabled` selects sparse-LK player following instead of interpolation; and camera motion, scene cuts, track confidence, and the existing ball tracker each have their own `enabled` flag. There is deliberately no opaque all-in-one smart-tracker switch.
+
 ## Prepared full-clip Test 2
 
 Test 2 samples 11 ruler-enhanced anchors at frames 0, 90, …, 810, and 899 (three-second spacing plus the exact final frame). It fixes Team A as Oklahoma City blue and Team B as San Antonio black/white across every independent request, associates explicit foot points with the baseline tracker, linearly interpolates all 900 frames, draws compact transparent layers with Pillow, and uses ffmpeg only for compositing/encoding and audio preservation.
@@ -103,3 +109,23 @@ python -m track_game.experiment3 run --approved-call-count 61
 ```
 
 Per-anchor usage is append-only. Each variant writes machine metrics for IDs over time, track creation/loss/recovery/expiration, ball loss/recovery, cost, and timing. Manual ID switches, fragmentation, ball misses, team mistakes, and reviewer notes remain `null` until a person evaluates the output.
+
+## Zero-cost player CV tracking ablation
+
+Test 4 reuses the saved Test 3 VLM response JSON and never constructs an OpenRouter provider. Its control is the existing improved tracker: Hungarian association, soft team history, persistent logical tracks, linear between-anchor player interpolation, and the current VLM-initialized ball tracker. The new variant changes only player-local sparse LK, global camera translation, scene-cut spatial resets, and track confidence.
+
+```bash
+python -m track_game.experiment4 render-saved
+```
+
+Both variants render locally. Detailed per-frame camera, cut, and confidence JSONL logs remain ignored; compact preflight and metrics JSON are committed. Fewer machine-created IDs must not be described as fewer real ID switches without manual video review.
+
+## Prepared 1 FPS experiment
+
+Test 5 prepares exactly 31 anchors at frames `0, 30, 60, …, 870, 899`, preserving the same Gemini 3.1 Flash Lite model, ruler, prompt, schema, player CV configuration, camera/cut/confidence behavior, and ball tracker. Preparation extracts local ruler images and writes a cost preflight but contains no paid-run command.
+
+```bash
+python -m track_game.experiment5 prepare
+```
+
+The 31-call batch must not be run until the current pricing, measured prior per-anchor cost, low/expected/high total, purpose, and changed variable are presented and the user explicitly approves exactly 31 calls.

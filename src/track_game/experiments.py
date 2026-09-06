@@ -110,6 +110,10 @@ class HumanTrackingEvaluation:
     fragmentation: int | None = None
     ball_misses: int | None = None
     team_assignment_mistakes: int | None = None
+    marker_drift_events: int | None = None
+    player_tracking_failures: int | None = None
+    scene_cut_failures: int | None = None
+    overall_visual_quality_notes: str | None = None
     notes: str | None = None
 
     def __post_init__(self) -> None:
@@ -118,6 +122,9 @@ class HumanTrackingEvaluation:
             self.fragmentation,
             self.ball_misses,
             self.team_assignment_mistakes,
+            self.marker_drift_events,
+            self.player_tracking_failures,
+            self.scene_cut_failures,
         )
         if any(value is not None and value < 0 for value in counts):
             raise ValueError("human evaluation counts cannot be negative")
@@ -146,6 +153,18 @@ class TrackingMetricsRecord:
     ball_lost_events: int | None
     ball_recovered_events: int | None
     ball_lost_frames: int | None
+    uncertain_track_frames: int | None = None
+    uncertainty_recoveries: int | None = None
+    scene_cut_frames: tuple[int, ...] = ()
+    camera_motion_successes: int | None = None
+    camera_motion_failures: int | None = None
+    camera_motion_seconds: float | None = None
+    player_cv_tracking_seconds: float | None = None
+    player_cv_total_pass_seconds: float | None = None
+    scene_cut_detection_seconds: float | None = None
+    ball_tracking_seconds: float | None = None
+    rendering_seconds: float | None = None
+    average_local_seconds_per_frame: float | None = None
     human_evaluation: HumanTrackingEvaluation = field(
         default_factory=HumanTrackingEvaluation
     )
@@ -172,6 +191,17 @@ class TrackingMetricsRecord:
             self.ball_lost_events,
             self.ball_recovered_events,
             self.ball_lost_frames,
+            self.uncertain_track_frames,
+            self.uncertainty_recoveries,
+            self.camera_motion_successes,
+            self.camera_motion_failures,
+            self.camera_motion_seconds,
+            self.player_cv_tracking_seconds,
+            self.player_cv_total_pass_seconds,
+            self.scene_cut_detection_seconds,
+            self.ball_tracking_seconds,
+            self.rendering_seconds,
+            self.average_local_seconds_per_frame,
         )
         if any(value is not None and value < 0 for value in measurements):
             raise ValueError("tracking measurements cannot be negative")

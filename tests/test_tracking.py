@@ -7,7 +7,9 @@ from track_game.tracking import (
     NearestNeighbourTracker,
     _hungarian_minimize,
     interpolate_frames,
+    TrackedPlayer,
 )
+from track_game.schema import Box, Point
 
 
 def detection(frame, x, team="A"):
@@ -157,3 +159,35 @@ def test_lost_hungarian_track_recovers_then_expires_after_limit():
     replacement = tracker.update(detection(90, 0.1))
     assert replacement.players[0].track_id != first.players[0].track_id
     assert tracker.lifecycle.tracks_expired == 1
+
+
+def test_hungarian_uses_cv_prediction_at_next_anchor():
+    config = TrackingConfig(
+        max_normalized_distance=0.25,
+        association_method="hungarian",
+        hungarian=HungarianConfig(
+            foot_distance_weight=1.0,
+            iou_weight=0.0,
+            size_change_weight=0.0,
+            motion_weight=0.0,
+            team_mismatch_penalty=0.0,
+            max_assignment_cost=1.1,
+        ),
+    )
+    tracker = HungarianPlayerTracker(config)
+    first = tracker.update(players_detection(0, [(0.2, "A"), (0.8, "A")]))
+    predictions = tuple(
+        TrackedPlayer(
+            player.track_id,
+            player.team,
+            Box(0.72 if player.foot.x < 0.5 else 0.18, 0.2, 0.78 if player.foot.x < 0.5 else 0.24, 0.8),
+            Point(0.75 if player.foot.x < 0.5 else 0.21, 0.8),
+            player.confidence,
+        )
+        for player in first.players
+    )
+    tracker.apply_predictions(predictions, 15)
+    second = tracker.update(players_detection(15, [(0.21, "A"), (0.75, "A")]))
+    by_x = {round(player.foot.x, 2): player.track_id for player in second.players}
+    assert by_x[0.75] == first.players[0].track_id
+    assert by_x[0.21] == first.players[1].track_id

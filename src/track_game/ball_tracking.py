@@ -32,6 +32,7 @@ class BallTrackingStats:
     lost_frames: int = 0
     lost_events: int = 0
     recovered_events: int = 0
+    scene_cut_resets: int = 0
 
 
 @dataclass(frozen=True)
@@ -162,6 +163,7 @@ class VLMInitializedBallTracker:
         player_timeline: Iterable[TrackedFrame] | None = None,
         *,
         frames_are_bgr: bool = False,
+        scene_cut_frames: set[int] | None = None,
     ) -> BallTrackingResult:
         player_by_frame = (
             {} if player_timeline is None else {frame.frame_id: frame for frame in player_timeline}
@@ -176,11 +178,24 @@ class VLMInitializedBallTracker:
         coast_frames = 0
         lost = True
         ever_initialized = False
+        cut_frames = scene_cut_frames or set()
 
         for frame_id, frame in enumerate(frames):
             gray = self._gray(frame, frames_are_bgr)
             height, width = gray.shape
             anchor = anchors.get(frame_id) if frame_id in anchors else None
+            if frame_id in cut_frames:
+                if not lost:
+                    stats = replace(stats, lost_events=stats.lost_events + 1)
+                center = None
+                features = None
+                kalman = None
+                confidence = 0.0
+                coast_frames = 0
+                lost = True
+                stats = replace(
+                    stats, scene_cut_resets=stats.scene_cut_resets + 1
+                )
             if frame_id in anchors and anchor is not None:
                 was_lost = lost
                 anchor_center = np.array(
@@ -299,14 +314,21 @@ class VLMInitializedBallTracker:
         frames: list[Image.Image],
         anchors: dict[int, BallDetection | None],
         player_timeline: Iterable[TrackedFrame] | None = None,
+        scene_cut_frames: set[int] | None = None,
     ) -> BallTrackingResult:
-        return self.track_frames(frames, anchors, player_timeline)
+        return self.track_frames(
+            frames,
+            anchors,
+            player_timeline,
+            scene_cut_frames=scene_cut_frames,
+        )
 
     def track_video(
         self,
         path: str | Path,
         anchors: dict[int, BallDetection | None],
         player_timeline: Iterable[TrackedFrame] | None = None,
+        scene_cut_frames: set[int] | None = None,
     ) -> BallTrackingResult:
         capture = cv2.VideoCapture(str(path))
         if not capture.isOpened():
@@ -323,7 +345,11 @@ class VLMInitializedBallTracker:
                 capture.release()
 
         return self.track_frames(
-            decoded_frames(), anchors, player_timeline, frames_are_bgr=True
+            decoded_frames(),
+            anchors,
+            player_timeline,
+            frames_are_bgr=True,
+            scene_cut_frames=scene_cut_frames,
         )
 
 

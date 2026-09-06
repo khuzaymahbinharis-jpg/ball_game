@@ -1,6 +1,6 @@
 from dataclasses import dataclass, replace
 from math import hypot, log
-from typing import Protocol
+from typing import Literal, Protocol
 
 from .config import TrackingConfig
 from .schema import Box, FrameDetection, PlayerDetection, Point, Team
@@ -14,6 +14,8 @@ class TrackedPlayer:
     foot: Point
     confidence: float
     possesses_ball: bool = False
+    tracking_confidence: float = 1.0
+    tracking_state: Literal["confirmed", "uncertain", "lost"] = "confirmed"
 
 
 @dataclass(frozen=True)
@@ -43,6 +45,10 @@ class PlayerTracker(Protocol):
     def track_states(self) -> dict[int, str]: ...
 
     def update(self, detection: FrameDetection) -> TrackedFrame: ...
+
+    def apply_predictions(self, players: tuple[TrackedPlayer, ...], frame_id: int) -> None: ...
+
+    def mark_scene_cut(self) -> None: ...
 
 
 class _LifecycleCounter:
@@ -84,6 +90,7 @@ class NearestNeighbourTracker:
         self._next_id = 1
         self._tracks: dict[int, tuple[TrackedPlayer, int]] = {}
         self._counter = _LifecycleCounter()
+        self._spatial_reset_pending = False
 
     @property
     def lifecycle(self) -> TrackLifecycleSnapshot:
@@ -98,18 +105,19 @@ class NearestNeighbourTracker:
 
     def update(self, detection: FrameDetection) -> TrackedFrame:
         candidates: list[tuple[float, int, int]] = []
-        for index, player in enumerate(detection.players):
-            for track_id, (old, missed) in self._tracks.items():
-                if missed > self.max_missed or (
-                    self.team_constraint and old.team != player.team
-                ):
-                    continue
-                distance = hypot(
-                    old.foot.x - player.foot.x,
-                    old.foot.y - player.foot.y,
-                )
-                if distance <= self.max_distance:
-                    candidates.append((distance, track_id, index))
+        if not self._spatial_reset_pending:
+            for index, player in enumerate(detection.players):
+                for track_id, (old, missed) in self._tracks.items():
+                    if missed > self.max_missed or (
+                        self.team_constraint and old.team != player.team
+                    ):
+                        continue
+                    distance = hypot(
+                        old.foot.x - player.foot.x,
+                        old.foot.y - player.foot.y,
+                    )
+                    if distance <= self.max_distance:
+                        candidates.append((distance, track_id, index))
         assigned_tracks, assigned_detections, matches = set(), set(), {}
         for _, track_id, index in sorted(candidates):
             if track_id not in assigned_tracks and index not in assigned_detections:
@@ -149,12 +157,23 @@ class NearestNeighbourTracker:
             else:
                 new_tracks[track_id] = (old, new_missed)
         self._tracks = new_tracks
+        self._spatial_reset_pending = False
         return TrackedFrame(
             detection.frame_id,
             tuple(current),
             detection.ball,
             detection.ball_confidence,
         )
+
+    def apply_predictions(self, players: tuple[TrackedPlayer, ...], frame_id: int) -> None:
+        del frame_id
+        for player in players:
+            if player.track_id in self._tracks:
+                _, missed = self._tracks[player.track_id]
+                self._tracks[player.track_id] = (player, missed)
+
+    def mark_scene_cut(self) -> None:
+        self._spatial_reset_pending = True
 
 
 @dataclass
@@ -164,6 +183,7 @@ class _HungarianTrack:
     missed_anchors: int
     velocity: Point
     team_scores: dict[Team, float]
+    predicted_frame_id: int | None = None
 
 
 def _box_iou(left: Box, right: Box) -> float:
@@ -244,6 +264,8 @@ class HungarianPlayerTracker:
         self._next_id = 1
         self._tracks: dict[int, _HungarianTrack] = {}
         self._counter = _LifecycleCounter()
+        self._spatial_reset_pending = False
+        self._last_assignment_costs: dict[int, float] = {}
 
     @property
     def lifecycle(self) -> TrackLifecycleSnapshot:
@@ -257,6 +279,16 @@ class HungarianPlayerTracker:
             track_id: "active" if state.missed_anchors == 0 else "lost"
             for track_id, state in self._tracks.items()
         }
+
+    @property
+    def last_assignment_costs(self) -> dict[int, float]:
+        return dict(self._last_assignment_costs)
+
+    def _confidence_state(self, confidence: float) -> Literal["confirmed", "uncertain", "lost"]:
+        settings = self.config.confidence
+        if not settings.enabled or confidence >= settings.confirmed_threshold:
+            return "confirmed"
+        return "uncertain" if confidence >= settings.lost_threshold else "lost"
 
     def _team_penalty(self, old: Team, new: Team) -> float:
         config = self.config.hungarian
@@ -274,9 +306,13 @@ class HungarianPlayerTracker:
             state.player.foot.x - detection.foot.x,
             state.player.foot.y - detection.foot.y,
         ) / scale
-        predicted = Point(
-            state.player.foot.x + state.velocity.x * elapsed,
-            state.player.foot.y + state.velocity.y * elapsed,
+        predicted = (
+            state.player.foot
+            if state.predicted_frame_id == frame_id
+            else Point(
+                state.player.foot.x + state.velocity.x * elapsed,
+                state.player.foot.y + state.velocity.y * elapsed,
+            )
         )
         motion_distance = hypot(
             predicted.x - detection.foot.x,
@@ -322,6 +358,8 @@ class HungarianPlayerTracker:
             detection.foot,
             detection.confidence,
             detection.possesses_ball,
+            detection.confidence,
+            self._confidence_state(detection.confidence),
         )
         return _HungarianTrack(player, frame_id, 0, Point(0.0, 0.0), scores)
 
@@ -329,7 +367,8 @@ class HungarianPlayerTracker:
         track_ids = sorted(self._tracks)
         detections = list(detection.players)
         matches: dict[int, int] = {}
-        if track_ids and detections:
+        self._last_assignment_costs = {}
+        if track_ids and detections and not self._spatial_reset_pending:
             real_costs = [
                 [
                     self._association_cost(self._tracks[track_id], item, detection.frame_id)
@@ -357,6 +396,8 @@ class HungarianPlayerTracker:
                 current.append(state.player)
                 continue
             state = self._tracks[track_id]
+            assignment_cost = real_costs[track_ids.index(track_id)][detection_index]
+            self._last_assignment_costs[track_id] = assignment_cost
             self._counter.matches += 1
             if state.missed_anchors > 0:
                 self._counter.recovered += 1
@@ -371,6 +412,19 @@ class HungarianPlayerTracker:
                 smoothing * state.velocity.y + (1 - smoothing) * measured_velocity.y,
             )
             stable_team = self._stabilized_team(state, item)
+            if self.config.confidence.enabled:
+                settings = self.config.confidence
+                assignment_quality = max(
+                    0.0,
+                    1.0 - assignment_cost / self.config.hungarian.max_assignment_cost,
+                )
+                total_weight = settings.anchor_detection_weight + settings.assignment_weight
+                tracking_confidence = (
+                    settings.anchor_detection_weight * item.confidence
+                    + settings.assignment_weight * assignment_quality
+                ) / total_weight
+            else:
+                tracking_confidence = item.confidence
             state.player = TrackedPlayer(
                 track_id,
                 stable_team,
@@ -378,9 +432,12 @@ class HungarianPlayerTracker:
                 item.foot,
                 item.confidence,
                 item.possesses_ball,
+                tracking_confidence,
+                self._confidence_state(tracking_confidence),
             )
             state.last_seen_frame = detection.frame_id
             state.missed_anchors = 0
+            state.predicted_frame_id = None
             current.append(state.player)
 
         for track_id in list(track_ids):
@@ -390,16 +447,42 @@ class HungarianPlayerTracker:
             if state.missed_anchors == 0:
                 self._counter.lost += 1
             state.missed_anchors += 1
+            if self.config.confidence.enabled:
+                confidence = (
+                    state.player.tracking_confidence
+                    * self.config.confidence.missed_anchor_decay
+                )
+                state.player = replace(
+                    state.player,
+                    tracking_confidence=confidence,
+                    tracking_state=self._confidence_state(confidence),
+                )
             if state.missed_anchors > self.config.max_missed_anchors:
                 self._counter.expired += 1
                 del self._tracks[track_id]
 
+        self._spatial_reset_pending = False
         return TrackedFrame(
             detection.frame_id,
             tuple(current),
             detection.ball,
             detection.ball_confidence,
         )
+
+    def apply_predictions(self, players: tuple[TrackedPlayer, ...], frame_id: int) -> None:
+        for player in players:
+            state = self._tracks.get(player.track_id)
+            if state is None:
+                continue
+            state.player = player
+            state.predicted_frame_id = frame_id
+
+    def mark_scene_cut(self) -> None:
+        """Reset only spatial correspondence; logical tracks age normally at the next anchor."""
+
+        self._spatial_reset_pending = True
+        for state in self._tracks.values():
+            state.predicted_frame_id = None
 
 
 def build_player_tracker(config: TrackingConfig) -> PlayerTracker:
@@ -458,6 +541,12 @@ def interpolate_frames(left: TrackedFrame, right: TrackedFrame) -> list[TrackedF
                     ),
                     _lerp(first.confidence, second.confidence, ratio),
                     first.possesses_ball if ratio < 0.5 else second.possesses_ball,
+                    _lerp(first.tracking_confidence, second.tracking_confidence, ratio),
+                    (
+                        "confirmed"
+                        if first.tracking_state == second.tracking_state == "confirmed"
+                        else "uncertain"
+                    ),
                 )
             )
         ball = None

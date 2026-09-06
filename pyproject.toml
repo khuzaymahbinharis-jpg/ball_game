@@ -23,6 +23,8 @@ dev = ["pytest>=8"]
 track-game-test1 = "track_game.test1:main"
 track-game-fullclip = "track_game.fullclip:main"
 track-game-experiment3 = "track_game.experiment3:main"
+track-game-experiment4 = "track_game.experiment4:main"
+track-game-experiment5 = "track_game.experiment5:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
