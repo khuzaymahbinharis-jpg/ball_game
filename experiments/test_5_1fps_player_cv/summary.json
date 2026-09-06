@@ -1,0 +1,330 @@
+{
+  "actual_api_cost_usd": 0.08316075,
+  "api_batch_seconds": 37.249400500033516,
+  "api_cost_complete": true,
+  "attempted_vlm_calls": 31,
+  "automatic_retries": 0,
+  "completed_at": "2026-09-06T18:36:42.508001+00:00",
+  "errors": {
+    "570": "OpenRouterValidationError: OpenRouter response failed schema validation",
+    "630": "OpenRouterValidationError: OpenRouter response failed schema validation",
+    "780": "OpenRouterValidationError: OpenRouter response failed schema validation",
+    "810": "OpenRouterValidationError: OpenRouter response failed schema validation"
+  },
+  "experiment_id": "test-5-1fps-player-cv",
+  "failed_vlm_calls": 4,
+  "frame_interval": 30,
+  "machine_metrics_are_not_manual_id_switch_counts": true,
+  "metrics": {
+    "actual_api_cost_usd": 0.08316075,
+    "anchor_count": 31,
+    "api_batch_seconds": 37.249400500033516,
+    "api_cost_complete": true,
+    "attempted_vlm_calls": 31,
+    "average_local_seconds_per_frame": 0.1255415587777841,
+    "ball_lost_events": 13,
+    "ball_lost_frames": 334,
+    "ball_recovered_events": 13,
+    "ball_tracking_seconds": 27.991149299952667,
+    "camera_motion_failures": 40,
+    "camera_motion_seconds": 10.9697550998535,
+    "camera_motion_successes": 859,
+    "experiment_id": "test-5-1fps-player-cv",
+    "human_evaluation": {
+      "ball_misses": null,
+      "fragmentation": null,
+      "manual_id_switches": null,
+      "marker_drift_events": null,
+      "notes": null,
+      "overall_visual_quality_notes": null,
+      "player_tracking_failures": null,
+      "scene_cut_failures": null,
+      "team_assignment_mistakes": null
+    },
+    "local_processing_seconds": 112.98740290000569,
+    "model": "google/gemini-3.1-flash-lite",
+    "planned_vlm_calls": 31,
+    "player_cv_total_pass_seconds": 46.41172010003356,
+    "player_cv_tracking_seconds": 15.955348699586466,
+    "rendering_seconds": 38.574436599970795,
+    "scene_cut_detection_seconds": 0.6089402004727162,
+    "scene_cut_frames": [
+      15,
+      369,
+      442
+    ],
+    "successful_vlm_calls": 27,
+    "summed_vlm_latency_seconds": 182.22449900011998,
+    "total_processing_seconds": 150.2368034000392,
+    "tracks_created": 28,
+    "tracks_expired": 16,
+    "tracks_lost": 29,
+    "tracks_recovered": 10,
+    "uncertain_track_frames": 1255,
+    "uncertainty_recoveries": 66,
+    "unique_ids_over_time": {
+      "0": [
+        1
+      ],
+      "30": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "60": [
+        2,
+        3,
+        4,
+        6,
+        8,
+        5,
+        7
+      ],
+      "90": [
+        9,
+        2,
+        8,
+        7,
+        3,
+        4,
+        5
+      ],
+      "120": [
+        9,
+        8,
+        2,
+        6,
+        3,
+        4,
+        5,
+        7
+      ],
+      "150": [
+        7,
+        9,
+        6,
+        8,
+        2,
+        3,
+        4,
+        5
+      ],
+      "180": [
+        8,
+        2,
+        5,
+        3,
+        4,
+        9,
+        10,
+        6,
+        7
+      ],
+      "210": [
+        7,
+        6,
+        2,
+        9,
+        5,
+        3,
+        10,
+        4,
+        11
+      ],
+      "240": [
+        8,
+        2,
+        6,
+        5,
+        9,
+        3,
+        10,
+        4,
+        11
+      ],
+      "270": [
+        7,
+        6,
+        8,
+        5,
+        9,
+        3,
+        10,
+        11,
+        4
+      ],
+      "300": [
+        6,
+        7,
+        9,
+        5,
+        3,
+        10,
+        11,
+        4
+      ],
+      "330": [
+        2,
+        6,
+        7,
+        9,
+        5,
+        3,
+        10,
+        11
+      ],
+      "360": [
+        2,
+        6,
+        9,
+        7,
+        10,
+        5,
+        3
+      ],
+      "390": [
+        12
+      ],
+      "420": [
+        12
+      ],
+      "450": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "480": [
+        13,
+        17,
+        14,
+        15,
+        20,
+        21,
+        16,
+        18,
+        19
+      ],
+      "510": [
+        17,
+        14,
+        13,
+        15,
+        21,
+        16,
+        18,
+        19
+      ],
+      "540": [
+        13,
+        20,
+        14,
+        17,
+        21,
+        16,
+        15,
+        18,
+        19
+      ],
+      "600": [
+        19,
+        22,
+        13,
+        20,
+        14,
+        17,
+        16,
+        18,
+        15
+      ],
+      "660": [
+        20,
+        13,
+        17,
+        14,
+        15,
+        21,
+        22
+      ],
+      "690": [
+        19,
+        20,
+        22,
+        13,
+        17,
+        14,
+        15,
+        21
+      ],
+      "720": [
+        13,
+        22,
+        20,
+        14,
+        15,
+        21
+      ],
+      "750": [
+        14,
+        17,
+        23,
+        20,
+        24,
+        15,
+        25,
+        21,
+        26
+      ],
+      "840": [
+        19,
+        27,
+        28,
+        25,
+        14,
+        17,
+        20,
+        24,
+        21,
+        15,
+        26
+      ],
+      "870": [
+        27,
+        28,
+        19,
+        25,
+        17,
+        14,
+        20,
+        21,
+        24,
+        26
+      ],
+      "899": [
+        28,
+        14,
+        17,
+        23,
+        25,
+        21,
+        20,
+        26,
+        24
+      ]
+    },
+    "variant": "hungarian_player_cv_camera_cut_confidence"
+  },
+  "model": "google/gemini-3.1-flash-lite",
+  "output_video": "outputs\\spurs_thunder_test5_1fps_player_cv.mp4",
+  "planned_vlm_calls": 31,
+  "status": "completed_with_anchor_errors",
+  "successful_vlm_calls": 27,
+  "summed_vlm_latency_seconds": 182.22449900011998
+}
