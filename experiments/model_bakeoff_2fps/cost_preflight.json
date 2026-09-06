@@ -1,0 +1,110 @@
+{
+  "all_six_model_equivalent_cost": {
+    "expected_usd": 1.0626685,
+    "high_usd": 2.64938494,
+    "low_usd": 0.42665413
+  },
+  "anchor_count_per_model": 61,
+  "captured_at": "2026-09-06T20:54:17.344808+00:00",
+  "cross_family_tokenization_warning": "Image tokenization and output length can differ materially by model family. The estimates hold the observed Gemini token counts constant only as planning proxies; actual OpenRouter usage and cost will be recorded. A separately exposed image rate is reported but not added again because prompt_tokens already include the image-token charge in the prior run.",
+  "currency": "USD",
+  "models": [
+    {
+      "estimated_cost_per_frame_usd": 0.002640197,
+      "expected_61_frame_cost_usd": 0.161052,
+      "high_61_frame_cost_usd": 0.414251,
+      "image_per_million_usd_if_separately_exposed": 0.25,
+      "input_per_million_usd": 0.25,
+      "key": "gemini_3_1_flash_lite",
+      "low_61_frame_cost_usd": 0.0595665,
+      "model": "google/gemini-3.1-flash-lite",
+      "output_per_million_usd": 1.5,
+      "provider": "Google AI Studio",
+      "provider_slug": "google-ai-studio"
+    },
+    {
+      "estimated_cost_per_frame_usd": 0.006923975,
+      "expected_61_frame_cost_usd": 0.4223625,
+      "high_61_frame_cost_usd": 1.055361,
+      "image_per_million_usd_if_separately_exposed": 0.75,
+      "input_per_million_usd": 0.75,
+      "key": "gemini_3_8_flash",
+      "low_61_frame_cost_usd": 0.1686345,
+      "model": "google/gemini-3.8-flash",
+      "output_per_million_usd": 3.75,
+      "provider": "Google AI Studio",
+      "provider_slug": "google-ai-studio"
+    },
+    {
+      "estimated_cost_per_frame_usd": 0.001027409,
+      "expected_61_frame_cost_usd": 0.06267196,
+      "high_61_frame_cost_usd": 0.15044796,
+      "image_per_million_usd_if_separately_exposed": null,
+      "input_per_million_usd": 0.13,
+      "key": "qwen3_vl_30b",
+      "low_61_frame_cost_usd": 0.02748538,
+      "model": "qwen/qwen3-vl-30b-a3b-instruct",
+      "output_per_million_usd": 0.52,
+      "provider": "Alibaba",
+      "provider_slug": "alibaba"
+    },
+    {
+      "estimated_cost_per_frame_usd": 0.001686935,
+      "expected_61_frame_cost_usd": 0.10290304,
+      "high_61_frame_cost_usd": 0.25144688,
+      "image_per_million_usd_if_separately_exposed": null,
+      "input_per_million_usd": 0.2,
+      "key": "qwen3_vl_235b",
+      "low_61_frame_cost_usd": 0.0433588,
+      "model": "qwen/qwen3-vl-235b-a22b-instruct",
+      "output_per_million_usd": 0.88,
+      "provider": "DeepInfra",
+      "provider_slug": "deepinfra/fp8"
+    },
+    {
+      "estimated_cost_per_frame_usd": 0.004615984,
+      "expected_61_frame_cost_usd": 0.281575,
+      "high_61_frame_cost_usd": 0.703574,
+      "image_per_million_usd_if_separately_exposed": null,
+      "input_per_million_usd": 0.5,
+      "key": "seed_2_1_turbo",
+      "low_61_frame_cost_usd": 0.112423,
+      "model": "bytedance-seed/seed-2-1-turbo",
+      "output_per_million_usd": 2.5,
+      "provider": "Seed",
+      "provider_slug": "seed/fp8"
+    },
+    {
+      "estimated_cost_per_frame_usd": 0.000526295,
+      "expected_61_frame_cost_usd": 0.032104,
+      "high_61_frame_cost_usd": 0.0743041,
+      "image_per_million_usd_if_separately_exposed": null,
+      "input_per_million_usd": 0.075,
+      "key": "glm_5_3_flash",
+      "low_61_frame_cost_usd": 0.01518595,
+      "model": "z-ai/glm-5.3-flash",
+      "output_per_million_usd": 0.25,
+      "provider": "DeepInfra",
+      "provider_slug": "deepinfra/fp4"
+    }
+  ],
+  "new_paid_calls_requiring_approval": 305,
+  "new_paid_five_model_cost_requiring_approval": {
+    "expected_usd": 0.9016165,
+    "high_usd": 2.23513394,
+    "low_usd": 0.36708763
+  },
+  "observed_control_usage": {
+    "actual_cost_usd": 0.161052,
+    "input_tokens_per_request_approx": 2588,
+    "input_tokens_total": 157860,
+    "output_tokens_per_request_approx": 1329,
+    "output_tokens_total": 81058
+  },
+  "reused_control_historical_actual_cost_usd": 0.161052,
+  "scenario_definitions": {
+    "expected": "Applies each selected endpoint's live rates to the control run's observed 157,860 input and 81,058 output tokens.",
+    "high": "Prices 61 requests at 2,588 input tokens and the fixed 4,096 output-token ceiling per request.",
+    "low": "Prices 61 requests at the control run's observed minima of 2,586 input and 220 output tokens per request. These independent minima are a proxy, not a guaranteed floor."
+  }
+}

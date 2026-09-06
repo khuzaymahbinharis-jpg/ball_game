@@ -36,6 +36,7 @@ class OpenRouterValidationError(OpenRouterError):
         request_id: str | None,
         returned_model: str | None,
         provider: str | None,
+        raw_response_body: dict[str, Any] | None = None,
     ):
         super().__init__(message)
         self.raw_content = raw_content
@@ -44,6 +45,7 @@ class OpenRouterValidationError(OpenRouterError):
         self.request_id = request_id
         self.returned_model = returned_model
         self.provider = provider
+        self.raw_response_body = raw_response_body
 
 
 @dataclass(frozen=True)
@@ -63,6 +65,7 @@ class OpenRouterResult:
     provider: str | None
     latency_seconds: float
     usage: ProviderUsage
+    raw_response_body: dict[str, Any] | None = None
 
 
 def detection_prompt(frame_id: int) -> str:
@@ -133,6 +136,9 @@ class OpenRouterVLMProvider:
         max_output_tokens: int = 4096,
         timeout_seconds: float = 45.0,
         client: httpx.Client | None = None,
+        reasoning_setting: dict[str, Any] | None = None,
+        include_reasoning_parameter: bool = True,
+        provider_preferences: dict[str, Any] | None = None,
     ):
         if not api_key.strip():
             raise ValueError("OpenRouter API key is empty")
@@ -145,6 +151,15 @@ class OpenRouterVLMProvider:
         self.max_output_tokens = max_output_tokens
         self.timeout_seconds = timeout_seconds
         self._client = client
+        self.reasoning_setting = (
+            {"effort": reasoning_effort, "exclude": True}
+            if reasoning_setting is None
+            else dict(reasoning_setting)
+        )
+        self.include_reasoning_parameter = include_reasoning_parameter
+        self.provider_preferences = (
+            None if provider_preferences is None else dict(provider_preferences)
+        )
 
     @classmethod
     def from_repository_env(
@@ -189,10 +204,13 @@ class OpenRouterVLMProvider:
                     "schema": frame_detection_json_schema(),
                 },
             },
-            "reasoning": {"effort": self.reasoning_effort, "exclude": True},
             "temperature": 0,
             "max_tokens": self.max_output_tokens,
         }
+        if self.include_reasoning_parameter:
+            payload["reasoning"] = self.reasoning_setting
+        if self.provider_preferences is not None:
+            payload["provider"] = self.provider_preferences
         headers = {
             "Authorization": f"Bearer {self._api_key}",
             "Content-Type": "application/json",
@@ -238,6 +256,7 @@ class OpenRouterVLMProvider:
                 request_id,
                 returned_model,
                 returned_provider,
+                body,
             ) from exc
         if detection.frame_id != frame_id:
             raise OpenRouterValidationError(
@@ -248,6 +267,7 @@ class OpenRouterVLMProvider:
                 request_id,
                 returned_model,
                 returned_provider,
+                body,
             )
         return OpenRouterResult(
             detection=detection,
@@ -256,6 +276,7 @@ class OpenRouterVLMProvider:
             provider=returned_provider,
             latency_seconds=latency,
             usage=usage,
+            raw_response_body=body,
         )
 
     def detect(self, frame_id: int, image: Image.Image) -> FrameDetection:

@@ -1,0 +1,200 @@
+{
+  "anchor_frames": [
+    0,
+    15,
+    30,
+    45,
+    60,
+    75,
+    90,
+    105,
+    120,
+    135,
+    150,
+    165,
+    180,
+    195,
+    210,
+    225,
+    240,
+    255,
+    270,
+    285,
+    300,
+    315,
+    330,
+    345,
+    360,
+    375,
+    390,
+    405,
+    420,
+    435,
+    450,
+    465,
+    480,
+    495,
+    510,
+    525,
+    540,
+    555,
+    570,
+    585,
+    600,
+    615,
+    630,
+    645,
+    660,
+    675,
+    690,
+    705,
+    720,
+    735,
+    750,
+    765,
+    780,
+    795,
+    810,
+    825,
+    840,
+    855,
+    870,
+    885,
+    899
+  ],
+  "anchors_per_model": 61,
+  "approval_gate": "STOP: requires explicit approval for the displayed 305 new paid calls.",
+  "common_configuration": {
+    "automatic_retries": 0,
+    "frame_interval": 15,
+    "max_concurrency": 8,
+    "max_output_tokens": 4096,
+    "prompt_sha256": "1d837a2bad1563fab74167623fd5d88e224c34ea835c0cb756538ccf45e716dc",
+    "provider_fallbacks": false,
+    "provider_must_support_all_parameters": true,
+    "provider_selection_policy": "Pin one active structured-output-compatible standard endpoint per model. Use the lowest-priced compatible non-flex endpoint; keep Gemini on standard Google AI Studio rather than discounted flex capacity so queueing does not confound the latency benchmark.",
+    "sampling_fps": 2.0,
+    "schema_sha256": "45bbb678c950351f7417f0404c5c5b7e45fba8575bc9e100383ea66f86eb46dc",
+    "temperature": 0
+  },
+  "control_reuse": {
+    "checks": {
+      "all_61_usage_rows_present": true,
+      "same_61_frames": true,
+      "same_clip": true,
+      "same_clip_geometry": true,
+      "same_concurrency": true,
+      "same_model": true,
+      "same_no_retry_policy": true,
+      "same_original_resolution": true,
+      "same_output_ceiling": true,
+      "same_prompt_bytes": true,
+      "same_reasoning": true,
+      "same_ruler_dimensions": true,
+      "same_ruler_source_files": true,
+      "same_schema_bytes": true,
+      "same_temperature": true,
+      "saved_invalid_responses_match_logs": true,
+      "saved_valid_responses_match_logs": true
+    },
+    "decision": "Reuse the exact paid control and make zero new Gemini 3.1 calls.",
+    "limitations": [
+      "Test 3 retained parsed response content, usage, cost, and latency, but not the full raw OpenRouter response envelope.",
+      "Test 3's per-anchor log did not retain the returned provider name; provider is therefore unknown for the reused control.",
+      "The control has 49 schema-valid responses and 12 schema-invalid responses; all 61 attempts are reused without retrying failures."
+    ],
+    "prompt_sha256": "1d837a2bad1563fab74167623fd5d88e224c34ea835c0cb756538ccf45e716dc",
+    "reusable": true,
+    "schema_sha256": "45bbb678c950351f7417f0404c5c5b7e45fba8575bc9e100383ea66f86eb46dc",
+    "source_experiment": "experiments/test_3_2fps_comparison"
+  },
+  "cost_preflight": "experiments\\model_bakeoff_2fps\\cost_preflight.json",
+  "exact_run_command": ".venv\\Scripts\\python.exe -m track_game.model_bakeoff run --approved-call-count 305",
+  "experiment_id": "model-bakeoff-2fps",
+  "models": [
+    {
+      "control_reuse": true,
+      "include_reasoning_parameter": true,
+      "key": "gemini_3_1_flash_lite",
+      "provider_slug": "google-ai-studio",
+      "reasoning_setting": {
+        "effort": "minimal",
+        "exclude": true
+      },
+      "slug": "google/gemini-3.1-flash-lite"
+    },
+    {
+      "control_reuse": false,
+      "include_reasoning_parameter": true,
+      "key": "gemini_3_8_flash",
+      "provider_slug": "google-ai-studio",
+      "reasoning_setting": {
+        "effort": "low",
+        "exclude": true
+      },
+      "slug": "google/gemini-3.8-flash"
+    },
+    {
+      "control_reuse": false,
+      "include_reasoning_parameter": false,
+      "key": "qwen3_vl_30b",
+      "provider_slug": "alibaba",
+      "reasoning_setting": null,
+      "slug": "qwen/qwen3-vl-30b-a3b-instruct"
+    },
+    {
+      "control_reuse": false,
+      "include_reasoning_parameter": false,
+      "key": "qwen3_vl_235b",
+      "provider_slug": "deepinfra/fp8",
+      "reasoning_setting": null,
+      "slug": "qwen/qwen3-vl-235b-a22b-instruct"
+    },
+    {
+      "control_reuse": false,
+      "include_reasoning_parameter": true,
+      "key": "seed_2_1_turbo",
+      "provider_slug": "seed/fp8",
+      "reasoning_setting": {
+        "enabled": false,
+        "exclude": true
+      },
+      "slug": "bytedance-seed/seed-2-1-turbo"
+    },
+    {
+      "control_reuse": false,
+      "include_reasoning_parameter": true,
+      "key": "glm_5_3_flash",
+      "provider_slug": "deepinfra/fp4",
+      "reasoning_setting": {
+        "effort": "low",
+        "exclude": true
+      },
+      "slug": "z-ai/glm-5.3-flash"
+    }
+  ],
+  "new_paid_calls_requiring_approval": 305,
+  "new_paid_inference_calls_attempted": 0,
+  "new_paid_models": [
+    "google/gemini-3.8-flash",
+    "qwen/qwen3-vl-30b-a3b-instruct",
+    "qwen/qwen3-vl-235b-a22b-instruct",
+    "bytedance-seed/seed-2-1-turbo",
+    "z-ai/glm-5.3-flash"
+  ],
+  "overall_winner": null,
+  "prepared_at": "2026-09-06T20:54:19.021071+00:00",
+  "review_frames": [
+    30,
+    180,
+    270,
+    360,
+    450,
+    570,
+    690,
+    840
+  ],
+  "source_clip": "clips\\dev\\spurs_thunder_test.mp4",
+  "status": "prepared_not_approved",
+  "strictly_2fps": true
+}

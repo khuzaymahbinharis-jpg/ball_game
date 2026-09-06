@@ -67,6 +67,39 @@ def test_openrouter_adapter_makes_one_mocked_call_and_records_usage():
     assert result.detection.players[0].possesses_ball
     assert result.usage.cost_usd == pytest.approx(0.0001)
     assert result.usage.reasoning_tokens == 10
+    assert result.raw_response_body["id"] == "mock-request"
+
+
+def test_openrouter_adapter_can_omit_reasoning_and_pin_provider():
+    def handler(request):
+        sent = json.loads(request.content)
+        assert "reasoning" not in sent
+        assert sent["provider"] == {
+            "only": ["deepinfra/fp8"],
+            "allow_fallbacks": False,
+            "require_parameters": True,
+        }
+        return httpx.Response(
+            200,
+            json={
+                "choices": [{"message": {"content": json.dumps(response_payload())}}],
+                "usage": {},
+            },
+        )
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    provider = OpenRouterVLMProvider(
+        "not-a-real-key",
+        client=client,
+        include_reasoning_parameter=False,
+        provider_preferences={
+            "only": ["deepinfra/fp8"],
+            "allow_fallbacks": False,
+            "require_parameters": True,
+        },
+    )
+    provider.request_detection(450, Image.new("RGB", (32, 32)))
+    client.close()
 
 
 def test_openrouter_adapter_never_retries_mocked_failure():
@@ -113,6 +146,7 @@ def test_schema_failure_retains_usage_and_raw_response():
     client.close()
     assert caught.value.usage.cost_usd == pytest.approx(0.0001)
     assert caught.value.raw_content == json.dumps(invalid)
+    assert caught.value.raw_response_body["id"] == "bad-schema"
 
 
 def test_repository_env_loader_requires_local_env_file(tmp_path):

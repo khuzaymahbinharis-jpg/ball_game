@@ -1,0 +1,407 @@
+{
+  "all_requested_slugs_exact": true,
+  "captured_at": "2026-09-06T20:54:17.344808+00:00",
+  "models": [
+    {
+      "active_compatible_provider_count": 7,
+      "active_compatible_providers": [
+        {
+          "provider": "Google AI Studio",
+          "provider_slug": "google-ai-studio/flex"
+        },
+        {
+          "provider": "Google AI Studio",
+          "provider_slug": "google-ai-studio"
+        },
+        {
+          "provider": "Google",
+          "provider_slug": "google-vertex/global"
+        },
+        {
+          "provider": "Google",
+          "provider_slug": "google-vertex/eu"
+        },
+        {
+          "provider": "Google",
+          "provider_slug": "google-vertex/us"
+        },
+        {
+          "provider": "Google",
+          "provider_slug": "google-vertex/global/priority"
+        },
+        {
+          "provider": "Google AI Studio",
+          "provider_slug": "google-ai-studio/priority"
+        }
+      ],
+      "benchmark_reasoning_setting": {
+        "effort": "minimal",
+        "exclude": true
+      },
+      "canonical_slug": "google/gemini-3.1-flash-lite-20260507",
+      "catalog_id": "google/gemini-3.1-flash-lite",
+      "chosen_provider": "Google AI Studio",
+      "chosen_provider_slug": "google-ai-studio",
+      "chosen_provider_status": 0,
+      "chosen_provider_uptime_5m": 99.56161714564053,
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file",
+        "audio"
+      ],
+      "key": "gemini_3_1_flash_lite",
+      "output_modalities": [
+        "text"
+      ],
+      "pricing_per_million": {
+        "image": 0.25,
+        "input": 0.25,
+        "output": 1.5
+      },
+      "pricing_per_token": {
+        "image": "0.00000025",
+        "input": "0.00000025",
+        "output": "0.0000015"
+      },
+      "reasoning_catalog": {
+        "default_effort": "minimal",
+        "default_enabled": true,
+        "mandatory": false,
+        "supported_efforts": [
+          "high",
+          "medium",
+          "low",
+          "minimal"
+        ]
+      },
+      "reasoning_parameter_included": true,
+      "requested_slug": "google/gemini-3.1-flash-lite",
+      "slug_exact_match": true,
+      "structured_output_supported": true
+    },
+    {
+      "active_compatible_provider_count": 3,
+      "active_compatible_providers": [
+        {
+          "provider": "Google AI Studio",
+          "provider_slug": "google-ai-studio/flex"
+        },
+        {
+          "provider": "Google AI Studio",
+          "provider_slug": "google-ai-studio"
+        },
+        {
+          "provider": "Google AI Studio",
+          "provider_slug": "google-ai-studio/priority"
+        }
+      ],
+      "benchmark_reasoning_setting": {
+        "effort": "low",
+        "exclude": true
+      },
+      "canonical_slug": "google/gemini-3.8-flash-20260902",
+      "catalog_id": "google/gemini-3.8-flash",
+      "chosen_provider": "Google AI Studio",
+      "chosen_provider_slug": "google-ai-studio",
+      "chosen_provider_status": 0,
+      "chosen_provider_uptime_5m": 98.78048780487805,
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file",
+        "audio"
+      ],
+      "key": "gemini_3_8_flash",
+      "output_modalities": [
+        "text"
+      ],
+      "pricing_per_million": {
+        "image": 0.75,
+        "input": 0.75,
+        "output": 3.75
+      },
+      "pricing_per_token": {
+        "image": "0.00000075",
+        "input": "0.00000075",
+        "output": "0.00000375"
+      },
+      "reasoning_catalog": {
+        "default_effort": "medium",
+        "default_enabled": true,
+        "mandatory": true,
+        "supported_efforts": [
+          "high",
+          "medium",
+          "low"
+        ]
+      },
+      "reasoning_parameter_included": true,
+      "requested_slug": "google/gemini-3.8-flash",
+      "slug_exact_match": true,
+      "structured_output_supported": true
+    },
+    {
+      "active_compatible_provider_count": 3,
+      "active_compatible_providers": [
+        {
+          "provider": "Alibaba",
+          "provider_slug": "alibaba"
+        },
+        {
+          "provider": "DeepInfra",
+          "provider_slug": "deepinfra/fp8"
+        },
+        {
+          "provider": "SiliconFlow",
+          "provider_slug": "siliconflow/fp8"
+        }
+      ],
+      "benchmark_reasoning_setting": null,
+      "canonical_slug": "qwen/qwen3-vl-30b-a3b-instruct",
+      "catalog_id": "qwen/qwen3-vl-30b-a3b-instruct",
+      "chosen_provider": "Alibaba",
+      "chosen_provider_slug": "alibaba",
+      "chosen_provider_status": 0,
+      "chosen_provider_uptime_5m": 100,
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "key": "qwen3_vl_30b",
+      "output_modalities": [
+        "text"
+      ],
+      "pricing_per_million": {
+        "image": null,
+        "input": 0.13,
+        "output": 0.52
+      },
+      "pricing_per_token": {
+        "image": null,
+        "input": "0.00000013",
+        "output": "0.00000052"
+      },
+      "reasoning_catalog": null,
+      "reasoning_parameter_included": false,
+      "requested_slug": "qwen/qwen3-vl-30b-a3b-instruct",
+      "slug_exact_match": true,
+      "structured_output_supported": true
+    },
+    {
+      "active_compatible_provider_count": 5,
+      "active_compatible_providers": [
+        {
+          "provider": "DeepInfra",
+          "provider_slug": "deepinfra/fp8"
+        },
+        {
+          "provider": "Venice",
+          "provider_slug": "venice/fp8"
+        },
+        {
+          "provider": "Parasail",
+          "provider_slug": "parasail/fp8"
+        },
+        {
+          "provider": "Alibaba",
+          "provider_slug": "alibaba"
+        },
+        {
+          "provider": "Novita",
+          "provider_slug": "novita/bf16"
+        }
+      ],
+      "benchmark_reasoning_setting": null,
+      "canonical_slug": "qwen/qwen3-vl-235b-a22b-instruct",
+      "catalog_id": "qwen/qwen3-vl-235b-a22b-instruct",
+      "chosen_provider": "DeepInfra",
+      "chosen_provider_slug": "deepinfra/fp8",
+      "chosen_provider_status": 0,
+      "chosen_provider_uptime_5m": 95.27896995708154,
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "key": "qwen3_vl_235b",
+      "output_modalities": [
+        "text"
+      ],
+      "pricing_per_million": {
+        "image": null,
+        "input": 0.2,
+        "output": 0.88
+      },
+      "pricing_per_token": {
+        "image": null,
+        "input": "0.0000002",
+        "output": "0.00000088"
+      },
+      "reasoning_catalog": null,
+      "reasoning_parameter_included": false,
+      "requested_slug": "qwen/qwen3-vl-235b-a22b-instruct",
+      "slug_exact_match": true,
+      "structured_output_supported": true
+    },
+    {
+      "active_compatible_provider_count": 1,
+      "active_compatible_providers": [
+        {
+          "provider": "Seed",
+          "provider_slug": "seed/fp8"
+        }
+      ],
+      "benchmark_reasoning_setting": {
+        "enabled": false,
+        "exclude": true
+      },
+      "canonical_slug": "bytedance-seed/seed-2-1-turbo-20260810",
+      "catalog_id": "bytedance-seed/seed-2-1-turbo",
+      "chosen_provider": "Seed",
+      "chosen_provider_slug": "seed/fp8",
+      "chosen_provider_status": 0,
+      "chosen_provider_uptime_5m": null,
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "key": "seed_2_1_turbo",
+      "output_modalities": [
+        "text"
+      ],
+      "pricing_per_million": {
+        "image": null,
+        "input": 0.5,
+        "output": 2.5
+      },
+      "pricing_per_token": {
+        "image": null,
+        "input": "0.0000005",
+        "output": "0.0000025"
+      },
+      "reasoning_catalog": {
+        "mandatory": false
+      },
+      "reasoning_parameter_included": true,
+      "requested_slug": "bytedance-seed/seed-2-1-turbo",
+      "slug_exact_match": true,
+      "structured_output_supported": true
+    },
+    {
+      "active_compatible_provider_count": 16,
+      "active_compatible_providers": [
+        {
+          "provider": "DeepInfra",
+          "provider_slug": "deepinfra/fp4"
+        },
+        {
+          "provider": "Wafer",
+          "provider_slug": "wafer"
+        },
+        {
+          "provider": "Makora",
+          "provider_slug": "makora"
+        },
+        {
+          "provider": "Modal",
+          "provider_slug": "modal/fp8"
+        },
+        {
+          "provider": "CoreWeave",
+          "provider_slug": "coreweave/fp8"
+        },
+        {
+          "provider": "Sail Research",
+          "provider_slug": "sail-research/fp8"
+        },
+        {
+          "provider": "NextBit",
+          "provider_slug": "nextbit/fp8"
+        },
+        {
+          "provider": "Fireworks",
+          "provider_slug": "fireworks"
+        },
+        {
+          "provider": "Friendli",
+          "provider_slug": "friendli"
+        },
+        {
+          "provider": "DigitalOcean",
+          "provider_slug": "digitalocean"
+        },
+        {
+          "provider": "Together",
+          "provider_slug": "together"
+        },
+        {
+          "provider": "Reka",
+          "provider_slug": "reka/fp8"
+        },
+        {
+          "provider": "Parasail",
+          "provider_slug": "parasail/fp8"
+        },
+        {
+          "provider": "BaseTen",
+          "provider_slug": "baseten/fp8"
+        },
+        {
+          "provider": "Venice",
+          "provider_slug": "venice"
+        },
+        {
+          "provider": "Cloudflare",
+          "provider_slug": "cloudflare"
+        }
+      ],
+      "benchmark_reasoning_setting": {
+        "effort": "low",
+        "exclude": true
+      },
+      "canonical_slug": "z-ai/glm-5.3-flash-20260826",
+      "catalog_id": "z-ai/glm-5.3-flash",
+      "chosen_provider": "DeepInfra",
+      "chosen_provider_slug": "deepinfra/fp4",
+      "chosen_provider_status": 0,
+      "chosen_provider_uptime_5m": 99.94036970781157,
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "key": "glm_5_3_flash",
+      "output_modalities": [
+        "text"
+      ],
+      "pricing_per_million": {
+        "image": null,
+        "input": 0.075,
+        "output": 0.25
+      },
+      "pricing_per_token": {
+        "image": null,
+        "input": "0.000000075",
+        "output": "0.00000025"
+      },
+      "reasoning_catalog": {
+        "default_effort": "max",
+        "default_enabled": true,
+        "mandatory": true,
+        "supported_efforts": [
+          "max",
+          "high",
+          "low"
+        ]
+      },
+      "reasoning_parameter_included": true,
+      "requested_slug": "z-ai/glm-5.3-flash",
+      "slug_exact_match": true,
+      "structured_output_supported": true
+    }
+  ],
+  "source": "https://openrouter.ai/api/v1/models"
+}

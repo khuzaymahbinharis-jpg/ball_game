@@ -1,0 +1,13 @@
+approval.json
+artifacts/
+*/records/
+*/raw_responses/
+*/parsed_detections/
+*/review_overlays/
+*/usage_cost.jsonl
+*/latency.jsonl
+*/schema_failures.jsonl
+*/batches.jsonl
+*/camera_motion.jsonl
+*/scene_cuts.jsonl
+*/track_confidence.jsonl
