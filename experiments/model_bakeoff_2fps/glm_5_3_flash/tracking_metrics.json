@@ -1,0 +1,153 @@
+{
+  "actual_api_cost_usd": null,
+  "anchor_count": 61,
+  "api_batch_seconds": 234.3807375000324,
+  "api_cost_complete": false,
+  "attempted_vlm_calls": 61,
+  "average_local_seconds_per_frame": 0.05074173100001644,
+  "ball_lost_events": 5,
+  "ball_lost_frames": 757,
+  "ball_recovered_events": 4,
+  "ball_tracking_seconds": 8.947670300025493,
+  "camera_motion_failures": 40,
+  "camera_motion_seconds": 4.9949183001881465,
+  "camera_motion_successes": 859,
+  "experiment_id": "model-bakeoff-2fps",
+  "human_evaluation": {
+    "ball_misses": null,
+    "fragmentation": null,
+    "manual_id_switches": null,
+    "marker_drift_events": null,
+    "notes": null,
+    "overall_visual_quality_notes": null,
+    "player_tracking_failures": null,
+    "scene_cut_failures": null,
+    "team_assignment_mistakes": null
+  },
+  "local_processing_seconds": 45.6675579000148,
+  "model": "z-ai/glm-5.3-flash",
+  "planned_vlm_calls": 61,
+  "player_cv_total_pass_seconds": 18.166590200038627,
+  "player_cv_tracking_seconds": 4.247354699007701,
+  "rendering_seconds": 18.550395100028254,
+  "scene_cut_detection_seconds": 0.28095420042518526,
+  "scene_cut_frames": [
+    15,
+    369,
+    442
+  ],
+  "successful_vlm_calls": 11,
+  "summed_vlm_latency_seconds": 360.53136679984163,
+  "total_processing_seconds": 280.0482954000472,
+  "tracks_created": 20,
+  "tracks_expired": 11,
+  "tracks_lost": 14,
+  "tracks_recovered": 2,
+  "uncertain_track_frames": 2080,
+  "uncertainty_recoveries": 16,
+  "unique_ids_over_time": {
+    "0": [
+      1
+    ],
+    "105": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "120": [
+      4,
+      8,
+      6,
+      5,
+      7,
+      2,
+      3,
+      9,
+      10
+    ],
+    "165": [
+      10,
+      2,
+      9,
+      5,
+      4,
+      3,
+      6,
+      8,
+      7
+    ],
+    "180": [
+      10,
+      2,
+      9,
+      5,
+      4,
+      3,
+      6,
+      8,
+      7
+    ],
+    "435": [
+      11
+    ],
+    "450": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "495": [
+      12,
+      14,
+      15,
+      17,
+      16,
+      18,
+      3,
+      19,
+      20
+    ],
+    "510": [
+      12,
+      14,
+      15,
+      16,
+      3,
+      18,
+      19,
+      20
+    ],
+    "525": [
+      12,
+      20,
+      17,
+      3,
+      19,
+      15,
+      18,
+      16,
+      14
+    ],
+    "540": [
+      17,
+      14,
+      12,
+      3,
+      16,
+      15,
+      19,
+      20
+    ]
+  },
+  "variant": "hungarian_player_cv_camera_cut_confidence:glm_5_3_flash"
+}

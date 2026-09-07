@@ -152,8 +152,10 @@ class VLMInitializedPlayerCVTracker:
         box[[0, 2]] = np.clip(box[[0, 2]], 0, width - 1)
         box[[1, 3]] = np.clip(box[[1, 3]], 0, height - 1)
         if box[2] <= box[0]:
+            box[0] = min(box[0], max(0, width - 2))
             box[2] = min(width - 1, box[0] + 1)
         if box[3] <= box[1]:
+            box[1] = min(box[1], max(0, height - 2))
             box[3] = min(height - 1, box[1] + 1)
         foot = np.array(
             [np.clip(foot[0], 0, width - 1), np.clip(foot[1], 0, height - 1)],

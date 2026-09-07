@@ -1,0 +1,51 @@
+{
+  "actual_concurrency": 8,
+  "actual_total_cost_usd": null,
+  "automatic_retries": 0,
+  "average_cost_per_request_usd": null,
+  "average_player_detections": null,
+  "ball_returned_anchors": 0,
+  "batch_wall_seconds": 263.9147818000056,
+  "calls_attempted": 61,
+  "calls_planned": 61,
+  "configured_concurrency": 8,
+  "configured_provider_slug": "google-ai-studio",
+  "cost_complete": false,
+  "exact_duplicate_geometry_pairs": 0,
+  "experiment_id": "model-bakeoff-2fps",
+  "http_429_count": 0,
+  "invalid_responses": 61,
+  "known_cost_usd": 0,
+  "latency_seconds": {
+    "basis": "per-request wall time, including failed requests when recorded",
+    "max": 70.92514349997509,
+    "mean": 30.37605317705311,
+    "median": 24.89594349998515,
+    "min": 16.178493899991736,
+    "p95": 53.86546910001198
+  },
+  "manual_quality": {
+    "ball_quality": null,
+    "player_quality": null,
+    "possession_quality": null,
+    "team_quality": null
+  },
+  "model": "google/gemini-3.7-flash",
+  "model_key": "gemini_3_7_flash",
+  "obviously_malformed_schema_valid_detections": 0,
+  "possession_returned_anchors": 0,
+  "provider_queueing_note": "OpenRouter did not expose a separate queue-duration field; request wall time and batch wall time are retained instead.",
+  "provider_queueing_seconds": null,
+  "request_errors": 61,
+  "returned_provider_counts": {},
+  "reused_control": false,
+  "schema_valid_percentage": 0.0,
+  "total_input_tokens": null,
+  "total_output_tokens": null,
+  "tracking": {
+    "reason": "fewer than two schema-valid detector anchors",
+    "status": "skipped"
+  },
+  "updated_at": "2026-09-07T22:20:40.411953+00:00",
+  "valid_responses": 0
+}

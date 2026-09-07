@@ -63,20 +63,20 @@
     899
   ],
   "automatic_retries": 0,
-  "canonical_slug_at_preflight": "qwen/qwen3-vl-235b-a22b-instruct",
+  "canonical_slug_at_preflight": "google/gemini-3.7-flash-20260813",
   "control_reuse": false,
   "control_reuse_verified": false,
   "experiment_id": "model-bakeoff-2fps",
   "frame_interval": 15,
   "max_concurrency": 8,
   "max_output_tokens": 4096,
-  "model": "qwen/qwen3-vl-235b-a22b-instruct",
-  "model_key": "qwen3_vl_235b",
+  "model": "google/gemini-3.7-flash",
+  "model_key": "gemini_3_7_flash",
   "original_resolution": [
     1920,
     1080
   ],
-  "output_video": "outputs\\model_bakeoff_2fps\\qwen3_vl_235b.mp4",
+  "output_video": "outputs\\model_bakeoff_2fps\\gemini_3_7_flash.mp4",
   "parsed_detection_directory": "parsed_detections",
   "player_cv_pipeline": {
     "ball_tracking": {
@@ -185,13 +185,16 @@
   "provider_routing": {
     "allow_fallbacks": false,
     "only": [
-      "alibaba"
+      "google-ai-studio"
     ],
     "require_parameters": true
   },
   "raw_response_directory": "raw_responses",
-  "reasoning_parameter_included": false,
-  "reasoning_setting": null,
+  "reasoning_parameter_included": true,
+  "reasoning_setting": {
+    "effort": "low",
+    "exclude": true
+  },
   "record_directory": "records",
   "ruler_margin_px": 64,
   "ruler_tick_step": 0.1,
@@ -200,9 +203,9 @@
   "source_clip": "clips\\dev\\spurs_thunder_test.mp4",
   "temperature": 0,
   "verified_pricing_per_million": {
-    "image": null,
-    "input": 0.26,
-    "output": 1.04
+    "image": 0.75,
+    "input": 0.75,
+    "output": 3.75
   },
-  "verified_provider": "Alibaba"
+  "verified_provider": "Google AI Studio"
 }

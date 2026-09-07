@@ -64,6 +64,7 @@
   ],
   "anchors_per_model": 61,
   "approval_gate": "STOP: requires explicit approval for the displayed 305 new paid calls.",
+  "approved_call_count": 305,
   "common_configuration": {
     "automatic_retries": 0,
     "frame_interval": 15,
@@ -77,6 +78,7 @@
     "schema_sha256": "45bbb678c950351f7417f0404c5c5b7e45fba8575bc9e100383ea66f86eb46dc",
     "temperature": 0
   },
+  "completed_at": "2026-09-07T21:28:36.641923+00:00",
   "control_reuse": {
     "checks": {
       "all_61_usage_rows_present": true,
@@ -146,7 +148,7 @@
       "control_reuse": false,
       "include_reasoning_parameter": false,
       "key": "qwen3_vl_235b",
-      "provider_slug": "deepinfra/fp8",
+      "provider_slug": "alibaba",
       "reasoning_setting": null,
       "slug": "qwen/qwen3-vl-235b-a22b-instruct"
     },
@@ -174,7 +176,9 @@
     }
   ],
   "new_paid_calls_requiring_approval": 305,
-  "new_paid_inference_calls_attempted": 0,
+  "new_paid_inference_calls_already_recorded": 61,
+  "new_paid_inference_calls_attempted": 305,
+  "new_paid_inference_calls_remaining": 0,
   "new_paid_models": [
     "google/gemini-3.8-flash",
     "qwen/qwen3-vl-30b-a3b-instruct",
@@ -183,7 +187,7 @@
     "z-ai/glm-5.3-flash"
   ],
   "overall_winner": null,
-  "prepared_at": "2026-09-06T20:54:19.021071+00:00",
+  "prepared_at": "2026-09-07T21:14:39.563296+00:00",
   "review_frames": [
     30,
     180,
@@ -194,7 +198,8 @@
     690,
     840
   ],
+  "run_started_at": "2026-09-07T21:14:39.625736+00:00",
   "source_clip": "clips\\dev\\spurs_thunder_test.mp4",
-  "status": "prepared_not_approved",
+  "status": "completed",
   "strictly_2fps": true
 }

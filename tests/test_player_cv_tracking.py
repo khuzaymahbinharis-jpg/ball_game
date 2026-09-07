@@ -103,6 +103,18 @@ def test_cv_never_discovers_players_without_vlm_initialization():
     assert all(frame.players == () for frame in result.timeline)
 
 
+def test_clipped_box_at_bottom_right_retains_positive_area():
+    box, foot = VLMInitializedPlayerCVTracker._clip_geometry(
+        np.array([160.0, 100.0, 170.0, 110.0]),
+        np.array([170.0, 110.0]),
+        width=160,
+        height=100,
+    )
+    assert box[2] > box[0]
+    assert box[3] > box[1]
+    assert tuple(foot) == (159.0, 99.0)
+
+
 def test_confidence_decays_to_uncertain_and_recovers_at_anchor():
     settings = TrackConfidenceConfig(
         enabled=True,

@@ -34,7 +34,7 @@ from .sampling import sample_frame_indices
 from .schema import FrameDetection, Team, frame_detection_json_schema
 from .test1 import _detection_as_dict
 from .tracking import build_player_tracker
-from .video import probe_video, render_tracked_video
+from .video import extract_video_frames, probe_video, render_tracked_video
 
 
 EXPERIMENT_ID = "model-bakeoff-2fps"
@@ -89,7 +89,7 @@ MODELS = (
     BakeoffModel(
         "qwen3_vl_235b",
         "qwen/qwen3-vl-235b-a22b-instruct",
-        "deepinfra/fp8",
+        "alibaba",
     ),
     BakeoffModel(
         "seed_2_1_turbo",
@@ -105,6 +105,13 @@ MODELS = (
         include_reasoning_parameter=True,
         reasoning_setting={"effort": "low", "exclude": True},
     ),
+)
+GEMINI_3_7_MODEL = BakeoffModel(
+    "gemini_3_7_flash",
+    "google/gemini-3.7-flash",
+    "google-ai-studio",
+    include_reasoning_parameter=True,
+    reasoning_setting={"effort": "low", "exclude": True},
 )
 PAID_MODELS = tuple(model for model in MODELS if not model.control_reuse)
 NEW_PAID_CALLS = len(PAID_MODELS) * ANCHORS_PER_MODEL
@@ -216,12 +223,13 @@ def verify_catalog_payload(
     endpoints_by_slug: dict[str, dict[str, Any]],
     *,
     captured_at: str | None = None,
+    models: Iterable[BakeoffModel] = MODELS,
 ) -> dict[str, Any]:
     """Verify exact slugs and fixed active providers without substituting aliases."""
 
     catalog = {item.get("id"): item for item in catalog_data}
     verified: list[dict[str, Any]] = []
-    for spec in MODELS:
+    for spec in models:
         if spec.slug not in catalog:
             raise RuntimeError(f"requested OpenRouter slug is unavailable: {spec.slug}")
         model = catalog[spec.slug]
@@ -304,16 +312,21 @@ def verify_catalog_payload(
     }
 
 
-def fetch_and_verify_catalog(timeout_seconds: float = 30.0) -> dict[str, Any]:
+def fetch_and_verify_catalog(
+    timeout_seconds: float = 30.0,
+    *,
+    models: Iterable[BakeoffModel] = MODELS,
+) -> dict[str, Any]:
     """Use only OpenRouter's public catalog APIs; this makes no inference request."""
 
+    models = tuple(models)
     with httpx.Client(timeout=timeout_seconds) as client:
         response = client.get(CATALOG_URL)
         response.raise_for_status()
         catalog_data = response.json()["data"]
         by_id = {item.get("id"): item for item in catalog_data}
         endpoints: dict[str, dict[str, Any]] = {}
-        for spec in MODELS:
+        for spec in models:
             model = by_id.get(spec.slug)
             if model is None:
                 endpoints[spec.slug] = {}
@@ -321,7 +334,7 @@ def fetch_and_verify_catalog(timeout_seconds: float = 30.0) -> dict[str, Any]:
             details = client.get("https://openrouter.ai" + model["links"]["details"])
             details.raise_for_status()
             endpoints[spec.slug] = details.json()["data"]
-    return verify_catalog_payload(catalog_data, endpoints)
+    return verify_catalog_payload(catalog_data, endpoints, models=models)
 
 
 def _cost_estimate(model_snapshot: dict[str, Any]) -> dict[str, Any]:
@@ -849,8 +862,14 @@ def _render_model_review_overlays(
     by_frame = {row["frame_id"]: row for row in records}
     output_dir = paths.model_dir(model) / "review_overlays"
     output_dir.mkdir(parents=True, exist_ok=True)
+    # Review overlays are presentation artifacts, not model inputs. Re-extract their
+    # source frames so a copied repository with stale per-file Windows ACLs remains
+    # runnable while the immutable ruler images sent to the models stay unchanged.
+    review_sources = extract_video_frames(
+        paths.clip, REVIEW_FRAMES, paths.experiment / "artifacts" / "review_sources"
+    )
     for frame_id in REVIEW_FRAMES:
-        source_path = paths.anchors / f"frame_{frame_id:04d}_original.png"
+        source_path = review_sources[frame_id]
         with Image.open(source_path) as source:
             row = by_frame.get(frame_id)
             if row and row.get("parsed_detection") is not None:
@@ -930,7 +949,11 @@ def _manual_review_markdown() -> str:
     return header + "\n".join(rows) + "\n"
 
 
-def _results_table_markdown(summaries: dict[str, dict[str, Any]] | None = None) -> str:
+def _results_table_markdown(
+    summaries: dict[str, dict[str, Any]] | None = None,
+    *,
+    models: Iterable[BakeoffModel] = MODELS,
+) -> str:
     summaries = summaries or {}
     lines = [
         "# Model bake-off results",
@@ -940,7 +963,7 @@ def _results_table_markdown(summaries: dict[str, dict[str, Any]] | None = None) 
         "| Model | Valid % | Player quality* | Ball quality* | Team quality* | Possession* | Cost | Mean latency | Batch time |",
         "|---|---:|---|---|---|---|---:|---:|---:|",
     ]
-    for model in MODELS:
+    for model in models:
         summary = summaries.get(model.key, {})
         valid = summary.get("schema_valid_percentage")
         cost = summary.get("actual_total_cost_usd")
@@ -1430,17 +1453,128 @@ def run_approved_bakeoff(
     return paths
 
 
+def run_gemini_3_7_extension(
+    repository_root: str | Path, approved_call_count: int
+) -> BakeoffPaths:
+    """Run the approved Gemini 3.7 extension without disturbing the completed bake-off."""
+
+    if approved_call_count != ANCHORS_PER_MODEL:
+        raise PermissionError(
+            f"Gemini 3.7 extension requires approval for exactly {ANCHORS_PER_MODEL} calls"
+        )
+    paths = bakeoff_paths(repository_root)
+    model = GEMINI_3_7_MODEL
+    model_dir = paths.model_dir(model)
+    model_dir.mkdir(parents=True, exist_ok=True)
+    for directory in (
+        "records",
+        "raw_responses",
+        "parsed_detections",
+        "review_overlays",
+    ):
+        (model_dir / directory).mkdir(parents=True, exist_ok=True)
+
+    catalog = fetch_and_verify_catalog(models=(model,))
+    control = audit_control_reuse(paths)
+    if not control["reusable"]:
+        raise RuntimeError("existing Gemini control is not equivalent; extension stopped")
+    snapshot = catalog["models"][0]
+    estimate = _cost_estimate(snapshot)
+    _write_json(model_dir / "catalog_snapshot.json", catalog)
+    _write_json(
+        model_dir / "cost_preflight.json",
+        {
+            "captured_at": catalog["captured_at"],
+            "currency": "USD",
+            "approved_calls": ANCHORS_PER_MODEL,
+            "estimate": estimate,
+        },
+    )
+    _write_json(model_dir / "config.json", _model_config(paths, model, snapshot, control))
+
+    fingerprint = _catalog_approval_fingerprint(catalog)
+    approval_path = model_dir / "approval.json"
+    if approval_path.is_file():
+        approval = json.loads(approval_path.read_text(encoding="utf-8"))
+        if approval.get("approved_call_count") != ANCHORS_PER_MODEL:
+            raise PermissionError("stored Gemini 3.7 approval has the wrong call count")
+        if approval.get("catalog_fingerprint") != fingerprint:
+            raise PermissionError("Gemini 3.7 provider/pricing changed; new approval required")
+    else:
+        _write_json(
+            approval_path,
+            {
+                "approved_at": _utc_now(),
+                "approved_call_count": ANCHORS_PER_MODEL,
+                "catalog_fingerprint": fingerprint,
+            },
+        )
+
+    extension_manifest_path = model_dir / "manifest.json"
+    existing = _load_model_records(paths, model)
+    extension_manifest = {
+        "experiment_id": EXPERIMENT_ID,
+        "extension": "gemini-3.7-flash",
+        "status": "approved_run_started",
+        "model": model.slug,
+        "provider_slug": model.provider_slug,
+        "approved_call_count": ANCHORS_PER_MODEL,
+        "paid_inference_calls_already_recorded": len(existing),
+        "paid_inference_calls_remaining": ANCHORS_PER_MODEL - len(existing),
+        "cost_preflight": estimate,
+        "started_at": _utc_now(),
+    }
+    _write_json(extension_manifest_path, extension_manifest)
+
+    records, batch_seconds = _run_detector_model(paths, model)
+    _materialize_model_artifacts(paths, model, records)
+    summary = _summarize_model(paths, model, records, batch_wall_seconds=batch_seconds)
+    _render_model_review_overlays(paths, model, records)
+    _run_player_cv_pipeline(paths, model, _detections_from_records(records), summary)
+
+    extension_manifest.update(
+        {
+            "status": "completed" if len(records) == ANCHORS_PER_MODEL else "partial",
+            "paid_inference_calls_attempted": len(records),
+            "paid_inference_calls_remaining": ANCHORS_PER_MODEL - len(records),
+            "completed_at": _utc_now(),
+            "output_video": summary.get("output_video"),
+            "overall_winner": None,
+        }
+    )
+    _write_json(extension_manifest_path, extension_manifest)
+
+    display_models = MODELS + (model,)
+    summaries = {}
+    for display_model in display_models:
+        summary_path = paths.model_dir(display_model) / "summary.json"
+        if summary_path.is_file():
+            summaries[display_model.key] = json.loads(
+                summary_path.read_text(encoding="utf-8")
+            )
+    paths.results_table.write_text(
+        _results_table_markdown(summaries, models=display_models), encoding="utf-8"
+    )
+    return paths
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=("prepare", "run"))
+    parser.add_argument("command", choices=("prepare", "run", "run-gemini-3-7"))
     parser.add_argument("--repository-root", type=Path, default=Path.cwd())
     parser.add_argument("--approved-call-count", type=int, default=0)
     args = parser.parse_args()
     if args.command == "prepare":
         print(prepare_bakeoff(args.repository_root).manifest)
-    else:
+    elif args.command == "run":
         print(
             run_approved_bakeoff(
+                args.repository_root, args.approved_call_count
+            ).results_table
+        )
+    else:
+        print(
+            run_gemini_3_7_extension(
                 args.repository_root, args.approved_call_count
             ).results_table
         )

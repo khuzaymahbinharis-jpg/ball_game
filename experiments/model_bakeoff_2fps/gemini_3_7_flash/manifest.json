@@ -1,0 +1,28 @@
+{
+  "approved_call_count": 61,
+  "completed_at": "2026-09-07T22:20:41.394969+00:00",
+  "cost_preflight": {
+    "estimated_cost_per_frame_usd": 0.006923975,
+    "expected_61_frame_cost_usd": 0.4223625,
+    "high_61_frame_cost_usd": 1.055361,
+    "image_per_million_usd_if_separately_exposed": 0.75,
+    "input_per_million_usd": 0.75,
+    "key": "gemini_3_7_flash",
+    "low_61_frame_cost_usd": 0.1686345,
+    "model": "google/gemini-3.7-flash",
+    "output_per_million_usd": 3.75,
+    "provider": "Google AI Studio",
+    "provider_slug": "google-ai-studio"
+  },
+  "experiment_id": "model-bakeoff-2fps",
+  "extension": "gemini-3.7-flash",
+  "model": "google/gemini-3.7-flash",
+  "output_video": null,
+  "overall_winner": null,
+  "paid_inference_calls_already_recorded": 0,
+  "paid_inference_calls_attempted": 61,
+  "paid_inference_calls_remaining": 0,
+  "provider_slug": "google-ai-studio",
+  "started_at": "2026-09-07T22:16:15.675537+00:00",
+  "status": "completed"
+}

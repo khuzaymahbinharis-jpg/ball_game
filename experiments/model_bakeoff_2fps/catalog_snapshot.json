@@ -1,6 +1,6 @@
 {
   "all_requested_slugs_exact": true,
-  "captured_at": "2026-09-06T20:54:17.344808+00:00",
+  "captured_at": "2026-09-07T21:14:37.552714+00:00",
   "models": [
     {
       "active_compatible_provider_count": 7,
@@ -43,7 +43,7 @@
       "chosen_provider": "Google AI Studio",
       "chosen_provider_slug": "google-ai-studio",
       "chosen_provider_status": 0,
-      "chosen_provider_uptime_5m": 99.56161714564053,
+      "chosen_provider_uptime_5m": 99.78973190818293,
       "input_modalities": [
         "text",
         "image",
@@ -106,7 +106,7 @@
       "chosen_provider": "Google AI Studio",
       "chosen_provider_slug": "google-ai-studio",
       "chosen_provider_status": 0,
-      "chosen_provider_uptime_5m": 98.78048780487805,
+      "chosen_provider_uptime_5m": 99.81403998140401,
       "input_modalities": [
         "text",
         "image",
@@ -191,12 +191,8 @@
       "structured_output_supported": true
     },
     {
-      "active_compatible_provider_count": 5,
+      "active_compatible_provider_count": 3,
       "active_compatible_providers": [
-        {
-          "provider": "DeepInfra",
-          "provider_slug": "deepinfra/fp8"
-        },
         {
           "provider": "Venice",
           "provider_slug": "venice/fp8"
@@ -208,19 +204,15 @@
         {
           "provider": "Alibaba",
           "provider_slug": "alibaba"
-        },
-        {
-          "provider": "Novita",
-          "provider_slug": "novita/bf16"
         }
       ],
       "benchmark_reasoning_setting": null,
       "canonical_slug": "qwen/qwen3-vl-235b-a22b-instruct",
       "catalog_id": "qwen/qwen3-vl-235b-a22b-instruct",
-      "chosen_provider": "DeepInfra",
-      "chosen_provider_slug": "deepinfra/fp8",
+      "chosen_provider": "Alibaba",
+      "chosen_provider_slug": "alibaba",
       "chosen_provider_status": 0,
-      "chosen_provider_uptime_5m": 95.27896995708154,
+      "chosen_provider_uptime_5m": 99.66101694915255,
       "input_modalities": [
         "text",
         "image"
@@ -231,13 +223,13 @@
       ],
       "pricing_per_million": {
         "image": null,
-        "input": 0.2,
-        "output": 0.88
+        "input": 0.26,
+        "output": 1.04
       },
       "pricing_per_token": {
         "image": null,
-        "input": "0.0000002",
-        "output": "0.00000088"
+        "input": "0.00000026",
+        "output": "0.00000104"
       },
       "reasoning_catalog": null,
       "reasoning_parameter_included": false,
@@ -291,7 +283,7 @@
       "structured_output_supported": true
     },
     {
-      "active_compatible_provider_count": 16,
+      "active_compatible_provider_count": 17,
       "active_compatible_providers": [
         {
           "provider": "DeepInfra",
@@ -356,6 +348,10 @@
         {
           "provider": "Cloudflare",
           "provider_slug": "cloudflare"
+        },
+        {
+          "provider": "Morph",
+          "provider_slug": "morph/fp8"
         }
       ],
       "benchmark_reasoning_setting": {
@@ -367,7 +363,7 @@
       "chosen_provider": "DeepInfra",
       "chosen_provider_slug": "deepinfra/fp4",
       "chosen_provider_status": 0,
-      "chosen_provider_uptime_5m": 99.94036970781157,
+      "chosen_provider_uptime_5m": 99.81233243967829,
       "input_modalities": [
         "text",
         "image",

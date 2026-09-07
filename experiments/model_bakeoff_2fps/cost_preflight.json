@@ -1,11 +1,11 @@
 {
   "all_six_model_equivalent_cost": {
-    "expected_usd": 1.0626685,
-    "high_usd": 2.64938494,
-    "low_usd": 0.42665413
+    "expected_usd": 1.08510938,
+    "high_usd": 2.69883398,
+    "low_usd": 0.43826609
   },
   "anchor_count_per_model": 61,
-  "captured_at": "2026-09-06T20:54:17.344808+00:00",
+  "captured_at": "2026-09-07T21:14:37.552714+00:00",
   "cross_family_tokenization_warning": "Image tokenization and output length can differ materially by model family. The estimates hold the observed Gemini token counts constant only as planning proxies; actual OpenRouter usage and cost will be recorded. A separately exposed image rate is reported but not added again because prompt_tokens already include the image-token charge in the prior run.",
   "currency": "USD",
   "models": [
@@ -49,17 +49,17 @@
       "provider_slug": "alibaba"
     },
     {
-      "estimated_cost_per_frame_usd": 0.001686935,
-      "expected_61_frame_cost_usd": 0.10290304,
-      "high_61_frame_cost_usd": 0.25144688,
+      "estimated_cost_per_frame_usd": 0.002054818,
+      "expected_61_frame_cost_usd": 0.12534392,
+      "high_61_frame_cost_usd": 0.30089592,
       "image_per_million_usd_if_separately_exposed": null,
-      "input_per_million_usd": 0.2,
+      "input_per_million_usd": 0.26,
       "key": "qwen3_vl_235b",
-      "low_61_frame_cost_usd": 0.0433588,
+      "low_61_frame_cost_usd": 0.05497076,
       "model": "qwen/qwen3-vl-235b-a22b-instruct",
-      "output_per_million_usd": 0.88,
-      "provider": "DeepInfra",
-      "provider_slug": "deepinfra/fp8"
+      "output_per_million_usd": 1.04,
+      "provider": "Alibaba",
+      "provider_slug": "alibaba"
     },
     {
       "estimated_cost_per_frame_usd": 0.004615984,
@@ -90,9 +90,9 @@
   ],
   "new_paid_calls_requiring_approval": 305,
   "new_paid_five_model_cost_requiring_approval": {
-    "expected_usd": 0.9016165,
-    "high_usd": 2.23513394,
-    "low_usd": 0.36708763
+    "expected_usd": 0.92405738,
+    "high_usd": 2.28458298,
+    "low_usd": 0.37869959
   },
   "observed_control_usage": {
     "actual_cost_usd": 0.161052,
