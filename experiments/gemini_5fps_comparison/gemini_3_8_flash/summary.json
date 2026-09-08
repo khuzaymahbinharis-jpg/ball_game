@@ -1,0 +1,60 @@
+{
+  "actual_total_cost_usd": 0.93379725,
+  "automatic_retries": 0,
+  "average_player_detections": 8.175675675675675,
+  "ball_returned_anchors": 109,
+  "batch_wall_seconds": 225.74618600000395,
+  "calls_attempted": 151,
+  "calls_planned": 151,
+  "configured_concurrency": 8,
+  "cost_complete": true,
+  "experiment_id": "gemini-flash-5fps-comparison",
+  "http_429_count": 0,
+  "invalid_responses": 3,
+  "known_cost_usd": 0.93379725,
+  "latency_seconds": {
+    "max": 37.34435889997985,
+    "mean": 7.763753369536917,
+    "median": 7.062428399978671,
+    "min": 3.0905837999889627,
+    "p95": 10.374208500026725
+  },
+  "model": "google/gemini-3.8-flash",
+  "model_key": "gemini_3_8_flash",
+  "output_video": "outputs\\gemini_5fps_comparison\\gemini_3_8_flash.mp4",
+  "possession_returned_anchors": 100,
+  "request_errors": 3,
+  "schema_valid_percentage": 98.01324503311258,
+  "total_input_tokens": 220743,
+  "total_output_tokens": 204864,
+  "tracking": {
+    "ball_tracking": {
+      "hungarian_matches": 90,
+      "lost_events": 6,
+      "lost_frames": 108,
+      "optical_flow_updates": 666,
+      "possession_prior_updates": 26,
+      "predicted_updates": 34,
+      "recovered_events": 6,
+      "rejected_vlm_anchors": 12,
+      "scene_cut_resets": 3,
+      "vlm_corrections": 97
+    },
+    "closeup_suppressed_anchors": 15,
+    "empty_player_frames": 93,
+    "local_processing_seconds": 488.69435380003415,
+    "scene_cut_frames": [
+      15,
+      369,
+      442
+    ],
+    "status": "completed",
+    "tracks_created": 39,
+    "tracks_expired": 29,
+    "tracks_lost": 49,
+    "tracks_recovered": 20,
+    "visible_player_marker_frames": 7632
+  },
+  "updated_at": "2026-09-08T04:07:00.537709+00:00",
+  "valid_responses": 148
+}

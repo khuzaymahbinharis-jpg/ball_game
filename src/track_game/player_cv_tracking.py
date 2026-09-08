@@ -3,6 +3,7 @@
 from dataclasses import asdict, dataclass
 from math import hypot
 from pathlib import Path
+from statistics import median_low
 from time import perf_counter
 from typing import Any, Iterable
 
@@ -18,6 +19,7 @@ from .camera_motion import (
 from .config import PipelineConfig
 from .scene_cut import SceneCutDetector, SceneCutResult
 from .schema import Box, FrameDetection, Point
+from .shot_context import ShotContextDecision, VLMShotContextFilter
 from .tracking import PlayerTracker, TrackedFrame, TrackedPlayer
 
 
@@ -33,6 +35,7 @@ class PlayerCVTrackingStats:
     confirmed_track_frames: int
     uncertainty_recoveries: int
     scene_cut_resets: int
+    closeup_suppressed_anchors: int
     camera_seconds: float
     scene_cut_seconds: float
     player_tracking_seconds: float
@@ -45,6 +48,7 @@ class PlayerCVTrackingResult:
     stats: PlayerCVTrackingStats
     camera_motion: tuple[CameraMotionEstimate, ...]
     scene_cuts: tuple[SceneCutResult, ...]
+    shot_context: tuple[ShotContextDecision, ...]
     confidence_history: tuple[dict[str, Any], ...]
 
 
@@ -62,6 +66,13 @@ class _LocalPlayerState:
 class VLMInitializedPlayerCVTracker:
     """Batched sparse LK; it cannot create a track without a VLM-initialized player."""
 
+    # VLM anchors correct drift, but snapping all the way to a slightly jittery
+    # anchor makes a foot marker visibly jump every sampling interval.  The
+    # prediction already represents the immediately preceding video frame, so
+    # retain most of that continuity and ease toward the semantic anchor.
+    _ANCHOR_GEOMETRY_WEIGHT = 0.45
+    _VELOCITY_COAST_DAMPING = 0.82
+
     def __init__(self, config: PipelineConfig, logical_tracker: PlayerTracker):
         if not config.player_cv_tracking.enabled:
             raise ValueError("player CV tracking must be enabled")
@@ -69,6 +80,7 @@ class VLMInitializedPlayerCVTracker:
         self.logical_tracker = logical_tracker
         self.camera_estimator = GlobalCameraMotionEstimator(config.camera_motion)
         self.cut_detector = SceneCutDetector(config.scene_cut)
+        self.shot_filter = VLMShotContextFilter(config.shot_context)
         self._states: dict[int, _LocalPlayerState] = {}
         self._previous_visual_state: dict[int, str] = {}
         self._anchor_reinitializations = 0
@@ -80,7 +92,9 @@ class VLMInitializedPlayerCVTracker:
         self._confirmed_track_frames = 0
         self._uncertainty_recoveries = 0
         self._scene_cut_resets = 0
+        self._closeup_suppressed_anchors = 0
         self._last_scene_cut_frame: int | None = None
+        self._continuity_horizon_frames = config.player_cv_tracking.max_coast_frames
 
     @staticmethod
     def _gray(frame: Any, frames_are_bgr: bool) -> np.ndarray:
@@ -189,13 +203,33 @@ class VLMInitializedPlayerCVTracker:
     def initialize(
         self, players: tuple[TrackedPlayer, ...], gray: np.ndarray
     ) -> None:
-        """Replace local trackers exclusively from VLM-associated player boxes."""
+        """Reconcile VLM-associated players without blinking retained tracks.
+
+        A track is still created exclusively from a VLM player.  At later
+        anchors, matched VLM geometry is blended with the preceding per-frame
+        CV prediction, while a player omitted from a single anchor keeps
+        coasting for as long as the logical Hungarian track remains eligible
+        for reassociation.
+        """
 
         height, width = gray.shape
+        previous_states = self._states
         new_states: dict[int, _LocalPlayerState] = {}
         for player in players:
-            box = self._box_pixels(player, width, height)
-            foot = np.array([player.foot.x * width, player.foot.y * height], dtype=np.float32)
+            detected_box = self._box_pixels(player, width, height)
+            detected_foot = np.array(
+                [player.foot.x * width, player.foot.y * height], dtype=np.float32
+            )
+            previous_state = previous_states.get(player.track_id)
+            if previous_state is None:
+                box, foot = detected_box, detected_foot
+                last_displacement = None
+            else:
+                weight = self._ANCHOR_GEOMETRY_WEIGHT
+                box = (1.0 - weight) * previous_state.box_px + weight * detected_box
+                foot = (1.0 - weight) * previous_state.foot_px + weight * detected_foot
+                box, foot = self._clip_geometry(box, foot, width, height)
+                last_displacement = previous_state.last_displacement
             confidence = (
                 player.tracking_confidence
                 if self.config.tracking.confidence.enabled
@@ -208,8 +242,13 @@ class VLMInitializedPlayerCVTracker:
             initialized = TrackedPlayer(
                 player.track_id,
                 player.team,
-                player.box,
-                player.foot,
+                Box(
+                    float(box[0]) / width,
+                    float(box[1]) / height,
+                    float(box[2]) / width,
+                    float(box[3]) / height,
+                ),
+                Point(float(foot[0]) / width, float(foot[1]) / height),
                 player.confidence,
                 player.possesses_ball,
                 confidence,
@@ -221,9 +260,35 @@ class VLMInitializedPlayerCVTracker:
                 foot,
                 self._features(gray, box),
                 confidence,
+                last_displacement=last_displacement,
             )
             self._previous_visual_state[player.track_id] = tracking_state
             self._anchor_reinitializations += 1
+
+        # Hungarian deliberately retains an unmatched identity for a bounded
+        # number of anchors.  Keep its already-VLM-initialized CV state too;
+        # the old replacement behaviour removed the marker for exactly the
+        # gap in which that identity was awaiting reassociation.
+        logical_states = self.logical_tracker.track_states
+        confidence_settings = self.config.tracking.confidence
+        for track_id, state in previous_states.items():
+            if track_id in new_states or logical_states.get(track_id) != "lost":
+                continue
+            if confidence_settings.enabled:
+                state.confidence *= confidence_settings.missed_anchor_decay
+            tracking_state = self._state_name(state.confidence)
+            state.player = TrackedPlayer(
+                state.player.track_id,
+                state.player.team,
+                state.player.box,
+                state.player.foot,
+                state.player.confidence,
+                state.player.possesses_ball,
+                min(1.0, max(0.0, state.confidence)),
+                tracking_state,
+            )
+            self._previous_visual_state[track_id] = tracking_state
+            new_states[track_id] = state
         self._states = new_states
 
     def reset(self) -> None:
@@ -360,12 +425,28 @@ class VLMInitializedPlayerCVTracker:
                 state.coast_frames += 1
                 if confidence_settings.enabled:
                     state.confidence *= confidence_settings.coast_decay
+                if state.last_displacement is not None:
+                    displacement = (
+                        state.last_displacement * self._VELOCITY_COAST_DAMPING
+                    ).astype(np.float32)
+                    state.box_px += np.array(
+                        [
+                            displacement[0],
+                            displacement[1],
+                            displacement[0],
+                            displacement[1],
+                        ],
+                        dtype=np.float32,
+                    )
+                    state.foot_px += displacement
+                    state.last_displacement = displacement
                 self._coast_updates += 1
                 state.features = self._features(current_gray, state.box_px)
-            lost = (
-                state.coast_frames > settings.max_coast_frames
-                or self._state_name(state.confidence) == "lost"
-            )
+            # The configured short coast limit predates sparse anchor sampling.
+            # Keep an initialized marker through the logical reassociation
+            # window; scene cuts still clear it immediately, and an expired
+            # Hungarian identity is removed at the next anchor reconciliation.
+            lost = state.coast_frames > self._continuity_horizon_frames
             if lost:
                 self._lost_track_frames += 1
                 self._previous_visual_state[track_id] = "lost"
@@ -391,9 +472,25 @@ class VLMInitializedPlayerCVTracker:
         timeline: list[TrackedFrame] = []
         camera_log: list[CameraMotionEstimate] = []
         cut_log: list[SceneCutResult] = []
+        shot_context_log: list[ShotContextDecision] = []
         confidence_log: list[dict[str, Any]] = []
         previous_gray: np.ndarray | None = None
         camera_seconds = scene_seconds = player_seconds = decode_seconds = 0.0
+
+        anchor_ids = sorted(anchors)
+        anchor_gaps = [
+            right - left
+            for left, right in zip(anchor_ids, anchor_ids[1:])
+            if right > left
+        ]
+        if anchor_gaps:
+            # include_last can make the final sampling gap shorter than the
+            # actual cadence (for example 6, ..., 6, 5 at 5 FPS).
+            nominal_gap = median_low(anchor_gaps)
+            self._continuity_horizon_frames = max(
+                self.config.player_cv_tracking.max_coast_frames,
+                nominal_gap * (self.config.tracking.max_missed_anchors + 1),
+            )
 
         for frame_id, frame in enumerate(frames):
             decode_started = perf_counter()
@@ -420,6 +517,8 @@ class VLMInitializedPlayerCVTracker:
                         cut.frame_difference,
                         cut.histogram_change,
                         cut.camera_failure_used,
+                        cut.aligned_frame_difference,
+                        cut.motion_compensated,
                     )
                 scene_seconds += perf_counter() - started
             camera_log.append(camera)
@@ -438,16 +537,31 @@ class VLMInitializedPlayerCVTracker:
 
             detection = anchors.get(frame_id)
             if detection is not None:
-                if predicted:
-                    self.logical_tracker.apply_predictions(predicted, frame_id)
-                tracked = self.logical_tracker.update(detection)
-                self.initialize(tracked.players, gray)
-                current = TrackedFrame(
-                    frame_id,
-                    tuple(state.player for state in self._states.values()),
-                    detection.ball,
-                    detection.ball_confidence,
-                )
+                detection, shot_context = self.shot_filter.filter(detection)
+                shot_context_log.append(shot_context)
+                if not shot_context.trackable:
+                    # Anchor reconciliation normally retains a missed identity.
+                    # A close-up is an explicit non-trackable shot boundary, so
+                    # clear spatial state instead of coasting markers across it.
+                    self.logical_tracker.update(detection)
+                    self.reset()
+                    self.logical_tracker.mark_scene_cut()
+                    self._closeup_suppressed_anchors += 1
+                    current = TrackedFrame(frame_id, (), None, None)
+                else:
+                    if predicted:
+                        self.logical_tracker.apply_predictions(predicted, frame_id)
+                    tracked = self.logical_tracker.update(detection)
+                    self.initialize(tracked.players, gray)
+                    current = TrackedFrame(
+                        frame_id,
+                        tuple(
+                            self._states[track_id].player
+                            for track_id in sorted(self._states)
+                        ),
+                        detection.ball,
+                        detection.ball_confidence,
+                    )
             else:
                 current = TrackedFrame(frame_id, predicted, None, None)
             timeline.append(current)
@@ -475,6 +589,7 @@ class VLMInitializedPlayerCVTracker:
                 confirmed_track_frames=self._confirmed_track_frames,
                 uncertainty_recoveries=self._uncertainty_recoveries,
                 scene_cut_resets=self._scene_cut_resets,
+                closeup_suppressed_anchors=self._closeup_suppressed_anchors,
                 camera_seconds=camera_seconds,
                 scene_cut_seconds=scene_seconds,
                 player_tracking_seconds=player_seconds,
@@ -482,6 +597,7 @@ class VLMInitializedPlayerCVTracker:
             ),
             tuple(camera_log),
             tuple(cut_log),
+            tuple(shot_context_log),
             tuple(confidence_log),
         )
 

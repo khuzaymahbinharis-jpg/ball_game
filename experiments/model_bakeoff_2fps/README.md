@@ -23,6 +23,8 @@ The completed run recorded **$0.75623447** of known new-call cost. Cost metadata
 
 An explicitly approved 61-call Gemini 3.7 Flash extension was run on the same anchors and configuration. All 61 requests failed without an HTTP response body, request ID, provider metadata, or billable-usage metadata; therefore no schema-valid detections or output video were produced. The public catalog still reported the pinned Google AI Studio endpoint active after the run, so this is recorded as an operational endpoint/transport failure rather than evidence about Gemini 3.7's detection quality. The artifact-derived known cost is $0, but billing completeness cannot be proven without returned usage metadata.
 
+A second explicitly approved attempt used the same model, Google AI Studio endpoint, frames, prompt, schema, and concurrency with only the request timeout increased from 45 to 120 seconds. It returned 60/61 schema-valid detections, cost $0.383148, averaged 10.781 seconds per request, and completed the concurrent API batch in 87.542 seconds. This confirms the first attempt was operationally invalid. The source clip and rendered retry output are both video-only files with no audio stream.
+
 After explicit approval for the displayed 305-call ceiling, run:
 
 ```powershell

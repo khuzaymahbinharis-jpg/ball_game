@@ -78,7 +78,7 @@ The tracking controls are independent: `association_method` selects greedy or Hu
 
 ## Prepared full-clip Test 2
 
-Test 2 samples 11 ruler-enhanced anchors at frames 0, 90, …, 810, and 899 (three-second spacing plus the exact final frame). It fixes Team A as Oklahoma City blue and Team B as San Antonio black/white across every independent request, associates explicit foot points with the baseline tracker, linearly interpolates all 900 frames, draws compact transparent layers with Pillow, and uses ffmpeg only for compositing/encoding and audio preservation.
+Test 2 samples 11 ruler-enhanced anchors at frames 0, 90, …, 810, and 899 (three-second spacing plus the exact final frame). It fixes Team A as Oklahoma City blue and Team B as San Antonio black/white across every independent request, associates explicit foot points with the baseline tracker, linearly interpolates all 900 frames, draws compact transparent layers with Pillow, and uses ffmpeg only for silent compositing/encoding.
 
 ```bash
 python -m track_game.fullclip prepare
@@ -90,7 +90,7 @@ Preparation is zero-cost. The paid runner requires a separate preflight approval
 python -m track_game.fullclip run --approved-call-count 11
 ```
 
-The approved Test 2 batch made exactly 11 calls with no retries. Nine anchors passed strict validation; frames 630 and 810 failed validation. A degraded output was rendered from the nine valid saved anchors, spanning all 900 frames and preserving audio. The known cost from successful responses is $0.02308575; total cost is incomplete because the two invalid responses' usage was not retained by the original adapter. Measured API batch plus final local render time was 21.74 seconds.
+The approved Test 2 batch made exactly 11 calls with no retries. Nine anchors passed strict validation; frames 630 and 810 failed validation. A degraded silent output was rendered from the nine valid saved anchors, spanning all 900 frames. The known cost from successful responses is $0.02308575; total cost is incomplete because the two invalid responses' usage was not retained by the original adapter. Measured API batch plus final local render time was 21.74 seconds.
 
 Current limitations are intentional: greedy matching has no velocity model; tracks visible in only one endpoint disappear between anchors; player interpolation cannot follow nonlinear motion or cuts; and optical flow declares the ball lost when its VLM-localized patch cannot be tracked reliably. Test 1 is an interface/grounding result, not a tracking benchmark.
 
@@ -129,3 +129,21 @@ python -m track_game.experiment5 prepare
 ```
 
 The 31-call batch must not be run until the current pricing, measured prior per-anchor cost, low/expected/high total, purpose, and changed variable are presented and the user explicitly approves exactly 31 calls.
+
+## Gemini Flash 5 FPS comparison
+
+The focused 5 FPS comparison uses the same silent 900-frame clip, ruler prompt, strict schema, provider pinning, and no-retry policy for Gemini 3.8 Flash and Gemini 3.7 Flash. It samples frames `0, 6, 12, …, 894, 899`: 151 anchors per model and exactly 302 paid calls. The downstream pipeline adds multi-cue Hungarian gating and confidence fusion to VLM ball anchors while retaining LK/Kalman motion, lost-track recovery, scene-cut resets, and the possession prior. Player and ball markers now use larger translucent fills, supersampled edges, and Lanczos video compositing.
+
+```bash
+python -m track_game.gemini_5fps prepare
+```
+
+Preparation extracts the local inputs, verifies that the source has no audio, and queries only OpenRouter's public catalog. It makes no inference calls. Review `experiments/gemini_5fps_comparison/cost_preflight.json` and obtain explicit approval for exactly 302 calls before running:
+
+```bash
+python -m track_game.gemini_5fps run --approved-call-count 302
+```
+
+The paid runner rechecks the pinned provider and token prices and stops for a new preflight if either changed. Both rendered outputs are video-only files.
+
+The approved run completed all 302 calls exactly once. Gemini 3.8 Flash returned 148/151 schema-valid anchors at $0.933797; Gemini 3.7 Flash returned 143/151 at $0.965046. Both silent outputs contain exactly 900 frames at 30 FPS and 1080p. Full machine metrics are recorded in `experiments/gemini_5fps_comparison/results_table.md` and each model's `summary.json`.

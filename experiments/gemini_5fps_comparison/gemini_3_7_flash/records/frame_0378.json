@@ -1,0 +1,118 @@
+{
+  "actual_openrouter_cost_usd": 0.003984,
+  "completed_at": "2026-09-08T04:15:09.110728+00:00",
+  "error": null,
+  "experiment_id": "gemini-flash-5fps-comparison",
+  "frame_id": 378,
+  "http_429": false,
+  "input_tokens": 1462,
+  "model": "google/gemini-3.7-flash",
+  "model_key": "gemini_3_7_flash",
+  "output_tokens": 770,
+  "parsed_detection": {
+    "ball": null,
+    "frame_id": 378,
+    "players": [
+      {
+        "box": {
+          "bottom": 1.0,
+          "left": 0.224,
+          "right": 0.627,
+          "top": 0.281
+        },
+        "confidence": 0.95,
+        "detection_id": "player_01",
+        "foot": {
+          "x": 0.425,
+          "y": 1.0
+        },
+        "team": "B",
+        "team_confidence": 0.99
+      },
+      {
+        "box": {
+          "bottom": 1.0,
+          "left": 0.612,
+          "right": 0.999,
+          "top": 0.054
+        },
+        "confidence": 0.92,
+        "detection_id": "player_02",
+        "foot": {
+          "x": 0.815,
+          "y": 1.0
+        },
+        "team": "A",
+        "team_confidence": 0.98
+      }
+    ],
+    "possession": null,
+    "uncertainty_notes": [
+      "Close-up framing truncates players at bottom of frame.",
+      "Ball is out of view."
+    ]
+  },
+  "raw_content": null,
+  "raw_response_body": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"frame_id\": 378,\n  \"players\": [\n    {\n      \"detection_id\": \"player_01\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.224,\n        \"top\": 0.281,\n        \"right\": 0.627,\n        \"bottom\": 1.0\n      },\n      \"foot\": {\n        \"x\": 0.425,\n        \"y\": 1.0\n      },\n      \"confidence\": 0.95,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_02\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.612,\n        \"top\": 0.054,\n        \"right\": 0.999,\n        \"bottom\": 1.0\n      },\n      \"foot\": {\n        \"x\": 0.815,\n        \"y\": 1.0\n      },\n      \"confidence\": 0.92,\n      \"team_confidence\": 0.98\n    }\n  ],\n  \"ball\": null,\n  \"possession\": null,\n  \"uncertainty_notes\": [\n    \"Close-up framing truncates players at bottom of frame.\",\n    \"Ball is out of view.\"\n  ]\n}",
+          "reasoning_details": [
+            {
+              "format": "google-gemini-v1",
+              "index": 0,
+              "signature": "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",
+              "type": "reasoning.text"
+            }
+          ],
+          "refusal": null,
+          "role": "assistant"
+        },
+        "native_finish_reason": "STOP"
+      }
+    ],
+    "created": 1788840904,
+    "id": "gen-1788840904-sj27prkEVhT0FPjTk9fm",
+    "model": "google/gemini-3.7-flash",
+    "object": "chat.completion",
+    "provider": "Google AI Studio",
+    "service_tier": "default",
+    "system_fingerprint": null,
+    "usage": {
+      "completion_tokens": 770,
+      "completion_tokens_details": {
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 500
+      },
+      "cost": 0.003984,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0028875,
+        "upstream_inference_cost": 0.003984,
+        "upstream_inference_prompt_cost": 0.0010965
+      },
+      "is_byok": false,
+      "prompt_tokens": 1462,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "video_tokens": 0
+      },
+      "total_tokens": 2232
+    }
+  },
+  "reasoning_tokens": 500,
+  "request_id": "gen-1788840904-sj27prkEVhT0FPjTk9fm",
+  "request_latency_seconds": 5.878969700017478,
+  "request_wall_seconds": 9.863719700020738,
+  "retry_count": 0,
+  "returned_model": "google/gemini-3.7-flash",
+  "returned_provider": "Google AI Studio",
+  "reused_control": false,
+  "schema_validation_success": true
+}

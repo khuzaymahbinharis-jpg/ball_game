@@ -1,0 +1,201 @@
+{
+  "ball": {
+    "box": {
+      "bottom": 0.519531,
+      "left": 0.21582,
+      "right": 0.227539,
+      "top": 0.5
+    },
+    "center": {
+      "x": 0.22168,
+      "y": 0.509766
+    },
+    "confidence": 0.72
+  },
+  "frame_id": 834,
+  "players": [
+    {
+      "box": {
+        "bottom": 0.467773,
+        "left": 0.116016,
+        "right": 0.148438,
+        "top": 0.349121
+      },
+      "confidence": 0.94,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.132812,
+        "y": 0.467773
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.546875,
+        "left": 0.162109,
+        "right": 0.208008,
+        "top": 0.425781
+      },
+      "confidence": 0.95,
+      "detection_id": "player_02",
+      "foot": {
+        "x": 0.183594,
+        "y": 0.544922
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.556641,
+        "left": 0.216797,
+        "right": 0.276367,
+        "top": 0.431641
+      },
+      "confidence": 0.95,
+      "detection_id": "player_03",
+      "foot": {
+        "x": 0.24707,
+        "y": 0.551758
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.523438,
+        "left": 0.237305,
+        "right": 0.28418,
+        "top": 0.386719
+      },
+      "confidence": 0.93,
+      "detection_id": "player_04",
+      "foot": {
+        "x": 0.272461,
+        "y": 0.521484
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.496094,
+        "left": 0.348633,
+        "right": 0.384766,
+        "top": 0.352539
+      },
+      "confidence": 0.94,
+      "detection_id": "player_05",
+      "foot": {
+        "x": 0.363281,
+        "y": 0.493164
+      },
+      "team": "B",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.677734,
+        "left": 0.303711,
+        "right": 0.34668,
+        "top": 0.506836
+      },
+      "confidence": 0.97,
+      "detection_id": "player_06",
+      "foot": {
+        "x": 0.325195,
+        "y": 0.673828
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.591797,
+        "left": 0.421875,
+        "right": 0.470703,
+        "top": 0.429688
+      },
+      "confidence": 0.96,
+      "detection_id": "player_07",
+      "foot": {
+        "x": 0.454102,
+        "y": 0.586914
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.558594,
+        "left": 0.548828,
+        "right": 0.589844,
+        "top": 0.408203
+      },
+      "confidence": 0.95,
+      "detection_id": "player_08",
+      "foot": {
+        "x": 0.567383,
+        "y": 0.552734
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.571289,
+        "left": 0.613281,
+        "right": 0.664062,
+        "top": 0.428711
+      },
+      "confidence": 0.95,
+      "detection_id": "player_09",
+      "foot": {
+        "x": 0.637695,
+        "y": 0.567383
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.612305,
+        "left": 0.666992,
+        "right": 0.702148,
+        "top": 0.435547
+      },
+      "confidence": 0.96,
+      "detection_id": "player_10",
+      "foot": {
+        "x": 0.68457,
+        "y": 0.606445
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.657227,
+        "left": 0.852539,
+        "right": 0.904297,
+        "top": 0.517578
+      },
+      "confidence": 0.93,
+      "detection_id": "player_11",
+      "foot": {
+        "x": 0.87793,
+        "y": 0.654297
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    }
+  ],
+  "possession": {
+    "confidence": 0.65,
+    "player_detection_id": "player_03"
+  },
+  "uncertainty_notes": [
+    "Ball is partially occluded near player_03's hands during action."
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "ball": null,
+  "frame_id": 414,
+  "players": [
+    {
+      "box": {
+        "bottom": 1.0,
+        "left": 0.245,
+        "right": 0.878,
+        "top": 0.068
+      },
+      "confidence": 0.98,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.561,
+        "y": 1.0
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    }
+  ],
+  "possession": null,
+  "uncertainty_notes": [
+    "Player's lower body and feet are cut off by the bottom frame boundary.",
+    "Ball is not visible in frame."
+  ]
+}

@@ -1,5 +1,6 @@
 """Local ffmpeg boundary; frame semantics remain outside this module."""
 
+import os
 import shutil
 import subprocess
 import tempfile
@@ -25,6 +26,88 @@ class VideoInfo:
 def resolve_ffmpeg() -> str:
     installed = shutil.which("ffmpeg")
     return installed or imageio_ffmpeg.get_ffmpeg_exe()
+
+
+def video_has_audio(path: str | Path) -> bool:
+    """Return whether a valid video contains at least one audio stream."""
+
+    path = Path(path)
+    probe_video(path)
+    result = subprocess.run(
+        [
+            resolve_ffmpeg(),
+            "-v",
+            "error",
+            "-i",
+            str(path),
+            "-map",
+            "0:a:0",
+            "-frames:a",
+            "1",
+            "-f",
+            "null",
+            "-",
+        ],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    )
+    return result.returncode == 0
+
+
+def mute_video_in_place(path: str | Path) -> VideoInfo:
+    """Remove every audio stream without re-encoding or altering the video frames."""
+
+    path = Path(path).resolve()
+    original = probe_video(path)
+    if not video_has_audio(path):
+        return original
+    with tempfile.TemporaryDirectory(dir=path.parent) as directory:
+        muted_path = Path(directory) / path.name
+        subprocess.run(
+            [
+                resolve_ffmpeg(),
+                "-hide_banner",
+                "-loglevel",
+                "error",
+                "-i",
+                str(path),
+                "-map",
+                "0:v:0",
+                "-c:v",
+                "copy",
+                "-an",
+                "-movflags",
+                "+faststart",
+                "-y",
+                str(muted_path),
+            ],
+            check=True,
+        )
+        muted = probe_video(muted_path)
+        if video_has_audio(muted_path):
+            raise RuntimeError("audio stream remained after mute operation")
+        if (
+            muted.frame_count,
+            muted.width,
+            muted.height,
+            round(muted.fps, 6),
+        ) != (
+            original.frame_count,
+            original.width,
+            original.height,
+            round(original.fps, 6),
+        ):
+            raise RuntimeError("mute operation changed the source video geometry")
+        muted_path.replace(path)
+        if os.name == "nt":
+            subprocess.run(
+                ["icacls", str(path), "/inheritance:e"],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                check=True,
+            )
+    return muted
 
 
 def probe_video(path: str | Path) -> VideoInfo:
@@ -70,8 +153,6 @@ def trim_video_clip(
             f"{duration_seconds:.6f}",
             "-map",
             "0:v:0",
-            "-map",
-            "0:a:0?",
             "-vf",
             f"fps={fps}",
             "-frames:v",
@@ -82,8 +163,7 @@ def trim_video_clip(
             "veryfast",
             "-crf",
             "18",
-            "-c:a",
-            "aac",
+            "-an",
             "-movflags",
             "+faststart",
             "-y",
@@ -118,8 +198,8 @@ def extract_video_frame(
             str(path),
             "-vf",
             f"select=eq(n\\,{frame_index})",
-            "-vsync",
-            "0",
+            "-fps_mode",
+            "passthrough",
             "-frames:v",
             "1",
             "-y",
@@ -227,6 +307,7 @@ def write_video_frames(
                 "libx264",
                 "-pix_fmt",
                 "yuv420p",
+                "-an",
                 str(output),
             ],
             check=True,
@@ -239,7 +320,7 @@ def render_tracked_video(
     timeline: list[TrackedFrame],
     show_ids: bool = True,
 ) -> VideoInfo:
-    """Draw Pillow overlays, composite with ffmpeg, and preserve source audio."""
+    """Draw Pillow overlays and encode a video-only MP4 with no audio stream."""
 
     source, output = Path(source), Path(output)
     info = probe_video(source)
@@ -255,7 +336,7 @@ def render_tracked_video(
             overlay = annotation_overlay(
                 by_frame[frame_id],
                 (info.width, info.height),
-                overlay_size=(480, 270),
+                overlay_size=(1280, 720),
                 show_ids=show_ids,
             )
             overlay.save(
@@ -277,13 +358,11 @@ def render_tracked_video(
                 str(overlay_directory / "%08d.png"),
                 "-filter_complex",
                 (
-                    f"[1:v]scale={info.width}:{info.height}:flags=bilinear[overlay];"
+                    f"[1:v]scale={info.width}:{info.height}:flags=lanczos[overlay];"
                     "[0:v][overlay]overlay=0:0:format=auto[video]"
                 ),
                 "-map",
                 "[video]",
-                "-map",
-                "0:a:0?",
                 "-c:v",
                 "libx264",
                 "-preset",
@@ -292,11 +371,9 @@ def render_tracked_video(
                 "20",
                 "-pix_fmt",
                 "yuv420p",
-                "-c:a",
-                "copy",
+                "-an",
                 "-frames:v",
                 str(info.frame_count),
-                "-shortest",
                 "-movflags",
                 "+faststart",
                 "-y",

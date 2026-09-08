@@ -1,0 +1,169 @@
+{
+  "ball": {
+    "box": {
+      "bottom": 0.681,
+      "left": 0.216,
+      "right": 0.237,
+      "top": 0.651
+    },
+    "center": {
+      "x": 0.226,
+      "y": 0.666
+    },
+    "confidence": 0.88
+  },
+  "frame_id": 174,
+  "players": [
+    {
+      "box": {
+        "bottom": 0.697,
+        "left": 0.16,
+        "right": 0.227,
+        "top": 0.548
+      },
+      "confidence": 0.94,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.183,
+        "y": 0.694
+      },
+      "team": "B",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.687,
+        "left": 0.186,
+        "right": 0.251,
+        "top": 0.496
+      },
+      "confidence": 0.92,
+      "detection_id": "player_02",
+      "foot": {
+        "x": 0.237,
+        "y": 0.678
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.737,
+        "left": 0.316,
+        "right": 0.358,
+        "top": 0.516
+      },
+      "confidence": 0.94,
+      "detection_id": "player_03",
+      "foot": {
+        "x": 0.337,
+        "y": 0.731
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.736,
+        "left": 0.316,
+        "right": 0.38,
+        "top": 0.541
+      },
+      "confidence": 0.93,
+      "detection_id": "player_04",
+      "foot": {
+        "x": 0.353,
+        "y": 0.73
+      },
+      "team": "B",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.609,
+        "left": 0.509,
+        "right": 0.562,
+        "top": 0.419
+      },
+      "confidence": 0.95,
+      "detection_id": "player_05",
+      "foot": {
+        "x": 0.537,
+        "y": 0.602
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.54,
+        "left": 0.557,
+        "right": 0.604,
+        "top": 0.363
+      },
+      "confidence": 0.94,
+      "detection_id": "player_06",
+      "foot": {
+        "x": 0.58,
+        "y": 0.536
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.655,
+        "left": 0.62,
+        "right": 0.672,
+        "top": 0.45
+      },
+      "confidence": 0.95,
+      "detection_id": "player_07",
+      "foot": {
+        "x": 0.645,
+        "y": 0.648
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.548,
+        "left": 0.351,
+        "right": 0.407,
+        "top": 0.349
+      },
+      "confidence": 0.93,
+      "detection_id": "player_08",
+      "foot": {
+        "x": 0.373,
+        "y": 0.542
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.508,
+        "left": 0.332,
+        "right": 0.371,
+        "top": 0.319
+      },
+      "confidence": 0.92,
+      "detection_id": "player_09",
+      "foot": {
+        "x": 0.356,
+        "y": 0.502
+      },
+      "team": "B",
+      "team_confidence": 0.98
+    }
+  ],
+  "possession": {
+    "confidence": 0.82,
+    "player_detection_id": "player_01"
+  },
+  "uncertainty_notes": [
+    "Dribbler player_01 and defender player_02 have overlapping body contours."
+  ]
+}

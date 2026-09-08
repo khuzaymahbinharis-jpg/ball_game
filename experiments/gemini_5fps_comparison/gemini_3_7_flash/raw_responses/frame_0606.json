@@ -1,0 +1,53 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"frame_id\": 606,\n  \"players\": [\n    {\"detection_id\": \"player_01\", \"team\": \"A\", \"box\": {\"left\": 4.02e-01, \"top\": 5.56e-01, \"right\": 4.67e-01, \"bottom\": 7.97e-01}, \"foot\": {\"x\": 4.22e-01, \"y\": 7.74e-01}, \"confidence\": 0.96, \"team_confidence\": 0.99},\n    {\"detection_id\": \"player_02\", \"team\": \"B\", \"box\": {\"left\": 5.30e-01, \"top\": 4.90e-01, \"right\": 5.96e-01, \"bottom\": 7.10e-01}, \"foot\": {\"x\": 5.62e-01, \"y\": 6.94e-01}, \"confidence\": 0.96, \"team_confidence\": 0.99},\n    {\"detection_id\": \"player_03\", \"team\": \"B\", \"box\": {\"left\": 2.06e-01, \"top\": 4.68e-01, \"right\": 2.65e-01, \"bottom\": 6.89e-01}, \"foot\": {\"x\": 2.37e-01, \"y\": 6.74e-01}, \"confidence\": 0.95, \"team_confidence\": 0.98},\n    {\"detection_id\": \"player_04\", \"team\": \"A\", \"box\": {\"left\": 1.77e-01, \"top\": 4.41e-01, \"right\": 2.22e-01, \"bottom\": 6.72e-01}, \"foot\": {\"x\": 2.09e-01, \"y\": 6.47e-01}, \"confidence\": 0.95, \"team_confidence\": 0.99},\n    {\"detection_id\": \"player_05\", \"team\": \"B\", \"box\": {\"left\": 4.34e-01, \"top\": 4.14e-01, \"right\": 4.79e-01, \"bottom\": 5.98e-01}, \"foot\": {\"x\": 4.61e-01, \"y\": 5.90e-01}, \"confidence\": 0.94, \"team_confidence\": 0.98},\n    {\"detection_id\": \"player_06\", \"team\": \"A\", \"box\": {\"left\": 3.99e-01, \"top\": 4.13e-01, \"right\": 4.34e-01, \"bottom\": 5.63e-01}, \"foot\": {\"x\": 4.16e-01, \"y\": 5.56e-01}, \"confidence\": 0.93, \"team_confidence\": 0.98},\n    {\"detection_id\": \"player_07\", \"team\": \"B\", \"box\": {\"left\": 4.71e-01, \"top\": 4.02e-01, \"right\": 5.16e-01, \"bottom\": 5.51e-01}, \"foot\": {\"x\": 4.90e-01, \"y\": 5.43e-01}, \"confidence\": 0.93, \"team_confidence\": 0.98},\n    {\"detection_id\": \"player_08\", \"team\": \"B\", \"box\": {\"left\": 3.12e-01, \"top\": 3.75e-01, \"right\": 3.54e-01, \"bottom\": 5.69e-01}, \"foot\": {\"x\": 3.36e-01, \"y\": 5.59e-01}, \"confidence\": 0.94, \"team_confidence\": 0.98},\n    {\"detection_id\": \"player_09\", \"team\": \"A\", \"box\": {\"left\": 2.70e-01, \"top\": 4.08e-01, \"right\": 3.06e-01, \"bottom\": 5.69e-01}, \"foot\": {\"x\": 2.87e-01, \"y\": 5.58e-01}, \"confidence\": 0.93, \"team_confidence\": 0.99}\n  ],\n  \"ball\": {\n    \"center\": {\"x\": 3.59e-01, \"y\": 2.37e-01},\n    \"box\": {\"left\": 3.52e-01, \"top\": 2.22e-01, \"right\": 3.66e-01, \"bottom\": 2.51e-01},\n    \"confidence\": 0.91\n  },\n  \"possession\": null,\n  \"uncertainty_notes\": [\n    \"Ball is mid-air/pass trajectory\",\n    \"Player 09 and Referee nearby on court perimeter\"\n  ]\n}",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "signature": "Em0KawERTTIP6B7ASYX6c27EFYwLikO6OBt7nOmfyf3omfPaTmT5fP+96W7p3WHUBvgMo1K9arrU7idGkWfKckqI3wjxoFLZsX4O7Bxes8h569THImW/p8dBihWy2qR+0nK5Mooc5JY7YnSJjt4a",
+            "type": "reasoning.text"
+          }
+        ],
+        "refusal": null,
+        "role": "assistant"
+      },
+      "native_finish_reason": "STOP"
+    }
+  ],
+  "created": 1788840962,
+  "id": "gen-1788840962-Aqsoy3UdWBCrwfEv2ZSE",
+  "model": "google/gemini-3.7-flash",
+  "object": "chat.completion",
+  "provider": "Google AI Studio",
+  "service_tier": "default",
+  "system_fingerprint": null,
+  "usage": {
+    "completion_tokens": 1208,
+    "completion_tokens_details": {
+      "audio_tokens": 0,
+      "image_tokens": 0,
+      "reasoning_tokens": 0
+    },
+    "cost": 0.0056265,
+    "cost_details": {
+      "upstream_inference_completions_cost": 0.00453,
+      "upstream_inference_cost": 0.0056265,
+      "upstream_inference_prompt_cost": 0.0010965
+    },
+    "is_byok": false,
+    "prompt_tokens": 1462,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": 0,
+      "cached_tokens": 0,
+      "video_tokens": 0
+    },
+    "total_tokens": 2670
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"frame_id\": 288,\n  \"players\": [\n    {\n      \"detection_id\": \"player_01\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.435,\n        \"top\": 5.29e-1,\n        \"right\": 0.481,\n        \"bottom\": 0.738\n      },\n      \"foot\": {\n        \"x\": 0.457,\n        \"y\": 0.729\n      },\n      \"confidence\": 0.95,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_02\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.579,\n        \"top\": 0.577,\n        \"right\": 0.62,\n        \"bottom\": 0.793\n      },\n      \"foot\": {\n        \"x\": 0.603,\n        \"y\": 0.785\n      },\n      \"confidence\": 0.94,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_03\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.605,\n        \"top\": 0.482,\n        \"right\": 0.659,\n        \"bottom\": 0.655\n      },\n      \"foot\": {\n        \"x\": 0.627,\n        \"y\": 0.648\n      },\n      \"confidence\": 0.95,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_04\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.486,\n        \"top\": 0.428,\n        \"right\": 0.533,\n        \"bottom\": 0.578\n      },\n      \"foot\": {\n        \"x\": 0.51,\n        \"y\": 0.572\n      },\n      \"confidence\": 0.94,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_05\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.751,\n        \"top\": 0.398,\n        \"right\": 0.791,\n        \"bottom\": 0.596\n      },\n      \"foot\": {\n        \"x\": 0.773,\n        \"y\": 0.589\n      },\n      \"confidence\": 0.95,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_06\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.838,\n        \"top\": 0.516,\n        \"right\": 0.884,\n        \"bottom\": 0.716\n      },\n      \"foot\": {\n        \"x\": 0.86,\n        \"y\": 0.706\n      },\n      \"confidence\": 0.95,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_07\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.329,\n        \"top\": 4.19e-1,\n        \"right\": 0.373,\n        \"bottom\": 0.64\n      },\n      \"foot\": {\n        \"x\": 0.342,\n        \"y\": 0.635\n      },\n      \"confidence\": 0.93,\n      \"team_confidence\": 0.98\n    },\n    {\n      \"detection_id\": \"player_08\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.341,\n        \"top\": 0.407,\n        \"right\": 0.395,\n        \"bottom\": 0.622\n      },\n      \"foot\": {\n        \"x\": 0.373,\n        \"y\": 0.613\n      },\n      \"confidence\": 0.92,\n      \"team_confidence\": 0.97\n    },\n    {\n      \"detection_id\": \"player_09\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.392,\n        \"top\": 0.334,\n        \"right\": 0.434,\n        \"bottom\": 0.472\n      },\n      \"foot\": {\n        \"x\": 0.41,\n        \"y\": 0.468\n      },\n      \"confidence\": 0.93,\n      \"team_confidence\": 0.98\n    }\n  ],\n  \"ball\": {\n    \"center\": {\n      \"x\": 0.344,\n      \"y\": 0.404\n    },\n    \"box\": {\n      \"left\": 0.338,\n      \"top\": 0.392,\n      \"right\": 0.352,\n      \"bottom\": 0.417\n    },\n    \"confidence\": 0.78\n  },\n  \"possession\": {\n    \"player_detection_id\": \"player_07\",\n    \"confidence\": 0.65\n  },\n  \"uncertainty_notes\": [\n    \"Contested layup/rebound near the rim obscures clear ball possession between player_07 and player_08.\"\n  ]\n}",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "signature": "EmcKZQERTTIP4QLr4aYSNcsP37gbdbwrlQsY0Kp8nB+2GzS4CBV/AUb/Gb1shCoHOt9UZkKl4xIO/0/oZICbkk1HHNn5qD9lLMj2u2HaV4COjFt5ndoc695yNWZFzdnEU8lnHDCAeJDM",
+            "type": "reasoning.text"
+          }
+        ],
+        "refusal": null,
+        "role": "assistant"
+      },
+      "native_finish_reason": "STOP"
+    }
+  ],
+  "created": 1788840258,
+  "id": "gen-1788840258-AHwnw5SjpCu1VlxJKY0n",
+  "model": "google/gemini-3.8-flash",
+  "object": "chat.completion",
+  "provider": "Google AI Studio",
+  "service_tier": "default",
+  "system_fingerprint": null,
+  "usage": {
+    "completion_tokens": 1396,
+    "completion_tokens_details": {
+      "audio_tokens": 0,
+      "image_tokens": 0,
+      "reasoning_tokens": 0
+    },
+    "cost": 0.0063315,
+    "cost_details": {
+      "upstream_inference_completions_cost": 0.005235,
+      "upstream_inference_cost": 0.0063315,
+      "upstream_inference_prompt_cost": 0.0010965
+    },
+    "is_byok": false,
+    "prompt_tokens": 1462,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": 0,
+      "cached_tokens": 0,
+      "video_tokens": 0
+    },
+    "total_tokens": 2858
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "ball": {
+    "box": {
+      "bottom": 0.25,
+      "left": 0.463,
+      "right": 0.476,
+      "top": 0.225
+    },
+    "center": {
+      "x": 0.469,
+      "y": 0.237
+    },
+    "confidence": 0.92
+  },
+  "frame_id": 618,
+  "players": [
+    {
+      "box": {
+        "bottom": 0.835,
+        "left": 0.354,
+        "right": 0.407,
+        "top": 0.606
+      },
+      "confidence": 0.95,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.362,
+        "y": 0.816
+      },
+      "team": "A",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.763,
+        "left": 0.485,
+        "right": 0.554,
+        "top": 0.543
+      },
+      "confidence": 0.95,
+      "detection_id": "player_02",
+      "foot": {
+        "x": 0.519,
+        "y": 0.755
+      },
+      "team": "B",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.767,
+        "left": 0.138,
+        "right": 0.207,
+        "top": 0.567
+      },
+      "confidence": 0.94,
+      "detection_id": "player_03",
+      "foot": {
+        "x": 0.155,
+        "y": 0.763
+      },
+      "team": "B",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.739,
+        "left": 0.117,
+        "right": 0.165,
+        "top": 0.545
+      },
+      "confidence": 0.92,
+      "detection_id": "player_04",
+      "foot": {
+        "x": 0.152,
+        "y": 0.728
+      },
+      "team": "A",
+      "team_confidence": 0.96
+    },
+    {
+      "box": {
+        "bottom": 0.618,
+        "left": 0.276,
+        "right": 0.323,
+        "top": 0.441
+      },
+      "confidence": 0.94,
+      "detection_id": "player_05",
+      "foot": {
+        "x": 0.297,
+        "y": 0.61
+      },
+      "team": "B",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.622,
+        "left": 0.208,
+        "right": 0.258,
+        "top": 0.454
+      },
+      "confidence": 0.94,
+      "detection_id": "player_06",
+      "foot": {
+        "x": 0.233,
+        "y": 0.614
+      },
+      "team": "A",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.622,
+        "left": 0.378,
+        "right": 0.413,
+        "top": 0.456
+      },
+      "confidence": 0.92,
+      "detection_id": "player_07",
+      "foot": {
+        "x": 0.395,
+        "y": 0.612
+      },
+      "team": "A",
+      "team_confidence": 0.96
+    },
+    {
+      "box": {
+        "bottom": 0.64,
+        "left": 0.412,
+        "right": 0.47,
+        "top": 0.468
+      },
+      "confidence": 0.92,
+      "detection_id": "player_08",
+      "foot": {
+        "x": 0.457,
+        "y": 0.632
+      },
+      "team": "B",
+      "team_confidence": 0.96
+    },
+    {
+      "box": {
+        "bottom": 0.591,
+        "left": 0.443,
+        "right": 0.495,
+        "top": 0.458
+      },
+      "confidence": 0.88,
+      "detection_id": "player_09",
+      "foot": {
+        "x": 0.468,
+        "y": 0.583
+      },
+      "team": "B",
+      "team_confidence": 0.95
+    }
+  ],
+  "possession": null,
+  "uncertainty_notes": [
+    "Ball is in flight towards the basket; no player has active possession."
+  ]
+}

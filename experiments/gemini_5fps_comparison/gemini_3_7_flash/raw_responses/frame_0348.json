@@ -1,0 +1,53 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"frame_id\": 348,\n  \"players\": [\n    {\n      \"detection_id\": \"player_01\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 4.67e-1,\n        \"top\": 5.92e-1,\n        \"right\": 5.12e-1,\n        \"bottom\": 8.27e-1\n      },\n      \"foot\": {\n        \"x\": 4.93e-1,\n        \"y\": 8.2e-1\n      },\n      \"confidence\": 9.7e-1,\n      \"team_confidence\": 9.9e-1\n    },\n    {\n      \"detection_id\": \"player_02\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 6.77e-1,\n        \"top\": 6.77e-1,\n        \"right\": 7.37e-1,\n        \"bottom\": 9.07e-1\n      },\n      \"foot\": {\n        \"x\": 7.07e-1,\n        \"y\": 8.95e-1\n      },\n      \"confidence\": 9.6e-1,\n      \"team_confidence\": 9.9e-1\n    },\n    {\n      \"detection_id\": \"player_03\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 7.42e-1,\n        \"top\": 6.13e-1,\n        \"right\": 8.11e-1,\n        \"bottom\": 8.18e-1\n      },\n      \"foot\": {\n        \"x\": 7.74e-1,\n        \"y\": 8.08e-1\n      },\n      \"confidence\": 9.5e-1,\n      \"team_confidence\": 9.9e-1\n    },\n    {\n      \"detection_id\": \"player_04\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 6.71e-1,\n        \"top\": 4.54e-1,\n        \"right\": 7.33e-1,\n        \"bottom\": 6.07e-1\n      },\n      \"foot\": {\n        \"x\": 6.94e-1,\n        \"y\": 5.98e-1\n      },\n      \"confidence\": 9.4e-1,\n      \"team_confidence\": 9.8e-1\n    },\n    {\n      \"detection_id\": \"player_05\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 5.15e-1,\n        \"top\": 4.71e-1,\n        \"right\": 5.68e-1,\n        \"bottom\": 6.2e-1\n      },\n      \"foot\": {\n        \"x\": 5.48e-1,\n        \"y\": 6.11e-1\n      },\n      \"confidence\": 9.3e-1,\n      \"team_confidence\": 9.8e-1\n    },\n    {\n      \"detection_id\": \"player_06\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 4.22e-1,\n        \"top\": 4.55e-1,\n        \"right\": 4.72e-1,\n        \"bottom\": 6.47e-1\n      },\n      \"foot\": {\n        \"x\": 4.38e-1,\n        \"y\": 6.36e-1\n      },\n      \"confidence\": 9.6e-1,\n      \"team_confidence\": 9.9e-1\n    },\n    {\n      \"detection_id\": \"player_07\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 2.05e-1,\n        \"top\": 4.39e-1,\n        \"right\": 2.57e-1,\n        \"bottom\": 6.43e-1\n      },\n      \"foot\": {\n        \"x\": 2.27e-1,\n        \"y\": 6.34e-1\n      },\n      \"confidence\": 9.6e-1,\n      \"team_confidence\": 9.9e-1\n    },\n    {\n      \"detection_id\": \"player_08\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 4.9e-1,\n        \"top\": 3.78e-1,\n        \"right\": 5.37e-1,\n        \"bottom\": 5.16e-1\n      },\n      \"foot\": {\n        \"x\": 5.14e-1,\n        \"y\": 5.08e-1\n      },\n      \"confidence\": 8.7e-1,\n      \"team_confidence\": 9.1e-1\n    }\n  ],\n  \"ball\": null,\n  \"possession\": null,\n  \"uncertainty_notes\": [\n    \"Ball is occluded or not clearly distinguishable from background/crowd.\"\n  ]\n}",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "signature": "Em0KawERTTIPBLUIeUN8tzz1K/5KqZ0ewCWyWP+ACemrg8MjJ05JLfqT61nCkcOH36R63g/yiVDJAARjNyiBqAIpqdLG0jv+Yb45XGqNsTNnDUiP3D2wJs1o49tlsQ40IvisCuMiDfFYdsCVkWso",
+            "type": "reasoning.text"
+          }
+        ],
+        "refusal": null,
+        "role": "assistant"
+      },
+      "native_finish_reason": "STOP"
+    }
+  ],
+  "created": 1788840897,
+  "id": "gen-1788840897-LhLc53LCnepbhZ9p5qOl",
+  "model": "google/gemini-3.7-flash",
+  "object": "chat.completion",
+  "provider": "Google AI Studio",
+  "service_tier": "default",
+  "system_fingerprint": null,
+  "usage": {
+    "completion_tokens": 1249,
+    "completion_tokens_details": {
+      "audio_tokens": 0,
+      "image_tokens": 0,
+      "reasoning_tokens": 0
+    },
+    "cost": 0.00578025,
+    "cost_details": {
+      "upstream_inference_completions_cost": 0.00468375,
+      "upstream_inference_cost": 0.00578025,
+      "upstream_inference_prompt_cost": 0.0010965
+    },
+    "is_byok": false,
+    "prompt_tokens": 1462,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": 0,
+      "cached_tokens": 0,
+      "video_tokens": 0
+    },
+    "total_tokens": 2711
+  }
+}

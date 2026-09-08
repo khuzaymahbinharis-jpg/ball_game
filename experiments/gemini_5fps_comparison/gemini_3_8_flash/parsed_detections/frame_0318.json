@@ -1,0 +1,170 @@
+{
+  "ball": null,
+  "frame_id": 318,
+  "players": [
+    {
+      "box": {
+        "bottom": 0.796,
+        "left": 0.46,
+        "right": 0.509,
+        "top": 0.582
+      },
+      "confidence": 0.98,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.487,
+        "y": 0.784
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.852,
+        "left": 0.611,
+        "right": 0.657,
+        "top": 0.636
+      },
+      "confidence": 0.97,
+      "detection_id": "player_02",
+      "foot": {
+        "x": 0.632,
+        "y": 0.841
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.737,
+        "left": 0.627,
+        "right": 0.674,
+        "top": 0.542
+      },
+      "confidence": 0.97,
+      "detection_id": "player_03",
+      "foot": {
+        "x": 0.647,
+        "y": 0.727
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.623,
+        "left": 0.541,
+        "right": 0.582,
+        "top": 0.456
+      },
+      "confidence": 0.97,
+      "detection_id": "player_04",
+      "foot": {
+        "x": 0.561,
+        "y": 0.613
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.62,
+        "left": 0.412,
+        "right": 0.451,
+        "top": 0.474
+      },
+      "confidence": 0.96,
+      "detection_id": "player_05",
+      "foot": {
+        "x": 0.431,
+        "y": 0.612
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.666,
+        "left": 0.348,
+        "right": 0.391,
+        "top": 0.477
+      },
+      "confidence": 0.97,
+      "detection_id": "player_06",
+      "foot": {
+        "x": 0.369,
+        "y": 0.655
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.644,
+        "left": 0.314,
+        "right": 0.355,
+        "top": 0.463
+      },
+      "confidence": 0.96,
+      "detection_id": "player_07",
+      "foot": {
+        "x": 0.339,
+        "y": 0.633
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.65,
+        "left": 0.801,
+        "right": 0.856,
+        "top": 0.449
+      },
+      "confidence": 0.97,
+      "detection_id": "player_08",
+      "foot": {
+        "x": 0.824,
+        "y": 0.638
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.808,
+        "left": 0.939,
+        "right": 0.98,
+        "top": 0.586
+      },
+      "confidence": 0.96,
+      "detection_id": "player_09",
+      "foot": {
+        "x": 0.955,
+        "y": 0.796
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.496,
+        "left": 0.419,
+        "right": 0.446,
+        "top": 0.378
+      },
+      "confidence": 0.92,
+      "detection_id": "player_10",
+      "foot": {
+        "x": 0.431,
+        "y": 0.491
+      },
+      "team": "B",
+      "team_confidence": 0.98
+    }
+  ],
+  "possession": null,
+  "uncertainty_notes": [
+    "Basketball is not clearly discernible in this frame."
+  ]
+}

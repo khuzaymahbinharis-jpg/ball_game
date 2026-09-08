@@ -1,0 +1,154 @@
+{
+  "ball": null,
+  "frame_id": 168,
+  "players": [
+    {
+      "box": {
+        "bottom": 0.67,
+        "left": 0.18,
+        "right": 0.237,
+        "top": 0.472
+      },
+      "confidence": 0.94,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.207,
+        "y": 0.655
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.597,
+        "left": 0.501,
+        "right": 0.563,
+        "top": 0.407
+      },
+      "confidence": 0.96,
+      "detection_id": "player_02",
+      "foot": {
+        "x": 0.536,
+        "y": 0.589
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.54,
+        "left": 0.559,
+        "right": 0.61,
+        "top": 0.36
+      },
+      "confidence": 0.95,
+      "detection_id": "player_03",
+      "foot": {
+        "x": 0.583,
+        "y": 0.532
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.548,
+        "left": 0.353,
+        "right": 0.401,
+        "top": 0.347
+      },
+      "confidence": 0.94,
+      "detection_id": "player_04",
+      "foot": {
+        "x": 0.378,
+        "y": 0.536
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.725,
+        "left": 0.316,
+        "right": 0.369,
+        "top": 0.509
+      },
+      "confidence": 0.92,
+      "detection_id": "player_05",
+      "foot": {
+        "x": 0.356,
+        "y": 0.718
+      },
+      "team": "A",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.706,
+        "left": 0.144,
+        "right": 0.209,
+        "top": 0.535
+      },
+      "confidence": 0.92,
+      "detection_id": "player_06",
+      "foot": {
+        "x": 0.169,
+        "y": 0.7
+      },
+      "team": "B",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.73,
+        "left": 0.301,
+        "right": 0.355,
+        "top": 0.548
+      },
+      "confidence": 0.93,
+      "detection_id": "player_07",
+      "foot": {
+        "x": 0.32,
+        "y": 0.725
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.648,
+        "left": 0.615,
+        "right": 0.655,
+        "top": 0.443
+      },
+      "confidence": 0.95,
+      "detection_id": "player_08",
+      "foot": {
+        "x": 0.633,
+        "y": 0.64
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.51,
+        "left": 0.334,
+        "right": 0.366,
+        "top": 0.316
+      },
+      "confidence": 0.91,
+      "detection_id": "player_09",
+      "foot": {
+        "x": 0.35,
+        "y": 0.502
+      },
+      "team": "B",
+      "team_confidence": 0.97
+    }
+  ],
+  "possession": null,
+  "uncertainty_notes": [
+    "Basketball is occluded by players on the left wing/low post action."
+  ]
+}

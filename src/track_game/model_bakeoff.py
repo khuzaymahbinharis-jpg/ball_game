@@ -32,6 +32,7 @@ from .provider import OpenRouterResult, OpenRouterValidationError, OpenRouterVLM
 from .ruler import normalized_to_pixel
 from .sampling import sample_frame_indices
 from .schema import FrameDetection, Team, frame_detection_json_schema
+from .shot_context import trackable_ball_anchors
 from .test1 import _detection_as_dict
 from .tracking import build_player_tracker
 from .video import extract_video_frames, probe_video, render_tracked_video
@@ -108,6 +109,13 @@ MODELS = (
 )
 GEMINI_3_7_MODEL = BakeoffModel(
     "gemini_3_7_flash",
+    "google/gemini-3.7-flash",
+    "google-ai-studio",
+    include_reasoning_parameter=True,
+    reasoning_setting={"effort": "low", "exclude": True},
+)
+GEMINI_3_7_RETRY_MODEL = BakeoffModel(
+    "gemini_3_7_flash_retry_120s",
     "google/gemini-3.7-flash",
     "google-ai-studio",
     include_reasoning_parameter=True,
@@ -1196,7 +1204,10 @@ def _append_batch_log(path: Path, row: dict[str, Any]) -> None:
 
 
 def _run_detector_model(
-    paths: BakeoffPaths, model: BakeoffModel
+    paths: BakeoffPaths,
+    model: BakeoffModel,
+    *,
+    timeout_seconds: float = 45.0,
 ) -> tuple[list[dict[str, Any]], float]:
     existing = _load_model_records(paths, model)
     completed = {row["frame_id"] for row in existing}
@@ -1217,6 +1228,7 @@ def _run_detector_model(
             "require_parameters": True,
         },
         max_output_tokens=MAX_OUTPUT_TOKENS,
+        timeout_seconds=timeout_seconds,
     )
     batch_started = perf_counter()
     futures: dict[Future[dict[str, Any]], int] = {}
@@ -1239,6 +1251,7 @@ def _run_detector_model(
             "actual_concurrency": min(MAX_CONCURRENCY, len(remaining)),
             "wall_seconds": segment_seconds,
             "automatic_retries": 0,
+            "request_timeout_seconds": timeout_seconds,
         },
     )
     records = _load_model_records(paths, model)
@@ -1281,7 +1294,7 @@ def _run_player_cv_pipeline(
     ball_started = perf_counter()
     ball_result = VLMInitializedBallTracker(variant.pipeline.ball_tracking).track_video(
         paths.clip,
-        {frame_id: item.ball_detection for frame_id, item in detections.items()},
+        trackable_ball_anchors(detections, player_result.shot_context),
         timeline,
         scene_cut_frames=cuts,
     )
@@ -1454,7 +1467,10 @@ def run_approved_bakeoff(
 
 
 def run_gemini_3_7_extension(
-    repository_root: str | Path, approved_call_count: int
+    repository_root: str | Path,
+    approved_call_count: int,
+    *,
+    retry_with_long_timeout: bool = False,
 ) -> BakeoffPaths:
     """Run the approved Gemini 3.7 extension without disturbing the completed bake-off."""
 
@@ -1463,7 +1479,8 @@ def run_gemini_3_7_extension(
             f"Gemini 3.7 extension requires approval for exactly {ANCHORS_PER_MODEL} calls"
         )
     paths = bakeoff_paths(repository_root)
-    model = GEMINI_3_7_MODEL
+    model = GEMINI_3_7_RETRY_MODEL if retry_with_long_timeout else GEMINI_3_7_MODEL
+    timeout_seconds = 120.0 if retry_with_long_timeout else 45.0
     model_dir = paths.model_dir(model)
     model_dir.mkdir(parents=True, exist_ok=True)
     for directory in (
@@ -1490,7 +1507,10 @@ def run_gemini_3_7_extension(
             "estimate": estimate,
         },
     )
-    _write_json(model_dir / "config.json", _model_config(paths, model, snapshot, control))
+    config = _model_config(paths, model, snapshot, control)
+    config["request_timeout_seconds"] = timeout_seconds
+    config["source_audio_policy"] = "source and rendered output must be silent"
+    _write_json(model_dir / "config.json", config)
 
     fingerprint = _catalog_approval_fingerprint(catalog)
     approval_path = model_dir / "approval.json"
@@ -1514,11 +1534,16 @@ def run_gemini_3_7_extension(
     existing = _load_model_records(paths, model)
     extension_manifest = {
         "experiment_id": EXPERIMENT_ID,
-        "extension": "gemini-3.7-flash",
+        "extension": (
+            "gemini-3.7-flash-retry-120s"
+            if retry_with_long_timeout
+            else "gemini-3.7-flash"
+        ),
         "status": "approved_run_started",
         "model": model.slug,
         "provider_slug": model.provider_slug,
         "approved_call_count": ANCHORS_PER_MODEL,
+        "request_timeout_seconds": timeout_seconds,
         "paid_inference_calls_already_recorded": len(existing),
         "paid_inference_calls_remaining": ANCHORS_PER_MODEL - len(existing),
         "cost_preflight": estimate,
@@ -1526,7 +1551,9 @@ def run_gemini_3_7_extension(
     }
     _write_json(extension_manifest_path, extension_manifest)
 
-    records, batch_seconds = _run_detector_model(paths, model)
+    records, batch_seconds = _run_detector_model(
+        paths, model, timeout_seconds=timeout_seconds
+    )
     _materialize_model_artifacts(paths, model, records)
     summary = _summarize_model(paths, model, records, batch_wall_seconds=batch_seconds)
     _render_model_review_overlays(paths, model, records)
@@ -1544,7 +1571,7 @@ def run_gemini_3_7_extension(
     )
     _write_json(extension_manifest_path, extension_manifest)
 
-    display_models = MODELS + (model,)
+    display_models = MODELS + (GEMINI_3_7_MODEL,)
     summaries = {}
     for display_model in display_models:
         summary_path = paths.model_dir(display_model) / "summary.json"
@@ -1552,6 +1579,8 @@ def run_gemini_3_7_extension(
             summaries[display_model.key] = json.loads(
                 summary_path.read_text(encoding="utf-8")
             )
+    if retry_with_long_timeout:
+        summaries[GEMINI_3_7_MODEL.key] = summary
     paths.results_table.write_text(
         _results_table_markdown(summaries, models=display_models), encoding="utf-8"
     )
@@ -1560,7 +1589,10 @@ def run_gemini_3_7_extension(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=("prepare", "run", "run-gemini-3-7"))
+    parser.add_argument(
+        "command",
+        choices=("prepare", "run", "run-gemini-3-7", "retry-gemini-3-7"),
+    )
     parser.add_argument("--repository-root", type=Path, default=Path.cwd())
     parser.add_argument("--approved-call-count", type=int, default=0)
     args = parser.parse_args()
@@ -1572,10 +1604,18 @@ def main() -> None:
                 args.repository_root, args.approved_call_count
             ).results_table
         )
-    else:
+    elif args.command == "run-gemini-3-7":
         print(
             run_gemini_3_7_extension(
                 args.repository_root, args.approved_call_count
+            ).results_table
+        )
+    else:
+        print(
+            run_gemini_3_7_extension(
+                args.repository_root,
+                args.approved_call_count,
+                retry_with_long_timeout=True,
             ).results_table
         )
 

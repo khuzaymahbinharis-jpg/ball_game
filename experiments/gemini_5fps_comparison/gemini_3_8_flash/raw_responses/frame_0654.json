@@ -1,0 +1,53 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"frame_id\": 654,\n  \"players\": [\n    {\n      \"detection_id\": \"player_01\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.469,\n        \"top\": 0.485,\n        \"right\": 0.531,\n        \"bottom\": 0.651\n      },\n      \"foot\": {\n        \"x\": 0.52,\n        \"y\": 0.648\n      },\n      \"confidence\": 0.94,\n      \"team_confidence\": 0.98\n    },\n    {\n      \"detection_id\": \"player_02\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.41,\n        \"top\": 0.49,\n        \"right\": 0.474,\n        \"bottom\": 0.729\n      },\n      \"foot\": {\n        \"x\": 0.441,\n        \"y\": 0.724\n      },\n      \"confidence\": 0.96,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_03\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.347,\n        \"top\": 0.529,\n        \"right\": 0.422,\n        \"bottom\": 0.725\n      },\n      \"foot\": {\n        \"x\": 0.385,\n        \"y\": 0.716\n      },\n      \"confidence\": 0.95,\n      \"team_confidence\": 0.98\n    },\n    {\n      \"detection_id\": \"player_04\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.103,\n        \"top\": 0.584,\n        \"right\": 0.144,\n        \"bottom\": 0.806\n      },\n      \"foot\": {\n        \"x\": 0.119,\n        \"y\": 0.801\n      },\n      \"confidence\": 0.96,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_05\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.233,\n        \"top\": 0.472,\n        \"right\": 0.287,\n        \"bottom\": 0.638\n      },\n      \"foot\": {\n        \"x\": 0.259,\n        \"y\": 0.633\n      },\n      \"confidence\": 0.94,\n      \"team_confidence\": 0.98\n    },\n    {\n      \"detection_id\": \"player_06\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.18,\n        \"top\": 0.441,\n        \"right\": 0.218,\n        \"bottom\": 0.63\n      },\n      \"foot\": {\n        \"x\": 0.198,\n        \"y\": 0.624\n      },\n      \"confidence\": 0.95,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_07\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.341,\n        \"top\": 0.471,\n        \"right\": 0.378,\n        \"bottom\": 0.65\n      },\n      \"foot\": {\n        \"x\": 0.354,\n        \"y\": 0.645\n      },\n      \"confidence\": 0.92,\n      \"team_confidence\": 0.97\n    },\n    {\n      \"detection_id\": \"player_08\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.36,\n        \"top\": 0.495,\n        \"right\": 0.404,\n        \"bottom\": 0.686\n      },\n      \"foot\": {\n        \"x\": 0.383,\n        \"y\": 0.678\n      },\n      \"confidence\": 0.72,\n      \"team_confidence\": 0.8\n    },\n    {\n      \"detection_id\": \"player_09\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.461,\n        \"top\": 0.465,\n        \"right\": 0.505,\n        \"bottom\": 0.635\n      },\n      \"foot\": {\n        \"x\": 0.481,\n        \"y\": 0.627\n      },\n      \"confidence\": 0.88,\n      \"team_confidence\": 0.92\n    },\n    {\n      \"detection_id\": \"player_10\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.3,\n        \"top\": 0.494,\n        \"right\": 0.34,\n        \"bottom\": 0.655\n      },\n      \"foot\": {\n        \"x\": 0.323,\n        \"y\": 0.65\n      },\n      \"confidence\": 0.7,\n      \"team_confidence\": 0.75\n    },\n    {\n      \"detection_id\": \"player_11\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.3,\n        \"top\": 0.491,\n        \"right\": 0.372,\n        \"bottom\": 0.656\n      },\n      \"foot\": {\n        \"x\": 0.347,\n        \"y\": 0.648\n      },\n      \"confidence\": 0.45,\n      \"team_confidence\": 0.6\n    },\n    {\n      \"detection_id\": \"player_12\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.3,\n        \"top\": 0.49,\n        \"right\": 0.35,\n        \"bottom\": 0.653\n      },\n      \"foot\": {\n        \"x\": 0.324,\n        \"y\": 0.648\n      },\n      \"confidence\": 0.4,\n      \"team_confidence\": 0.6\n    },\n    {\n      \"detection_id\": \"player_13\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.03,\n        \"top\": 0.495,\n        \"right\": 0.93,\n        \"bottom\": 0.656\n      },\n      \"foot\": {\n        \"x\": 0.065,\n        \"y\": 0.645\n      },\n      \"confidence\": 0.85,\n      \"team_confidence\": 0.94\n    }\n  ],\n  \"ball\": {\n    \"center\": {\n      \"x\": 0.518,\n      \"y\": 0.541\n    },\n    \"box\": {\n      \"left\": 0.511,\n      \"top\": 0.53,\n      \"right\": 0.526,\n      \"bottom\": 0.553\n    },\n    \"confidence\": 0.88\n  },\n  \"possession\": {\n    \"player_detection_id\": \"player_01\",\n    \"confidence\": 0.85\n  },\n  \"uncertainty_notes\": [\n    \"Player driving near right lane line is actively gathering or dribbling the ball.\"\n  ]\n}",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "signature": "EmcKZQERTTIPvS3/aYt54PPVjflAj4qHMwmtggX/ACq7bgkppzSgJ+u6L1kJNGIscnTxDyFiEY7ECqnwtEgooPACVhNeyCfJCpBg0ut55f3HKGSVFZCQSByyDCYv2sV6nrLKZEP/04lQ",
+            "type": "reasoning.text"
+          }
+        ],
+        "refusal": null,
+        "role": "assistant"
+      },
+      "native_finish_reason": "STOP"
+    }
+  ],
+  "created": 1788840344,
+  "id": "gen-1788840344-TpD5OoJYvwS34YNKXCN3",
+  "model": "google/gemini-3.8-flash",
+  "object": "chat.completion",
+  "provider": "Google AI Studio",
+  "service_tier": "default",
+  "system_fingerprint": null,
+  "usage": {
+    "completion_tokens": 1917,
+    "completion_tokens_details": {
+      "audio_tokens": 0,
+      "image_tokens": 0,
+      "reasoning_tokens": 0
+    },
+    "cost": 0.00828525,
+    "cost_details": {
+      "upstream_inference_completions_cost": 0.00718875,
+      "upstream_inference_cost": 0.00828525,
+      "upstream_inference_prompt_cost": 0.0010965
+    },
+    "is_byok": false,
+    "prompt_tokens": 1462,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": 0,
+      "cached_tokens": 0,
+      "video_tokens": 0
+    },
+    "total_tokens": 3379
+  }
+}

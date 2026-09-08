@@ -34,7 +34,7 @@ VLM_CALLS = len(ANCHOR_FRAMES)
 MAX_CONCURRENCY = 11
 REASONING_SETTING = {"effort": "minimal", "exclude": True}
 MAX_OUTPUT_TOKENS = 4096
-PROMPT_VERSION = "fullclip-ruler-v1"
+PROMPT_VERSION = "fullclip-ruler-v2-closeup-filter"
 
 PRICING_SNAPSHOT: dict[str, Any] = {
     "captured_at": "2026-09-03T02:59:35.0119534Z",

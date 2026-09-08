@@ -1,0 +1,53 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"frame_id\": 762,\n  \"players\": [\n    {\"detection_id\": \"player_01\", \"team\": \"A\", \"box\": {\"left\": 2.249e-01, \"top\": 4.545e-01, \"right\": 2.684e-01, \"bottom\": 6.136e-01}, \"foot\": {\"x\": 2.532e-01, \"y\": 6.113e-01}, \"confidence\": 9.773e-01, \"team_confidence\": 9.947e-01},\n    {\"detection_id\": \"player_02\", \"team\": \"B\", \"box\": {\"left\": 3.328e-01, \"top\": 4.475e-01, \"right\": 3.822e-01, \"bottom\": 6.002e-01}, \"foot\": {\"x\": 3.655e-01, \"y\": 5.968e-01}, \"confidence\": 9.684e-01, \"team_confidence\": 9.932e-01},\n    {\"detection_id\": \"player_03\", \"team\": \"A\", \"box\": {\"left\": 3.968e-01, \"top\": 4.108e-01, \"right\": 4.505e-01, \"bottom\": 5.485e-01}, \"foot\": {\"x\": 4.298e-01, \"y\": 5.467e-01}, \"confidence\": 9.245e-01, \"team_confidence\": 9.878e-01},\n    {\"detection_id\": \"player_04\", \"team\": \"B\", \"box\": {\"left\": 4.316e-01, \"top\": 3.948e-01, \"right\": 4.974e-01, \"bottom\": 5.565e-01}, \"foot\": {\"x\": 4.686e-01, \"y\": 5.524e-01}, \"confidence\": 9.421e-01, \"team_confidence\": 9.914e-01},\n    {\"detection_id\": \"player_05\", \"team\": \"B\", \"box\": {\"left\": 4.606e-01, \"top\": 3.882e-01, \"right\": 5.061e-01, \"bottom\": 5.405e-01}, \"foot\": {\"x\": 4.908e-01, \"y\": 5.385e-01}, \"confidence\": 9.473e-01, \"team_confidence\": 9.895e-01},\n    {\"detection_id\": \"player_06\", \"team\": \"B\", \"box\": {\"left\": 5.642e-01, \"top\": 2.915e-01, \"right\": 6.002e-01, \"bottom\": 4.364e-01}, \"foot\": {\"x\": 5.789e-01, \"y\": 4.321e-01}, \"confidence\": 9.539e-01, \"team_confidence\": 9.923e-01},\n    {\"detection_id\": \"player_07\", \"team\": \"B\", \"box\": {\"left\": 7.324e-01, \"top\": 4.204e-01, \"right\": 7.747e-01, \"bottom\": 5.928e-01}, \"foot\": {\"x\": 7.553e-01, \"y\": 5.892e-01}, \"confidence\": 9.782e-01, \"team_confidence\": 9.967e-01},\n    {\"detection_id\": \"player_08\", \"team\": \"A\", \"box\": {\"left\": 8.706e-01, \"top\": 4.887e-01, \"right\": 9.297e-01, \"bottom\": 6.467e-01}, \"foot\": {\"x\": 8.932e-01, \"y\": 6.425e-01}, \"confidence\": 9.615e-01, \"team_confidence\": 9.938e-01}\n  ],\n  \"ball\": {\n    \"center\": {\"x\": 2.544e-01, \"y\": 5.228e-01},\n    \"box\": {\"left\": 2.472e-01, \"top\": 5.093e-01, \"right\": 2.616e-01, \"bottom\": 5.363e-01},\n    \"confidence\": 9.624e-01\n  },\n  \"possession\": {\n    \"player_detection_id\": \"player_01\",\n    \"confidence\": 9.721e-01\n  },\n  \"uncertainty_notes\": []\n}",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "signature": "Em0KawERTTIPR+miZkRnqb92Zihyw05bhRX+2UDxovdnDpZnZR++ckJuSGm5Zvh2u2C0xGps3qH54ataPE+WIfwWADZcrvfiFwOWziMsyouKSboQ1bWP2NeC9qlOzDXFpm2AaAZYjQhSxIqKrXrw",
+            "type": "reasoning.text"
+          }
+        ],
+        "refusal": null,
+        "role": "assistant"
+      },
+      "native_finish_reason": "STOP"
+    }
+  ],
+  "created": 1788840999,
+  "id": "gen-1788840999-S1KbbUZfp6yYfPHp5IgP",
+  "model": "google/gemini-3.7-flash",
+  "object": "chat.completion",
+  "provider": "Google AI Studio",
+  "service_tier": "default",
+  "system_fingerprint": null,
+  "usage": {
+    "completion_tokens": 1225,
+    "completion_tokens_details": {
+      "audio_tokens": 0,
+      "image_tokens": 0,
+      "reasoning_tokens": 0
+    },
+    "cost": 0.00569025,
+    "cost_details": {
+      "upstream_inference_completions_cost": 0.00459375,
+      "upstream_inference_cost": 0.00569025,
+      "upstream_inference_prompt_cost": 0.0010965
+    },
+    "is_byok": false,
+    "prompt_tokens": 1462,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": 0,
+      "cached_tokens": 0,
+      "video_tokens": 0
+    },
+    "total_tokens": 2687
+  }
+}

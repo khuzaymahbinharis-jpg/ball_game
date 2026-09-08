@@ -1,0 +1,26 @@
+{
+  "ball": null,
+  "frame_id": 432,
+  "players": [
+    {
+      "box": {
+        "bottom": 1.0,
+        "left": 0.244,
+        "right": 0.84,
+        "top": 0.126
+      },
+      "confidence": 0.95,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.55,
+        "y": 1.0
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    }
+  ],
+  "possession": null,
+  "uncertainty_notes": [
+    "Close-up broadcast shot; lower body is cut off by the camera frame."
+  ]
+}

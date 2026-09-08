@@ -1,0 +1,169 @@
+{
+  "ball": {
+    "box": {
+      "bottom": 0.3612,
+      "left": 0.317,
+      "right": 0.33,
+      "top": 0.3424
+    },
+    "center": {
+      "x": 0.323,
+      "y": 0.3518
+    },
+    "confidence": 0.74
+  },
+  "frame_id": 528,
+  "players": [
+    {
+      "box": {
+        "bottom": 0.8448,
+        "left": 0.339,
+        "right": 0.406,
+        "top": 0.6136
+      },
+      "confidence": 0.94,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.366,
+        "y": 0.8358
+      },
+      "team": "A",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.6438,
+        "left": 0.365,
+        "right": 0.437,
+        "top": 0.4545
+      },
+      "confidence": 0.92,
+      "detection_id": "player_02",
+      "foot": {
+        "x": 0.428,
+        "y": 0.6347
+      },
+      "team": "A",
+      "team_confidence": 0.97
+    },
+    {
+      "box": {
+        "bottom": 0.7009,
+        "left": 0.493,
+        "right": 0.551,
+        "top": 0.4974
+      },
+      "confidence": 0.95,
+      "detection_id": "player_03",
+      "foot": {
+        "x": 0.528,
+        "y": 0.694
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.5753,
+        "left": 0.428,
+        "right": 0.472,
+        "top": 0.4026
+      },
+      "confidence": 0.91,
+      "detection_id": "player_04",
+      "foot": {
+        "x": 0.446,
+        "y": 0.5679
+      },
+      "team": "B",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.5034,
+        "left": 0.475,
+        "right": 0.517,
+        "top": 0.3424
+      },
+      "confidence": 0.92,
+      "detection_id": "player_05",
+      "foot": {
+        "x": 0.497,
+        "y": 0.4954
+      },
+      "team": "B",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.5827,
+        "left": 0.342,
+        "right": 0.395,
+        "top": 0.4249
+      },
+      "confidence": 0.9,
+      "detection_id": "player_06",
+      "foot": {
+        "x": 0.354,
+        "y": 0.5733
+      },
+      "team": "B",
+      "team_confidence": 0.96
+    },
+    {
+      "box": {
+        "bottom": 0.4809,
+        "left": 0.316,
+        "right": 0.353,
+        "top": 0.3328
+      },
+      "confidence": 0.88,
+      "detection_id": "player_07",
+      "foot": {
+        "x": 0.334,
+        "y": 0.4697
+      },
+      "team": "A",
+      "team_confidence": 0.94
+    },
+    {
+      "box": {
+        "bottom": 0.5378,
+        "left": 0.364,
+        "right": 0.41,
+        "top": 0.4195
+      },
+      "confidence": 0.83,
+      "detection_id": "player_08",
+      "foot": {
+        "x": 0.383,
+        "y": 0.528
+      },
+      "team": "A",
+      "team_confidence": 0.92
+    },
+    {
+      "box": {
+        "bottom": 0.439,
+        "left": 0.441,
+        "right": 0.473,
+        "top": 0.3344
+      },
+      "confidence": 0.86,
+      "detection_id": "player_09",
+      "foot": {
+        "x": 0.457,
+        "y": 0.4331
+      },
+      "team": "A",
+      "team_confidence": 0.93
+    }
+  ],
+  "possession": {
+    "confidence": 0.7,
+    "player_detection_id": "player_07"
+  },
+  "uncertainty_notes": [
+    "Distant players and ball around left three-point line perimeter partially blended with crowd."
+  ]
+}

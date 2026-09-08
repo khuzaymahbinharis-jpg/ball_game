@@ -1,0 +1,241 @@
+{
+  "actual_openrouter_cost_usd": 0.0071115,
+  "completed_at": "2026-09-08T04:16:11.050887+00:00",
+  "error": null,
+  "experiment_id": "gemini-flash-5fps-comparison",
+  "frame_id": 624,
+  "http_429": false,
+  "input_tokens": 1462,
+  "model": "google/gemini-3.7-flash",
+  "model_key": "gemini_3_7_flash",
+  "output_tokens": 1604,
+  "parsed_detection": {
+    "ball": {
+      "box": {
+        "bottom": 0.287,
+        "left": 0.517,
+        "right": 0.533,
+        "top": 0.265
+      },
+      "center": {
+        "x": 0.525,
+        "y": 0.276
+      },
+      "confidence": 0.895
+    },
+    "frame_id": 624,
+    "players": [
+      {
+        "box": {
+          "bottom": 0.835,
+          "left": 0.325,
+          "right": 0.388,
+          "top": 0.613
+        },
+        "confidence": 0.988,
+        "detection_id": "player_01",
+        "foot": {
+          "x": 0.339,
+          "y": 0.83
+        },
+        "team": "A",
+        "team_confidence": 0.994
+      },
+      {
+        "box": {
+          "bottom": 0.764,
+          "left": 0.463,
+          "right": 0.537,
+          "top": 0.548
+        },
+        "confidence": 0.987,
+        "detection_id": "player_02",
+        "foot": {
+          "x": 0.501,
+          "y": 0.761
+        },
+        "team": "B",
+        "team_confidence": 0.996
+      },
+      {
+        "box": {
+          "bottom": 0.774,
+          "left": 0.118,
+          "right": 0.177,
+          "top": 0.572
+        },
+        "confidence": 0.977,
+        "detection_id": "player_03",
+        "foot": {
+          "x": 0.134,
+          "y": 0.768
+        },
+        "team": "B",
+        "team_confidence": 0.995
+      },
+      {
+        "box": {
+          "bottom": 0.737,
+          "left": 0.0546,
+          "right": 0.115,
+          "top": 0.567
+        },
+        "confidence": 0.968,
+        "detection_id": "player_04",
+        "foot": {
+          "x": 0.0938,
+          "y": 0.73
+        },
+        "team": "A",
+        "team_confidence": 0.992
+      },
+      {
+        "box": {
+          "bottom": 0.629,
+          "left": 0.25,
+          "right": 0.301,
+          "top": 0.449
+        },
+        "confidence": 0.973,
+        "detection_id": "player_05",
+        "foot": {
+          "x": 0.276,
+          "y": 0.623
+        },
+        "team": "B",
+        "team_confidence": 0.994
+      },
+      {
+        "box": {
+          "bottom": 0.632,
+          "left": 0.174,
+          "right": 0.23,
+          "top": 0.479
+        },
+        "confidence": 0.971,
+        "detection_id": "player_06",
+        "foot": {
+          "x": 0.195,
+          "y": 0.628
+        },
+        "team": "A",
+        "team_confidence": 0.992
+      },
+      {
+        "box": {
+          "bottom": 0.623,
+          "left": 0.359,
+          "right": 0.402,
+          "top": 0.467
+        },
+        "confidence": 0.969,
+        "detection_id": "player_07",
+        "foot": {
+          "x": 0.373,
+          "y": 0.617
+        },
+        "team": "A",
+        "team_confidence": 0.991
+      },
+      {
+        "box": {
+          "bottom": 0.63,
+          "left": 0.391,
+          "right": 0.441,
+          "top": 0.471
+        },
+        "confidence": 0.965,
+        "detection_id": "player_08",
+        "foot": {
+          "x": 0.414,
+          "y": 0.624
+        },
+        "team": "B",
+        "team_confidence": 0.991
+      },
+      {
+        "box": {
+          "bottom": 0.591,
+          "left": 0.425,
+          "right": 0.479,
+          "top": 0.469
+        },
+        "confidence": 0.953,
+        "detection_id": "player_09",
+        "foot": {
+          "x": 0.454,
+          "y": 0.586
+        },
+        "team": "B",
+        "team_confidence": 0.987
+      }
+    ],
+    "possession": null,
+    "uncertainty_notes": [
+      "Ball in mid-air toward basket; no player in active possession."
+    ]
+  },
+  "raw_content": null,
+  "raw_response_body": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"frame_id\": 624,\n  \"players\": [\n    {\n      \"detection_id\": \"player_01\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 3.25e-01,\n        \"top\": 6.13e-01,\n        \"right\": 3.88e-01,\n        \"bottom\": 8.35e-01\n      },\n      \"foot\": {\n        \"x\": 3.39e-01,\n        \"y\": 8.3e-01\n      },\n      \"confidence\": 9.88e-01,\n      \"team_confidence\": 9.94e-01\n    },\n    {\n      \"detection_id\": \"player_02\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 4.63e-01,\n        \"top\": 5.48e-01,\n        \"right\": 5.37e-01,\n        \"bottom\": 7.64e-01\n      },\n      \"foot\": {\n        \"x\": 5.01e-01,\n        \"y\": 7.61e-01\n      },\n      \"confidence\": 9.87e-01,\n      \"team_confidence\": 9.96e-01\n    },\n    {\n      \"detection_id\": \"player_03\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 1.18e-01,\n        \"top\": 5.72e-01,\n        \"right\": 1.77e-01,\n        \"bottom\": 7.74e-01\n      },\n      \"foot\": {\n        \"x\": 1.34e-01,\n        \"y\": 7.68e-01\n      },\n      \"confidence\": 9.77e-01,\n      \"team_confidence\": 9.95e-01\n    },\n    {\n      \"detection_id\": \"player_04\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 5.46e-02,\n        \"top\": 5.67e-01,\n        \"right\": 1.15e-01,\n        \"bottom\": 7.37e-01\n      },\n      \"foot\": {\n        \"x\": 9.38e-02,\n        \"y\": 7.3e-01\n      },\n      \"confidence\": 9.68e-01,\n      \"team_confidence\": 9.92e-01\n    },\n    {\n      \"detection_id\": \"player_05\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 2.5e-01,\n        \"top\": 4.49e-01,\n        \"right\": 3.01e-01,\n        \"bottom\": 6.29e-01\n      },\n      \"foot\": {\n        \"x\": 2.76e-01,\n        \"y\": 6.23e-01\n      },\n      \"confidence\": 9.73e-01,\n      \"team_confidence\": 9.94e-01\n    },\n    {\n      \"detection_id\": \"player_06\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 1.74e-01,\n        \"top\": 4.79e-01,\n        \"right\": 2.3e-01,\n        \"bottom\": 6.32e-01\n      },\n      \"foot\": {\n        \"x\": 1.95e-01,\n        \"y\": 6.28e-01\n      },\n      \"confidence\": 9.71e-01,\n      \"team_confidence\": 9.92e-01\n    },\n    {\n      \"detection_id\": \"player_07\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 3.59e-01,\n        \"top\": 4.67e-01,\n        \"right\": 4.02e-01,\n        \"bottom\": 6.23e-01\n      },\n      \"foot\": {\n        \"x\": 3.73e-01,\n        \"y\": 6.17e-01\n      },\n      \"confidence\": 9.69e-01,\n      \"team_confidence\": 9.91e-01\n    },\n    {\n      \"detection_id\": \"player_08\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 3.91e-01,\n        \"top\": 4.71e-01,\n        \"right\": 4.41e-01,\n        \"bottom\": 6.3e-01\n      },\n      \"foot\": {\n        \"x\": 4.14e-01,\n        \"y\": 6.24e-01\n      },\n      \"confidence\": 9.65e-01,\n      \"team_confidence\": 9.91e-01\n    },\n    {\n      \"detection_id\": \"player_09\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 4.25e-01,\n        \"top\": 4.69e-01,\n        \"right\": 4.79e-01,\n        \"bottom\": 5.91e-01\n      },\n      \"foot\": {\n        \"x\": 4.54e-01,\n        \"y\": 5.86e-01\n      },\n      \"confidence\": 9.53e-01,\n      \"team_confidence\": 9.87e-01\n    }\n  ],\n  \"ball\": {\n    \"center\": {\n      \"x\": 5.25e-01,\n      \"y\": 2.76e-01\n    },\n    \"box\": {\n      \"left\": 5.17e-01,\n      \"top\": 2.65e-01,\n      \"right\": 5.33e-01,\n      \"bottom\": 2.87e-01\n    },\n    \"confidence\": 8.95e-01\n  },\n  \"possession\": null,\n  \"uncertainty_notes\": [\"Ball in mid-air toward basket; no player in active possession.\"]\n}",
+          "reasoning_details": [
+            {
+              "format": "google-gemini-v1",
+              "index": 0,
+              "signature": "Em0KawERTTIPh661QWKjtFuol+VPysDLRQpBRk5sqF3zRJJhCzST5CgXU3BwBQeiGmTVUaW+QUG4XAp1q91Wc7sPUU8fF/ljAdPDQMB5hRLyFnqWCWTfZs576gEN2x9KoVs59GG63Ult+wvr+gLZ",
+              "type": "reasoning.text"
+            }
+          ],
+          "refusal": null,
+          "role": "assistant"
+        },
+        "native_finish_reason": "STOP"
+      }
+    ],
+    "created": 1788840965,
+    "id": "gen-1788840965-Ei21sFtLqw5kLkeZAM8D",
+    "model": "google/gemini-3.7-flash",
+    "object": "chat.completion",
+    "provider": "Google AI Studio",
+    "service_tier": "default",
+    "system_fingerprint": null,
+    "usage": {
+      "completion_tokens": 1604,
+      "completion_tokens_details": {
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "cost": 0.0071115,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.006015,
+        "upstream_inference_cost": 0.0071115,
+        "upstream_inference_prompt_cost": 0.0010965
+      },
+      "is_byok": false,
+      "prompt_tokens": 1462,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "video_tokens": 0
+      },
+      "total_tokens": 3066
+    }
+  },
+  "reasoning_tokens": 0,
+  "request_id": "gen-1788840965-Ei21sFtLqw5kLkeZAM8D",
+  "request_latency_seconds": 7.8823367999866605,
+  "request_wall_seconds": 12.52115899999626,
+  "retry_count": 0,
+  "returned_model": "google/gemini-3.7-flash",
+  "returned_provider": "Google AI Studio",
+  "reused_control": false,
+  "schema_validation_success": true
+}

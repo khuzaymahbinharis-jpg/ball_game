@@ -1,0 +1,53 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"frame_id\": 198,\n  \"players\": [\n    {\"detection_id\": \"player_01\", \"team\": \"B\", \"box\": {\"left\": 0.138, \"top\": 5.09e-01, \"right\": 0.203, \"bottom\": 0.672}, \"foot\": {\"x\": 0.171, \"y\": 0.669}, \"confidence\": 0.95, \"team_confidence\": 0.98},\n    {\"detection_id\": \"player_02\", \"team\": \"A\", \"box\": {\"left\": 0.211, \"top\": 0.485, \"right\": 0.287, \"bottom\": 0.672}, \"foot\": {\"x\": 0.273, \"y\": 0.664}, \"confidence\": 0.96, \"team_confidence\": 0.99},\n    {\"detection_id\": \"player_03\", \"team\": \"A\", \"box\": {\"left\": 0.339, \"top\": 0.505, \"right\": 0.395, \"bottom\": 0.709}, \"foot\": {\"x\": 0.383, \"y\": 0.705}, \"confidence\": 0.95, \"team_confidence\": 0.99},\n    {\"detection_id\": \"player_04\", \"team\": \"B\", \"box\": {\"left\": 0.428, \"top\": 0.528, \"right\": 0.476, \"bottom\": 0.742}, \"foot\": {\"x\": 0.446, \"y\": 0.738}, \"confidence\": 0.94, \"team_confidence\": 0.99},\n    {\"detection_id\": \"player_05\", \"team\": \"A\", \"box\": {\"left\": 0.498, \"top\": 0.442, \"right\": 0.548, \"bottom\": 0.612}, \"foot\": {\"x\": 0.525, \"y\": 0.605}, \"confidence\": 0.95, \"team_confidence\": 0.99},\n    {\"detection_id\": \"player_06\", \"team\": \"A\", \"box\": {\"left\": 0.528, \"top\": 0.355, \"right\": 0.569, \"bottom\": 0.518}, \"foot\": {\"x\": 0.547, \"y\": 0.514}, \"confidence\": 0.93, \"team_confidence\": 0.99},\n    {\"detection_id\": \"player_07\", \"team\": \"B\", \"box\": {\"left\": 0.69, \"top\": 0.488, \"right\": 0.761, \"bottom\": 0.702}, \"foot\": {\"x\": 0.702, \"y\": 0.697}, \"confidence\": 0.96, \"team_confidence\": 0.99},\n    {\"detection_id\": \"player_08\", \"team\": \"B\", \"box\": {\"left\": 0.916, \"top\": 0.339, \"right\": 0.965, \"bottom\": 0.582}, \"foot\": {\"x\": 0.927, \"y\": 0.575}, \"confidence\": 0.96, \"team_confidence\": 0.99},\n    {\"detection_id\": \"player_09\", \"team\": \"A\", \"box\": {\"left\": 0.325, \"top\": 3.28e-01, \"right\": 0.366, \"bottom\": 0.519}, \"foot\": {\"x\": 0.339, \"y\": 0.514}, \"confidence\": 0.92, \"team_confidence\": 0.99},\n    {\"detection_id\": \"player_10\", \"team\": \"B\", \"box\": {\"left\": 0.309, \"top\": 3.09e-01, \"right\": 0.347, \"bottom\": 0.472}, \"foot\": {\"x\": 0.323, \"y\": 0.468}, \"confidence\": 0.88, \"team_confidence\": 0.97}\n  ],\n  \"ball\": {\n    \"center\": {\"x\": 0.141, \"y\": 0.627},\n    \"box\": {\"left\": 0.134, \"top\": 0.615, \"right\": 0.148, \"bottom\": 0.639},\n    \"confidence\": 0.85\n  },\n  \"possession\": {\n    \"player_detection_id\": \"player_01\",\n    \"confidence\": 0.88\n  },\n  \"uncertainty_notes\": []\n}",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "signature": "EmcKZQERTTIPByqoTWKRKeVMkGtwCFemZjpK9R0rpsHZTBYcT/tTe98rFOWtQHhPK9lPBeF+hBnuOBbLjHgZRPc61XK5vA8LbGhBRoZBVLyDtvsJOiDIBa0ct4LvJXB8JoKNarHfni7a",
+            "type": "reasoning.text"
+          }
+        ],
+        "refusal": null,
+        "role": "assistant"
+      },
+      "native_finish_reason": "STOP"
+    }
+  ],
+  "created": 1788840238,
+  "id": "gen-1788840238-9GRbyFe5LzMF5FLPTIrs",
+  "model": "google/gemini-3.8-flash",
+  "object": "chat.completion",
+  "provider": "Google AI Studio",
+  "service_tier": "default",
+  "system_fingerprint": null,
+  "usage": {
+    "completion_tokens": 1132,
+    "completion_tokens_details": {
+      "audio_tokens": 0,
+      "image_tokens": 0,
+      "reasoning_tokens": 0
+    },
+    "cost": 0.0053415,
+    "cost_details": {
+      "upstream_inference_completions_cost": 0.004245,
+      "upstream_inference_cost": 0.0053415,
+      "upstream_inference_prompt_cost": 0.0010965
+    },
+    "is_byok": false,
+    "prompt_tokens": 1462,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": 0,
+      "cached_tokens": 0,
+      "video_tokens": 0
+    },
+    "total_tokens": 2594
+  }
+}

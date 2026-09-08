@@ -1,0 +1,154 @@
+{
+  "ball": null,
+  "frame_id": 486,
+  "players": [
+    {
+      "box": {
+        "bottom": 0.654,
+        "left": 0.158,
+        "right": 0.227,
+        "top": 0.482
+      },
+      "confidence": 0.95,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.193,
+        "y": 0.642
+      },
+      "team": "A",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.694,
+        "left": 0.214,
+        "right": 0.276,
+        "top": 0.504
+      },
+      "confidence": 0.96,
+      "detection_id": "player_02",
+      "foot": {
+        "x": 0.227,
+        "y": 0.684
+      },
+      "team": "B",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.641,
+        "left": 0.258,
+        "right": 0.332,
+        "top": 0.458
+      },
+      "confidence": 0.97,
+      "detection_id": "player_03",
+      "foot": {
+        "x": 0.297,
+        "y": 0.626
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.63,
+        "left": 0.319,
+        "right": 0.391,
+        "top": 0.441
+      },
+      "confidence": 0.97,
+      "detection_id": "player_04",
+      "foot": {
+        "x": 0.365,
+        "y": 0.621
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.45,
+        "left": 0.369,
+        "right": 0.409,
+        "top": 0.295
+      },
+      "confidence": 0.93,
+      "detection_id": "player_05",
+      "foot": {
+        "x": 0.386,
+        "y": 0.443
+      },
+      "team": "B",
+      "team_confidence": 0.96
+    },
+    {
+      "box": {
+        "bottom": 0.46,
+        "left": 0.408,
+        "right": 0.447,
+        "top": 0.318
+      },
+      "confidence": 0.92,
+      "detection_id": "player_06",
+      "foot": {
+        "x": 0.422,
+        "y": 0.449
+      },
+      "team": "A",
+      "team_confidence": 0.96
+    },
+    {
+      "box": {
+        "bottom": 0.485,
+        "left": 0.433,
+        "right": 0.488,
+        "top": 0.323
+      },
+      "confidence": 0.94,
+      "detection_id": "player_07",
+      "foot": {
+        "x": 0.458,
+        "y": 0.477
+      },
+      "team": "B",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.707,
+        "left": 0.616,
+        "right": 0.664,
+        "top": 0.501
+      },
+      "confidence": 0.96,
+      "detection_id": "player_08",
+      "foot": {
+        "x": 0.642,
+        "y": 0.696
+      },
+      "team": "B",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.774,
+        "left": 0.667,
+        "right": 0.721,
+        "top": 0.567
+      },
+      "confidence": 0.95,
+      "detection_id": "player_09",
+      "foot": {
+        "x": 0.695,
+        "y": 0.762
+      },
+      "team": "A",
+      "team_confidence": 0.98
+    }
+  ],
+  "possession": null,
+  "uncertainty_notes": [
+    "The basketball is fully occluded near the ball-handling player, no distinct ball detected."
+  ]
+}

@@ -17,6 +17,7 @@ from .player_cv_tracking import (
     scene_cut_log_as_dict,
 )
 from .schema import FrameDetection
+from .shot_context import trackable_ball_anchors
 from .tracking import TrackedFrame, build_player_tracker, interpolate_sequence
 from .video import probe_video, render_tracked_video
 
@@ -220,7 +221,7 @@ def render_saved_ablation(repository_root: str | Path) -> Experiment4Paths:
     cv_ball_started = perf_counter()
     cv_ball = VLMInitializedBallTracker(cv_variant.pipeline.ball_tracking).track_video(
         paths.clip,
-        {frame: detection.ball_detection for frame, detection in detections.items()},
+        trackable_ball_anchors(detections, player_result.shot_context),
         cv_timeline,
         scene_cut_frames=cut_frames,
     )

@@ -1,0 +1,170 @@
+{
+  "ball": {
+    "box": {
+      "bottom": 0.67,
+      "left": 0.161,
+      "right": 0.181,
+      "top": 0.638
+    },
+    "center": {
+      "x": 0.171,
+      "y": 0.654
+    },
+    "confidence": 0.88
+  },
+  "frame_id": 150,
+  "players": [
+    {
+      "box": {
+        "bottom": 0.684,
+        "left": 0.119,
+        "right": 0.185,
+        "top": 0.546
+      },
+      "confidence": 0.92,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.147,
+        "y": 0.677
+      },
+      "team": "B",
+      "team_confidence": 0.96
+    },
+    {
+      "box": {
+        "bottom": 0.694,
+        "left": 0.252,
+        "right": 0.301,
+        "top": 0.496
+      },
+      "confidence": 0.91,
+      "detection_id": "player_02",
+      "foot": {
+        "x": 0.274,
+        "y": 0.683
+      },
+      "team": "A",
+      "team_confidence": 0.95
+    },
+    {
+      "box": {
+        "bottom": 0.63,
+        "left": 0.285,
+        "right": 0.339,
+        "top": 0.506
+      },
+      "confidence": 0.87,
+      "detection_id": "player_03",
+      "foot": {
+        "x": 0.305,
+        "y": 0.625
+      },
+      "team": "A",
+      "team_confidence": 0.92
+    },
+    {
+      "box": {
+        "bottom": 0.742,
+        "left": 0.28,
+        "right": 0.339,
+        "top": 0.579
+      },
+      "confidence": 0.85,
+      "detection_id": "player_04",
+      "foot": {
+        "x": 0.309,
+        "y": 0.737
+      },
+      "team": "B",
+      "team_confidence": 0.88
+    },
+    {
+      "box": {
+        "bottom": 0.537,
+        "left": 0.311,
+        "right": 0.354,
+        "top": 0.349
+      },
+      "confidence": 0.93,
+      "detection_id": "player_05",
+      "foot": {
+        "x": 0.331,
+        "y": 0.532
+      },
+      "team": "B",
+      "team_confidence": 0.96
+    },
+    {
+      "box": {
+        "bottom": 0.551,
+        "left": 0.347,
+        "right": 0.399,
+        "top": 0.363
+      },
+      "confidence": 0.92,
+      "detection_id": "player_06",
+      "foot": {
+        "x": 0.379,
+        "y": 0.543
+      },
+      "team": "A",
+      "team_confidence": 0.96
+    },
+    {
+      "box": {
+        "bottom": 0.589,
+        "left": 0.488,
+        "right": 0.545,
+        "top": 0.401
+      },
+      "confidence": 0.94,
+      "detection_id": "player_07",
+      "foot": {
+        "x": 0.517,
+        "y": 0.581
+      },
+      "team": "A",
+      "team_confidence": 0.97
+    },
+    {
+      "box": {
+        "bottom": 0.613,
+        "left": 0.567,
+        "right": 0.609,
+        "top": 0.422
+      },
+      "confidence": 0.93,
+      "detection_id": "player_08",
+      "foot": {
+        "x": 0.584,
+        "y": 0.606
+      },
+      "team": "B",
+      "team_confidence": 0.96
+    },
+    {
+      "box": {
+        "bottom": 0.549,
+        "left": 0.601,
+        "right": 0.649,
+        "top": 0.363
+      },
+      "confidence": 0.94,
+      "detection_id": "player_09",
+      "foot": {
+        "x": 0.626,
+        "y": 0.542
+      },
+      "team": "A",
+      "team_confidence": 0.97
+    }
+  ],
+  "possession": {
+    "confidence": 0.85,
+    "player_detection_id": "player_01"
+  },
+  "uncertainty_notes": [
+    "player_04 is partly occluded by the foreground crowd/court side view.",
+    "Referees are excluded near the court."
+  ]
+}

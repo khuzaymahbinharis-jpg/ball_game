@@ -1,0 +1,166 @@
+{
+  "ball": {
+    "box": {
+      "bottom": 0.578,
+      "left": 0.466,
+      "right": 0.478,
+      "top": 0.556
+    },
+    "center": {
+      "x": 0.472,
+      "y": 0.567
+    },
+    "confidence": 0.62
+  },
+  "frame_id": 636,
+  "players": [
+    {
+      "box": {
+        "bottom": 0.754,
+        "left": 0.431,
+        "right": 0.496,
+        "top": 0.527
+      },
+      "confidence": 0.97,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.463,
+        "y": 0.742
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.797,
+        "left": 0.319,
+        "right": 0.382,
+        "top": 0.567
+      },
+      "confidence": 0.97,
+      "detection_id": "player_02",
+      "foot": {
+        "x": 0.342,
+        "y": 0.784
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.797,
+        "left": 0.091,
+        "right": 0.141,
+        "top": 0.586
+      },
+      "confidence": 0.96,
+      "detection_id": "player_03",
+      "foot": {
+        "x": 0.113,
+        "y": 0.789
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.632,
+        "left": 0.211,
+        "right": 0.253,
+        "top": 0.454
+      },
+      "confidence": 0.96,
+      "detection_id": "player_04",
+      "foot": {
+        "x": 0.233,
+        "y": 0.625
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.638,
+        "left": 0.109,
+        "right": 0.154,
+        "top": 0.479
+      },
+      "confidence": 0.94,
+      "detection_id": "player_05",
+      "foot": {
+        "x": 0.134,
+        "y": 0.632
+      },
+      "team": "A",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.636,
+        "left": 0.31,
+        "right": 0.348,
+        "top": 0.47
+      },
+      "confidence": 0.94,
+      "detection_id": "player_06",
+      "foot": {
+        "x": 0.329,
+        "y": 0.627
+      },
+      "team": "A",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.636,
+        "left": 0.351,
+        "right": 0.412,
+        "top": 0.483
+      },
+      "confidence": 0.95,
+      "detection_id": "player_07",
+      "foot": {
+        "x": 0.375,
+        "y": 0.629
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.609,
+        "left": 0.417,
+        "right": 0.475,
+        "top": 0.467
+      },
+      "confidence": 0.93,
+      "detection_id": "player_08",
+      "foot": {
+        "x": 0.44,
+        "y": 0.603
+      },
+      "team": "B",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.576,
+        "left": 0.461,
+        "right": 0.5,
+        "top": 0.461
+      },
+      "confidence": 0.91,
+      "detection_id": "player_09",
+      "foot": {
+        "x": 0.479,
+        "y": 0.572
+      },
+      "team": "A",
+      "team_confidence": 0.97
+    }
+  ],
+  "possession": null,
+  "uncertainty_notes": [
+    "Ball is heavily occluded near player_09 and player_01."
+  ]
+}

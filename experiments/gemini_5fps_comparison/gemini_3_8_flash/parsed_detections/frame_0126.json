@@ -1,0 +1,169 @@
+{
+  "ball": {
+    "box": {
+      "bottom": 0.672,
+      "left": 0.316,
+      "right": 0.338,
+      "top": 0.638
+    },
+    "center": {
+      "x": 0.327,
+      "y": 0.655
+    },
+    "confidence": 0.85
+  },
+  "frame_id": 126,
+  "players": [
+    {
+      "box": {
+        "bottom": 0.601,
+        "left": 0.38,
+        "right": 0.434,
+        "top": 0.449
+      },
+      "confidence": 0.88,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.407,
+        "y": 0.596
+      },
+      "team": "B",
+      "team_confidence": 0.95
+    },
+    {
+      "box": {
+        "bottom": 0.595,
+        "left": 0.444,
+        "right": 0.505,
+        "top": 0.387
+      },
+      "confidence": 0.91,
+      "detection_id": "player_02",
+      "foot": {
+        "x": 0.468,
+        "y": 0.592
+      },
+      "team": "A",
+      "team_confidence": 0.96
+    },
+    {
+      "box": {
+        "bottom": 0.599,
+        "left": 0.513,
+        "right": 0.56,
+        "top": 0.402
+      },
+      "confidence": 0.91,
+      "detection_id": "player_03",
+      "foot": {
+        "x": 0.528,
+        "y": 0.594
+      },
+      "team": "B",
+      "team_confidence": 0.95
+    },
+    {
+      "box": {
+        "bottom": 0.563,
+        "left": 0.638,
+        "right": 0.678,
+        "top": 0.354
+      },
+      "confidence": 0.93,
+      "detection_id": "player_04",
+      "foot": {
+        "x": 0.655,
+        "y": 0.558
+      },
+      "team": "A",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.563,
+        "left": 0.334,
+        "right": 0.387,
+        "top": 0.358
+      },
+      "confidence": 0.9,
+      "detection_id": "player_05",
+      "foot": {
+        "x": 0.354,
+        "y": 0.559
+      },
+      "team": "A",
+      "team_confidence": 0.97
+    },
+    {
+      "box": {
+        "bottom": 0.601,
+        "left": 0.306,
+        "right": 0.358,
+        "top": 0.387
+      },
+      "confidence": 0.89,
+      "detection_id": "player_06",
+      "foot": {
+        "x": 0.324,
+        "y": 0.597
+      },
+      "team": "B",
+      "team_confidence": 0.95
+    },
+    {
+      "box": {
+        "bottom": 0.648,
+        "left": 0.247,
+        "right": 0.321,
+        "top": 0.484
+      },
+      "confidence": 0.86,
+      "detection_id": "player_07",
+      "foot": {
+        "x": 0.284,
+        "y": 0.642
+      },
+      "team": "A",
+      "team_confidence": 0.96
+    },
+    {
+      "box": {
+        "bottom": 0.771,
+        "left": 0.33,
+        "right": 0.443,
+        "top": 0.592
+      },
+      "confidence": 0.84,
+      "detection_id": "player_08",
+      "foot": {
+        "x": 0.373,
+        "y": 0.763
+      },
+      "team": "B",
+      "team_confidence": 0.93
+    },
+    {
+      "box": {
+        "bottom": 0.709,
+        "left": 0.043,
+        "right": 0.119,
+        "top": 0.512
+      },
+      "confidence": 0.88,
+      "detection_id": "player_09",
+      "foot": {
+        "x": 0.71,
+        "y": 0.703
+      },
+      "team": "B",
+      "team_confidence": 0.95
+    }
+  ],
+  "possession": {
+    "confidence": 0.65,
+    "player_detection_id": "player_08"
+  },
+  "uncertainty_notes": [
+    "Lower body of player_08 and ball are near crowd foreground; slight motion blur."
+  ]
+}

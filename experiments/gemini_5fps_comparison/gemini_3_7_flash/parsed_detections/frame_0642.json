@@ -1,0 +1,154 @@
+{
+  "ball": null,
+  "frame_id": 642,
+  "players": [
+    {
+      "box": {
+        "bottom": 0.796,
+        "left": 0.089,
+        "right": 0.138,
+        "top": 0.584
+      },
+      "confidence": 0.94,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.113,
+        "y": 0.796
+      },
+      "team": "B",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.627,
+        "left": 0.082,
+        "right": 0.13,
+        "top": 0.474
+      },
+      "confidence": 0.91,
+      "detection_id": "player_02",
+      "foot": {
+        "x": 0.111,
+        "y": 0.627
+      },
+      "team": "A",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.635,
+        "left": 0.192,
+        "right": 0.237,
+        "top": 0.449
+      },
+      "confidence": 0.95,
+      "detection_id": "player_03",
+      "foot": {
+        "x": 0.215,
+        "y": 0.635
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.637,
+        "left": 0.284,
+        "right": 0.323,
+        "top": 0.457
+      },
+      "confidence": 0.94,
+      "detection_id": "player_04",
+      "foot": {
+        "x": 0.3,
+        "y": 0.637
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.648,
+        "left": 0.334,
+        "right": 0.404,
+        "top": 0.485
+      },
+      "confidence": 0.91,
+      "detection_id": "player_05",
+      "foot": {
+        "x": 0.383,
+        "y": 0.648
+      },
+      "team": "B",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.757,
+        "left": 0.316,
+        "right": 0.399,
+        "top": 0.554
+      },
+      "confidence": 0.96,
+      "detection_id": "player_06",
+      "foot": {
+        "x": 0.355,
+        "y": 0.757
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.74,
+        "left": 0.411,
+        "right": 0.481,
+        "top": 0.511
+      },
+      "confidence": 0.96,
+      "detection_id": "player_07",
+      "foot": {
+        "x": 0.451,
+        "y": 0.74
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.613,
+        "left": 0.435,
+        "right": 0.494,
+        "top": 0.468
+      },
+      "confidence": 0.88,
+      "detection_id": "player_08",
+      "foot": {
+        "x": 0.464,
+        "y": 0.613
+      },
+      "team": "B",
+      "team_confidence": 0.92
+    },
+    {
+      "box": {
+        "bottom": 0.615,
+        "left": 0.472,
+        "right": 0.531,
+        "top": 0.463
+      },
+      "confidence": 0.92,
+      "detection_id": "player_09",
+      "foot": {
+        "x": 0.515,
+        "y": 0.615
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    }
+  ],
+  "possession": null,
+  "uncertainty_notes": [
+    "Basketball is occluded by players during drive to the basket."
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "ball": null,
+  "frame_id": 408,
+  "players": [
+    {
+      "box": {
+        "bottom": 1.0,
+        "left": 0.319,
+        "right": 0.886,
+        "top": 0.221
+      },
+      "confidence": 0.935,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.586,
+        "y": 1.0
+      },
+      "team": "B",
+      "team_confidence": 0.987
+    }
+  ],
+  "possession": null,
+  "uncertainty_notes": [
+    "Player shown in tight close-up; lower body and feet are cut off below screen.",
+    "Basketball not visible in frame."
+  ]
+}

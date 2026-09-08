@@ -1,0 +1,183 @@
+{
+  "ball": {
+    "box": {
+      "bottom": 0.453,
+      "left": 0.288,
+      "right": 0.3,
+      "top": 0.437
+    },
+    "center": {
+      "x": 0.294,
+      "y": 0.445
+    },
+    "confidence": 0.85
+  },
+  "frame_id": 864,
+  "players": [
+    {
+      "box": {
+        "bottom": 0.534,
+        "left": 0.144,
+        "right": 0.198,
+        "top": 0.414
+      },
+      "confidence": 0.95,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.155,
+        "y": 0.525
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.53,
+        "left": 0.174,
+        "right": 0.229,
+        "top": 0.412
+      },
+      "confidence": 0.94,
+      "detection_id": "player_02",
+      "foot": {
+        "x": 0.201,
+        "y": 0.521
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.488,
+        "left": 0.24,
+        "right": 0.301,
+        "top": 0.384
+      },
+      "confidence": 0.94,
+      "detection_id": "player_03",
+      "foot": {
+        "x": 0.264,
+        "y": 0.481
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.51,
+        "left": 0.364,
+        "right": 0.419,
+        "top": 0.373
+      },
+      "confidence": 0.96,
+      "detection_id": "player_04",
+      "foot": {
+        "x": 0.388,
+        "y": 0.5
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.609,
+        "left": 0.414,
+        "right": 0.45,
+        "top": 0.441
+      },
+      "confidence": 0.96,
+      "detection_id": "player_05",
+      "foot": {
+        "x": 0.432,
+        "y": 0.601
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.688,
+        "left": 0.297,
+        "right": 0.339,
+        "top": 0.509
+      },
+      "confidence": 0.96,
+      "detection_id": "player_06",
+      "foot": {
+        "x": 0.32,
+        "y": 0.678
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.543,
+        "left": 0.639,
+        "right": 0.677,
+        "top": 0.398
+      },
+      "confidence": 0.94,
+      "detection_id": "player_07",
+      "foot": {
+        "x": 0.655,
+        "y": 0.537
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.608,
+        "left": 0.658,
+        "right": 0.7,
+        "top": 0.439
+      },
+      "confidence": 0.94,
+      "detection_id": "player_08",
+      "foot": {
+        "x": 0.685,
+        "y": 0.599
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.575,
+        "left": 0.718,
+        "right": 0.763,
+        "top": 0.416
+      },
+      "confidence": 0.96,
+      "detection_id": "player_09",
+      "foot": {
+        "x": 0.739,
+        "y": 0.567
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.68,
+        "left": 0.846,
+        "right": 0.895,
+        "top": 0.528
+      },
+      "confidence": 0.95,
+      "detection_id": "player_10",
+      "foot": {
+        "x": 0.868,
+        "y": 0.669
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    }
+  ],
+  "possession": {
+    "confidence": 0.82,
+    "player_detection_id": "player_03"
+  },
+  "uncertainty_notes": []
+}

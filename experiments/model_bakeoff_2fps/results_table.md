@@ -10,4 +10,4 @@ Manual quality columns remain blank until human detector review is entered. No o
 | qwen/qwen3-vl-235b-a22b-instruct | 100.00% |  |  |  |  | $0.055579 | 4.257s | 35.092s |
 | bytedance-seed/seed-2-1-turbo | 68.85% |  |  |  |  | $0.268502 | 21.365s | 173.587s |
 | z-ai/glm-5.3-flash | 18.03% |  |  |  |  |  | 26.625s | 234.381s |
-| google/gemini-3.7-flash | 0.00% |  |  |  |  |  | 30.376s | 263.915s |
+| google/gemini-3.7-flash | 98.36% |  |  |  |  | $0.383148 | 10.781s | 87.542s |

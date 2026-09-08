@@ -1,0 +1,53 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"frame_id\": 882,\n  \"players\": [\n    {\"detection_id\": \"player_01\", \"team\": \"A\", \"box\": {\"left\": 2.89e-1, \"top\": 5.04e-1, \"right\": 3.28e-1, \"bottom\": 6.88e-1}, \"foot\": {\"x\": 3.09e-1, \"y\": 6.78e-1}, \"confidence\": 9.88e-1, \"team_confidence\": 9.94e-1},\n    {\"detection_id\": \"player_02\", \"team\": \"B\", \"box\": {\"left\": 3.96e-1, \"top\": 4.45e-1, \"right\": 4.38e-1, \"bottom\": 6.09e-1}, \"foot\": {\"x\": 4.09e-1, \"y\": 6.03e-1}, \"confidence\": 9.87e-1, \"team_confidence\": 9.92e-1},\n    {\"detection_id\": \"player_03\", \"team\": \"A\", \"box\": {\"left\": 3.51e-1, \"top\": 3.86e-1, \"right\": 3.93e-1, \"bottom\": 5.08e-1}, \"foot\": {\"x\": 3.73e-1, \"y\": 5.01e-1}, \"confidence\": 9.68e-1, \"team_confidence\": 9.87e-1},\n    {\"detection_id\": \"player_04\", \"team\": \"B\", \"box\": {\"left\": 4.19e-1, \"top\": 3.85e-1, \"right\": 4.6e-1, \"bottom\": 5.16e-1}, \"foot\": {\"x\": 4.4e-1, \"y\": 5.12e-1}, \"confidence\": 9.66e-1, \"team_confidence\": 9.83e-1},\n    {\"detection_id\": \"player_05\", \"team\": \"A\", \"box\": {\"left\": 1.7e-1, \"top\": 4.05e-1, \"right\": 2.33e-1, \"bottom\": 5.32e-1}, \"foot\": {\"x\": 2.02e-1, \"y\": 5.25e-1}, \"confidence\": 9.77e-1, \"team_confidence\": 9.95e-1},\n    {\"detection_id\": \"player_06\", \"team\": \"B\", \"box\": {\"left\": 1.32e-1, \"top\": 3.97e-1, \"right\": 2.0e-1, \"bottom\": 5.24e-1}, \"foot\": {\"x\": 1.55e-1, \"y\": 5.18e-1}, \"confidence\": 9.72e-1, \"team_confidence\": 9.9e-1},\n    {\"detection_id\": \"player_07\", \"team\": \"B\", \"box\": {\"left\": 6.43e-1, \"top\": 4.31e-1, \"right\": 6.84e-1, \"bottom\": 6.0e-1}, \"foot\": {\"x\": 6.64e-1, \"y\": 5.92e-1}, \"confidence\": 9.85e-1, \"team_confidence\": 9.93e-1},\n    {\"detection_id\": \"player_08\", \"team\": \"B\", \"box\": {\"left\": 6.61e-1, \"top\": 3.95e-1, \"right\": 6.96e-1, \"bottom\": 5.51e-1}, \"foot\": {\"x\": 6.78e-1, \"y\": 5.42e-1}, \"confidence\": 9.79e-1, \"team_confidence\": 9.89e-1},\n    {\"detection_id\": \"player_09\", \"team\": \"A\", \"box\": {\"left\": 7.37e-1, \"top\": 4.41e-1, \"right\": 7.82e-1, \"bottom\": 5.75e-1}, \"foot\": {\"x\": 7.5e-1, \"y\": 5.67e-1}, \"confidence\": 9.82e-1, \"team_confidence\": 9.96e-1},\n    {\"detection_id\": \"player_10\", \"team\": \"A\", \"box\": {\"left\": 7.94e-1, \"top\": 5.48e-1, \"right\": 8.74e-1, \"bottom\": 6.99e-1}, \"foot\": {\"x\": 8.44e-1, \"y\": 6.91e-1}, \"confidence\": 9.83e-1, \"team_confidence\": 9.95e-1}\n  ],\n  \"ball\": {\n    \"center\": {\"x\": 3.86e-1, \"y\": 5.06e-1},\n    \"box\": {\"left\": 3.8e-1, \"top\": 4.95e-1, \"right\": 3.93e-1, \"bottom\": 5.17e-1},\n    \"confidence\": 9.1e-1\n  },\n  \"possession\": {\n    \"player_detection_id\": \"player_03\",\n    \"confidence\": 8.42e-1\n  },\n  \"uncertainty_notes\": []\n}",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "signature": "Em0KawERTTIP23wNH3m4FdhURR/LkLplT3ucinQ3RcA2F70ZXmN7cgY4M31p6tz2q5UkC7dcrxarcVhm+enbbVHRd8M/DEYqFRYxYsq5shUa47IMRtsE3W6ksfrgXqcDGm17bGIdxBlHvzCePTRA",
+            "type": "reasoning.text"
+          }
+        ],
+        "refusal": null,
+        "role": "assistant"
+      },
+      "native_finish_reason": "STOP"
+    }
+  ],
+  "created": 1788841035,
+  "id": "gen-1788841035-VT68DTBBC2DCmpRZwj6h",
+  "model": "google/gemini-3.7-flash",
+  "object": "chat.completion",
+  "provider": "Google AI Studio",
+  "service_tier": "default",
+  "system_fingerprint": null,
+  "usage": {
+    "completion_tokens": 1320,
+    "completion_tokens_details": {
+      "audio_tokens": 0,
+      "image_tokens": 0,
+      "reasoning_tokens": 0
+    },
+    "cost": 0.0060465,
+    "cost_details": {
+      "upstream_inference_completions_cost": 0.00495,
+      "upstream_inference_cost": 0.0060465,
+      "upstream_inference_prompt_cost": 0.0010965
+    },
+    "is_byok": false,
+    "prompt_tokens": 1462,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": 0,
+      "cached_tokens": 0,
+      "video_tokens": 0
+    },
+    "total_tokens": 2782
+  }
+}

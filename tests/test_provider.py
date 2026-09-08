@@ -4,7 +4,11 @@ import httpx
 import pytest
 from PIL import Image
 
-from track_game.provider import OpenRouterValidationError, OpenRouterVLMProvider
+from track_game.provider import (
+    OpenRouterValidationError,
+    OpenRouterVLMProvider,
+    detection_prompt,
+)
 
 
 def response_payload(frame_id=450):
@@ -28,6 +32,12 @@ def response_payload(frame_id=450):
         "possession": {"player_detection_id": "player_01", "confidence": 0.7},
         "uncertainty_notes": [],
     }
+
+
+def test_prompt_suppresses_player_markers_in_non_gameplay_closeups():
+    prompt = detection_prompt(12)
+    assert "tight player close-up" in prompt
+    assert "players=[], ball=null, and possession=null" in prompt
 
 
 def test_openrouter_adapter_makes_one_mocked_call_and_records_usage():

@@ -15,7 +15,7 @@ from .schema import FrameDetection, frame_detection_json_schema
 
 
 DEFAULT_OPENROUTER_MODEL = "google/gemini-3.1-flash-lite"
-PROMPT_VERSION = "test1-ruler-v1"
+PROMPT_VERSION = "test1-ruler-v2-closeup-filter"
 
 
 class VLMProvider(Protocol):
@@ -78,8 +78,16 @@ vertical ruler to its left. Every coordinate in the JSON must use the rulers'
 normalized 0.0-1.0 coordinate system relative to the ORIGINAL VIDEO CONTENT.
 Do not include the white ruler margins in any coordinate.
 
-Detect every visible on-court player, including partially occluded players, but
-exclude referees, spectators, coaches, bench personnel, and graphics. Assign the
+First decide whether this is a trackable live gameplay view. A trackable view
+shows enough of the playing surface to place multiple active players spatially.
+For a tight player close-up, portrait shot, bench/crowd shot, replay, or graphic,
+return players=[], ball=null, and possession=null, and briefly name the view in
+uncertainty_notes. Do not track a cropped player merely because they are wearing
+a game uniform.
+
+In a trackable gameplay view, detect every visible on-court player, including
+partially occluded players, but exclude referees, spectators, coaches, bench
+personnel, and graphics. Assign the
 two visually distinct uniform groups as Team A and Team B consistently within
 this frame. Use "uncertain" only when the uniform cannot be assigned reliably.
 Give each player a unique local detection_id such as player_01. For each player:

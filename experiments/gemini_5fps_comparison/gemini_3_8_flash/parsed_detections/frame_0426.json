@@ -1,0 +1,26 @@
+{
+  "ball": null,
+  "frame_id": 426,
+  "players": [
+    {
+      "box": {
+        "bottom": 1.0,
+        "left": 0.245,
+        "right": 0.804,
+        "top": 0.054
+      },
+      "confidence": 0.95,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.525,
+        "y": 1.0
+      },
+      "team": "B",
+      "team_confidence": 0.98
+    }
+  ],
+  "possession": null,
+  "uncertainty_notes": [
+    "Close-up portrait of player_01; feet and lower body are out of frame."
+  ]
+}

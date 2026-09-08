@@ -1,0 +1,102 @@
+{
+  "actual_openrouter_cost_usd": 0.001734,
+  "completed_at": "2026-09-08T04:04:47.240287+00:00",
+  "error": null,
+  "experiment_id": "gemini-flash-5fps-comparison",
+  "frame_id": 390,
+  "http_429": false,
+  "input_tokens": 1462,
+  "model": "google/gemini-3.8-flash",
+  "model_key": "gemini_3_8_flash",
+  "output_tokens": 170,
+  "parsed_detection": {
+    "ball": null,
+    "frame_id": 390,
+    "players": [
+      {
+        "box": {
+          "bottom": 1.0,
+          "left": 0.205,
+          "right": 0.782,
+          "top": 0.205
+        },
+        "confidence": 0.95,
+        "detection_id": "player_01",
+        "foot": {
+          "x": 0.454,
+          "y": 1.0
+        },
+        "team": "B",
+        "team_confidence": 0.99
+      }
+    ],
+    "possession": null,
+    "uncertainty_notes": [
+      "Player's lower body is cut off by the bottom edge of the frame.",
+      "Ball is not visible in this camera angle."
+    ]
+  },
+  "raw_content": null,
+  "raw_response_body": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"frame_id\": 390,\n  \"players\": [\n    {\n      \"detection_id\": \"player_01\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 2.05e-1,\n        \"top\": 2.05e-1,\n        \"right\": 7.82e-1,\n        \"bottom\": 1.0\n      },\n      \"foot\": {\n        \"x\": 4.54e-1,\n        \"y\": 1.0\n      },\n      \"confidence\": 0.95,\n      \"team_confidence\": 0.99\n    }\n  ],\n  \"ball\": null,\n  \"possession\": null,\n  \"uncertainty_notes\": [\n    \"Player's lower body is cut off by the bottom edge of the frame.\",\n    \"Ball is not visible in this camera angle.\"\n  ]\n}",
+          "reasoning_details": [
+            {
+              "format": "google-gemini-v1",
+              "index": 0,
+              "signature": "EmcKZQERTTIPPnHe1hrhcWn9MGoirPFfl3TTQTuKkx7B1lWtj5h8tFP1KJAmgz8J/qhhhA3HCxoa/un9lLGhK1+pnIK4wEF1dLBPaECd4XlE1KYzplIZKw8YiQ+0zyObCfPH2aMn+Ruk",
+              "type": "reasoning.text"
+            }
+          ],
+          "refusal": null,
+          "role": "assistant"
+        },
+        "native_finish_reason": "STOP"
+      }
+    ],
+    "created": 1788840284,
+    "id": "gen-1788840284-Xb1jhelG8oMqf8p30FTS",
+    "model": "google/gemini-3.8-flash",
+    "object": "chat.completion",
+    "provider": "Google AI Studio",
+    "service_tier": "default",
+    "system_fingerprint": null,
+    "usage": {
+      "completion_tokens": 170,
+      "completion_tokens_details": {
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "cost": 0.001734,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0006375,
+        "upstream_inference_cost": 0.001734,
+        "upstream_inference_prompt_cost": 0.0010965
+      },
+      "is_byok": false,
+      "prompt_tokens": 1462,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "video_tokens": 0
+      },
+      "total_tokens": 1632
+    }
+  },
+  "reasoning_tokens": 0,
+  "request_id": "gen-1788840284-Xb1jhelG8oMqf8p30FTS",
+  "request_latency_seconds": 3.5185489000286907,
+  "request_wall_seconds": 7.209019300004002,
+  "retry_count": 0,
+  "returned_model": "google/gemini-3.8-flash",
+  "returned_provider": "Google AI Studio",
+  "reused_control": false,
+  "schema_validation_success": true
+}

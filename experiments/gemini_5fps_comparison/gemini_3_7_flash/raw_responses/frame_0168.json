@@ -1,0 +1,53 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"frame_id\": 168,\n  \"players\": [\n    {\n      \"detection_id\": \"player_01\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.18,\n        \"top\": 0.472,\n        \"right\": 0.237,\n        \"bottom\": 0.67\n      },\n      \"foot\": {\n        \"x\": 0.207,\n        \"y\": 0.655\n      },\n      \"confidence\": 0.94,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_02\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.501,\n        \"top\": 0.407,\n        \"right\": 0.563,\n        \"bottom\": 0.597\n      },\n      \"foot\": {\n        \"x\": 0.536,\n        \"y\": 0.589\n      },\n      \"confidence\": 0.96,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_03\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.559,\n        \"top\": 0.36,\n        \"right\": 0.61,\n        \"bottom\": 0.54\n      },\n      \"foot\": {\n        \"x\": 0.583,\n        \"y\": 0.532\n      },\n      \"confidence\": 0.95,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_04\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.353,\n        \"top\": 0.347,\n        \"right\": 0.401,\n        \"bottom\": 0.548\n      },\n      \"foot\": {\n        \"x\": 0.378,\n        \"y\": 0.536\n      },\n      \"confidence\": 0.94,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_05\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.316,\n        \"top\": 0.509,\n        \"right\": 0.369,\n        \"bottom\": 0.725\n      },\n      \"foot\": {\n        \"x\": 0.356,\n        \"y\": 0.718\n      },\n      \"confidence\": 0.92,\n      \"team_confidence\": 0.98\n    },\n    {\n      \"detection_id\": \"player_06\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.144,\n        \"top\": 0.535,\n        \"right\": 0.209,\n        \"bottom\": 0.706\n      },\n      \"foot\": {\n        \"x\": 0.169,\n        \"y\": 0.7\n      },\n      \"confidence\": 0.92,\n      \"team_confidence\": 0.98\n    },\n    {\n      \"detection_id\": \"player_07\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.301,\n        \"top\": 0.548,\n        \"right\": 0.355,\n        \"bottom\": 0.73\n      },\n      \"foot\": {\n        \"x\": 0.32,\n        \"y\": 0.725\n      },\n      \"confidence\": 0.93,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_08\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.615,\n        \"top\": 0.443,\n        \"right\": 0.655,\n        \"bottom\": 0.648\n      },\n      \"foot\": {\n        \"x\": 0.633,\n        \"y\": 0.64\n      },\n      \"confidence\": 0.95,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_09\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.334,\n        \"top\": 0.316,\n        \"right\": 0.366,\n        \"bottom\": 0.51\n      },\n      \"foot\": {\n        \"x\": 0.35,\n        \"y\": 0.502\n      },\n      \"confidence\": 0.91,\n      \"team_confidence\": 0.97\n    }\n  ],\n  \"ball\": null,\n  \"possession\": null,\n  \"uncertainty_notes\": [\n    \"Basketball is occluded by players on the left wing/low post action.\"\n  ]\n}",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "signature": "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",
+            "type": "reasoning.text"
+          }
+        ],
+        "refusal": null,
+        "role": "assistant"
+      },
+      "native_finish_reason": "STOP"
+    }
+  ],
+  "created": 1788840853,
+  "id": "gen-1788840853-BB6Zi1Mc15M8CVxrbtHH",
+  "model": "google/gemini-3.7-flash",
+  "object": "chat.completion",
+  "provider": "Google AI Studio",
+  "service_tier": "default",
+  "system_fingerprint": null,
+  "usage": {
+    "completion_tokens": 1936,
+    "completion_tokens_details": {
+      "audio_tokens": 0,
+      "image_tokens": 0,
+      "reasoning_tokens": 686
+    },
+    "cost": 0.0083565,
+    "cost_details": {
+      "upstream_inference_completions_cost": 0.00726,
+      "upstream_inference_cost": 0.0083565,
+      "upstream_inference_prompt_cost": 0.0010965
+    },
+    "is_byok": false,
+    "prompt_tokens": 1462,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": 0,
+      "cached_tokens": 0,
+      "video_tokens": 0
+    },
+    "total_tokens": 3398
+  }
+}

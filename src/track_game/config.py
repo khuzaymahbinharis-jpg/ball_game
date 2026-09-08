@@ -80,6 +80,42 @@ class TrackConfidenceConfig:
 
 
 @dataclass(frozen=True)
+class BallHungarianConfig:
+    """Multi-cue cost and confidence settings for VLM ball-anchor association."""
+
+    center_distance_weight: float = 0.20
+    motion_distance_weight: float = 0.55
+    size_change_weight: float = 0.10
+    detection_confidence_weight: float = 0.15
+    distance_scale: float = 0.18
+    max_assignment_cost: float = 1.20
+    anchor_detection_weight: float = 0.65
+    assignment_weight: float = 0.35
+
+    def __post_init__(self) -> None:
+        weights = (
+            self.center_distance_weight,
+            self.motion_distance_weight,
+            self.size_change_weight,
+            self.detection_confidence_weight,
+        )
+        if any(weight < 0 for weight in weights):
+            raise ValueError("ball Hungarian cost weights cannot be negative")
+        if sum(weights) <= 0:
+            raise ValueError("at least one ball Hungarian cost weight must be positive")
+        if self.distance_scale <= 0 or self.max_assignment_cost <= 0:
+            raise ValueError("ball Hungarian distance and cost limits must be positive")
+        confidence_weights = (
+            self.anchor_detection_weight,
+            self.assignment_weight,
+        )
+        if any(weight < 0 for weight in confidence_weights):
+            raise ValueError("ball confidence weights cannot be negative")
+        if sum(confidence_weights) <= 0:
+            raise ValueError("ball confidence weights must be positive")
+
+
+@dataclass(frozen=True)
 class PlayerCVTrackingConfig:
     enabled: bool = False
     method: Literal["linear_interpolation", "sparse_lk"] = "linear_interpolation"
@@ -200,6 +236,8 @@ class TrackingConfig:
 @dataclass(frozen=True)
 class BallTrackingConfig:
     enabled: bool = False
+    association_method: Literal["direct", "hungarian"] = "hungarian"
+    hungarian: BallHungarianConfig = field(default_factory=BallHungarianConfig)
     use_kalman: bool = True
     lk_window_size: int = 21
     lk_max_level: int = 3
@@ -217,6 +255,8 @@ class BallTrackingConfig:
     possession_prior_max_distance: float = 0.12
 
     def __post_init__(self) -> None:
+        if self.association_method not in ("direct", "hungarian"):
+            raise ValueError("unsupported ball association method")
         if self.lk_window_size < 3 or self.lk_window_size % 2 == 0:
             raise ValueError("lk_window_size must be an odd integer of at least 3")
         if self.lk_max_level < 0 or self.min_tracked_points < 1 or self.max_features < 1:
@@ -235,6 +275,21 @@ class BallTrackingConfig:
             raise ValueError("ball tracking fractions must be in [0, 1]")
         if self.max_forward_backward_error_px <= 0 or self.max_lk_error <= 0:
             raise ValueError("optical-flow error thresholds must be positive")
+
+
+@dataclass(frozen=True)
+class ShotContextConfig:
+    """Post-VLM geometric guard against tracking broadcast close-ups."""
+
+    enabled: bool = True
+    maximum_players_in_closeup: int = 3
+    minimum_dominant_box_area: float = 0.15
+
+    def __post_init__(self) -> None:
+        if self.maximum_players_in_closeup < 1:
+            raise ValueError("maximum_players_in_closeup must be positive")
+        if not 0 < self.minimum_dominant_box_area <= 1:
+            raise ValueError("minimum_dominant_box_area must be in (0, 1]")
 
 
 @dataclass(frozen=True)
@@ -262,6 +317,7 @@ class PipelineConfig:
     camera_motion: CameraMotionConfig = field(default_factory=CameraMotionConfig)
     scene_cut: SceneCutConfig = field(default_factory=SceneCutConfig)
     ball_tracking: BallTrackingConfig = field(default_factory=BallTrackingConfig)
+    shot_context: ShotContextConfig = field(default_factory=ShotContextConfig)
     ruler: RulerConfig = field(default_factory=RulerConfig)
     model: ModelConfig = field(default_factory=ModelConfig)
 

@@ -1,0 +1,53 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"frame_id\": 252,\n  \"players\": [\n    {\n      \"detection_id\": \"player_01\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.381,\n        \"top\": 0.329,\n        \"right\": 0.429,\n        \"bottom\": 0.457\n      },\n      \"foot\": {\n        \"x\": 0.407,\n        \"y\": 0.453\n      },\n      \"confidence\": 0.93,\n      \"team_confidence\": 0.98\n    },\n    {\n      \"detection_id\": \"player_02\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.348,\n        \"top\": 0.399,\n        \"right\": 0.394,\n        \"bottom\": 0.556\n      },\n      \"foot\": {\n        \"x\": 0.366,\n        \"y\": 0.548\n      },\n      \"confidence\": 0.95,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_03\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.276,\n        \"top\": 0.424,\n        \"right\": 0.328,\n        \"bottom\": 0.63\n      },\n      \"foot\": {\n        \"x\": 0.287,\n        \"y\": 0.623\n      },\n      \"confidence\": 0.91,\n      \"team_confidence\": 0.98\n    },\n    {\n      \"detection_id\": \"player_04\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.279,\n        \"top\": 0.49,\n        \"right\": 0.335,\n        \"bottom\": 0.655\n      },\n      \"foot\": {\n        \"x\": 0.316,\n        \"y\": 0.651\n      },\n      \"confidence\": 0.96,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_05\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.446,\n        \"top\": 0.415,\n        \"right\": 0.495,\n        \"bottom\": 0.57\n      },\n      \"foot\": {\n        \"x\": 0.468,\n        \"y\": 0.564\n      },\n      \"confidence\": 0.95,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_06\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.426,\n        \"top\": 0.528,\n        \"right\": 0.494,\n        \"bottom\": 0.738\n      },\n      \"foot\": {\n        \"x\": 0.46,\n        \"y\": 0.731\n      },\n      \"confidence\": 0.97,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_07\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.565,\n        \"top\": 0.482,\n        \"right\": 0.637,\n        \"bottom\": 0.659\n      },\n      \"foot\": {\n        \"x\": 0.605,\n        \"y\": 0.653\n      },\n      \"confidence\": 0.96,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_08\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.608,\n        \"top\": 0.563,\n        \"right\": 0.662,\n        \"bottom\": 0.772\n      },\n      \"foot\": {\n        \"x\": 0.637,\n        \"y\": 0.767\n      },\n      \"confidence\": 0.96,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_09\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.763,\n        \"top\": 0.395,\n        \"right\": 0.812,\n        \"bottom\": 0.578\n      },\n      \"foot\": {\n        \"x\": 0.785,\n        \"y\": 0.572\n      },\n      \"confidence\": 0.94,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_10\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.777,\n        \"top\": 0.501,\n        \"right\": 0.82,\n        \"bottom\": 0.702\n      },\n      \"foot\": {\n        \"x\": 0.796,\n        \"y\": 0.693\n      },\n      \"confidence\": 0.95,\n      \"team_confidence\": 0.99\n    }\n  ],\n  \"ball\": {\n    \"center\": {\n      \"x\": 0.336,\n      \"y\": 0.561\n    },\n    \"box\": {\n      \"left\": 0.327,\n      \"top\": 0.55,\n      \"right\": 0.345,\n      \"bottom\": 0.572\n    },\n    \"confidence\": 0.88\n  },\n  \"possession\": {\n    \"player_detection_id\": \"player_04\",\n    \"confidence\": 0.85\n  },\n  \"uncertainty_notes\": []\n}",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "signature": "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",
+            "type": "reasoning.text"
+          }
+        ],
+        "refusal": null,
+        "role": "assistant"
+      },
+      "native_finish_reason": "STOP"
+    }
+  ],
+  "created": 1788840871,
+  "id": "gen-1788840871-p1XZQ1mVWiMlG1dONxS6",
+  "model": "google/gemini-3.7-flash",
+  "object": "chat.completion",
+  "provider": "Google AI Studio",
+  "service_tier": "default",
+  "system_fingerprint": null,
+  "usage": {
+    "completion_tokens": 2147,
+    "completion_tokens_details": {
+      "audio_tokens": 0,
+      "image_tokens": 0,
+      "reasoning_tokens": 655
+    },
+    "cost": 0.00914775,
+    "cost_details": {
+      "upstream_inference_completions_cost": 0.00805125,
+      "upstream_inference_cost": 0.00914775,
+      "upstream_inference_prompt_cost": 0.0010965
+    },
+    "is_byok": false,
+    "prompt_tokens": 1462,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": 0,
+      "cached_tokens": 0,
+      "video_tokens": 0
+    },
+    "total_tokens": 3609
+  }
+}

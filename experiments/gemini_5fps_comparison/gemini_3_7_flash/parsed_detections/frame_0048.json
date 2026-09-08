@@ -1,0 +1,122 @@
+{
+  "ball": null,
+  "frame_id": 48,
+  "players": [
+    {
+      "box": {
+        "bottom": 0.5485,
+        "left": 0.1626,
+        "right": 0.2451,
+        "top": 0.3097
+      },
+      "confidence": 0.9773,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.1839,
+        "y": 0.5438
+      },
+      "team": "A",
+      "team_confidence": 0.9897
+    },
+    {
+      "box": {
+        "bottom": 0.5405,
+        "left": 0.4258,
+        "right": 0.4863,
+        "top": 0.3737
+      },
+      "confidence": 0.9728,
+      "detection_id": "player_02",
+      "foot": {
+        "x": 0.4509,
+        "y": 0.5309
+      },
+      "team": "A",
+      "team_confidence": 0.9874
+    },
+    {
+      "box": {
+        "bottom": 0.5176,
+        "left": 0.5679,
+        "right": 0.6331,
+        "top": 0.3491
+      },
+      "confidence": 0.9684,
+      "detection_id": "player_03",
+      "foot": {
+        "x": 0.6096,
+        "y": 0.5088
+      },
+      "team": "B",
+      "team_confidence": 0.9878
+    },
+    {
+      "box": {
+        "bottom": 0.5923,
+        "left": 0.7425,
+        "right": 0.8169,
+        "top": 0.3766
+      },
+      "confidence": 0.9689,
+      "detection_id": "player_04",
+      "foot": {
+        "x": 0.7822,
+        "y": 0.5795
+      },
+      "team": "A",
+      "team_confidence": 0.989
+    },
+    {
+      "box": {
+        "bottom": 0.7447,
+        "left": 0.2859,
+        "right": 0.3729,
+        "top": 0.5228
+      },
+      "confidence": 0.9674,
+      "detection_id": "player_05",
+      "foot": {
+        "x": 0.348,
+        "y": 0.723
+      },
+      "team": "A",
+      "team_confidence": 0.9851
+    },
+    {
+      "box": {
+        "bottom": 0.8653,
+        "left": 0.2308,
+        "right": 0.3125,
+        "top": 0.6136
+      },
+      "confidence": 0.9697,
+      "detection_id": "player_06",
+      "foot": {
+        "x": 0.2748,
+        "y": 0.8525
+      },
+      "team": "B",
+      "team_confidence": 0.9883
+    },
+    {
+      "box": {
+        "bottom": 0.7641,
+        "left": 0.5344,
+        "right": 0.6273,
+        "top": 0.5394
+      },
+      "confidence": 0.9715,
+      "detection_id": "player_07",
+      "foot": {
+        "x": 0.5733,
+        "y": 0.7502
+      },
+      "team": "B",
+      "team_confidence": 0.9888
+    }
+  ],
+  "possession": null,
+  "uncertainty_notes": [
+    "Ball not clearly visible on court due to rapid movement or occlusion."
+  ]
+}

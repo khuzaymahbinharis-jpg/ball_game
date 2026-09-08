@@ -1,0 +1,170 @@
+{
+  "ball": null,
+  "frame_id": 264,
+  "players": [
+    {
+      "box": {
+        "bottom": 0.7352,
+        "left": 0.4417,
+        "right": 0.4965,
+        "top": 0.5277
+      },
+      "confidence": 0.95,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.4881,
+        "y": 0.7279
+      },
+      "team": "A",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.7765,
+        "left": 0.6042,
+        "right": 0.6643,
+        "top": 0.5767
+      },
+      "confidence": 0.94,
+      "detection_id": "player_02",
+      "foot": {
+        "x": 0.6183,
+        "y": 0.7689
+      },
+      "team": "B",
+      "team_confidence": 0.97
+    },
+    {
+      "box": {
+        "bottom": 0.6516,
+        "left": 0.5834,
+        "right": 0.6471,
+        "top": 0.4832
+      },
+      "confidence": 0.93,
+      "detection_id": "player_03",
+      "foot": {
+        "x": 0.6064,
+        "y": 0.6453
+      },
+      "team": "A",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.5727,
+        "left": 0.4568,
+        "right": 0.5228,
+        "top": 0.4385
+      },
+      "confidence": 0.91,
+      "detection_id": "player_04",
+      "foot": {
+        "x": 0.5122,
+        "y": 0.5666
+      },
+      "team": "A",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.5642,
+        "left": 0.3486,
+        "right": 0.3967,
+        "top": 0.4091
+      },
+      "confidence": 0.92,
+      "detection_id": "player_05",
+      "foot": {
+        "x": 0.3578,
+        "y": 0.5561
+      },
+      "team": "A",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.6388,
+        "left": 0.2756,
+        "right": 0.3483,
+        "top": 0.4545
+      },
+      "confidence": 0.92,
+      "detection_id": "player_06",
+      "foot": {
+        "x": 0.2831,
+        "y": 0.6273
+      },
+      "team": "A",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.6643,
+        "left": 0.2853,
+        "right": 0.3393,
+        "top": 0.4961
+      },
+      "confidence": 0.92,
+      "detection_id": "player_07",
+      "foot": {
+        "x": 0.3167,
+        "y": 0.6549
+      },
+      "team": "B",
+      "team_confidence": 0.96
+    },
+    {
+      "box": {
+        "bottom": 0.4536,
+        "left": 0.3864,
+        "right": 0.4234,
+        "top": 0.3292
+      },
+      "confidence": 0.88,
+      "detection_id": "player_08",
+      "foot": {
+        "x": 0.4025,
+        "y": 0.4492
+      },
+      "team": "B",
+      "team_confidence": 0.95
+    },
+    {
+      "box": {
+        "bottom": 0.5864,
+        "left": 0.7551,
+        "right": 0.8018,
+        "top": 0.3966
+      },
+      "confidence": 0.93,
+      "detection_id": "player_09",
+      "foot": {
+        "x": 0.7828,
+        "y": 0.5766
+      },
+      "team": "B",
+      "team_confidence": 0.97
+    },
+    {
+      "box": {
+        "bottom": 0.6892,
+        "left": 0.7915,
+        "right": 0.8455,
+        "top": 0.5011
+      },
+      "confidence": 0.94,
+      "detection_id": "player_10",
+      "foot": {
+        "x": 0.8058,
+        "y": 0.6786
+      },
+      "team": "B",
+      "team_confidence": 0.97
+    }
+  ],
+  "possession": null,
+  "uncertainty_notes": [
+    "Basketball is not clearly visible or occluded by players."
+  ]
+}

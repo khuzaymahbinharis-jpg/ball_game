@@ -78,7 +78,9 @@ def cv_improved_variant() -> ComparisonVariant:
             ),
             camera_motion=CameraMotionConfig(
                 enabled=True,
-                transform_type="translation",
+                # Broadcast cameras pan and zoom; partial affine motion lets the
+                # cut detector compensate both without assigning semantics.
+                transform_type="partial_affine",
             ),
             scene_cut=SceneCutConfig(enabled=True),
             ball_tracking=BallTrackingConfig(enabled=True),

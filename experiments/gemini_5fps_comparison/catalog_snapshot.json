@@ -1,0 +1,131 @@
+{
+  "all_requested_slugs_exact": true,
+  "captured_at": "2026-09-08T03:50:38.763417+00:00",
+  "models": [
+    {
+      "active_compatible_provider_count": 3,
+      "active_compatible_providers": [
+        {
+          "provider": "Google AI Studio",
+          "provider_slug": "google-ai-studio/flex"
+        },
+        {
+          "provider": "Google AI Studio",
+          "provider_slug": "google-ai-studio"
+        },
+        {
+          "provider": "Google AI Studio",
+          "provider_slug": "google-ai-studio/priority"
+        }
+      ],
+      "benchmark_reasoning_setting": {
+        "effort": "low",
+        "exclude": true
+      },
+      "canonical_slug": "google/gemini-3.8-flash-20260902",
+      "catalog_id": "google/gemini-3.8-flash",
+      "chosen_provider": "Google AI Studio",
+      "chosen_provider_slug": "google-ai-studio",
+      "chosen_provider_status": 0,
+      "chosen_provider_uptime_5m": 99.87973541791942,
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file",
+        "audio"
+      ],
+      "key": "gemini_3_8_flash",
+      "output_modalities": [
+        "text"
+      ],
+      "pricing_per_million": {
+        "image": 0.75,
+        "input": 0.75,
+        "output": 3.75
+      },
+      "pricing_per_token": {
+        "image": "0.00000075",
+        "input": "0.00000075",
+        "output": "0.00000375"
+      },
+      "reasoning_catalog": {
+        "default_effort": "medium",
+        "default_enabled": true,
+        "mandatory": true,
+        "supported_efforts": [
+          "high",
+          "medium",
+          "low"
+        ]
+      },
+      "reasoning_parameter_included": true,
+      "requested_slug": "google/gemini-3.8-flash",
+      "slug_exact_match": true,
+      "structured_output_supported": true
+    },
+    {
+      "active_compatible_provider_count": 3,
+      "active_compatible_providers": [
+        {
+          "provider": "Google AI Studio",
+          "provider_slug": "google-ai-studio/flex"
+        },
+        {
+          "provider": "Google AI Studio",
+          "provider_slug": "google-ai-studio"
+        },
+        {
+          "provider": "Google AI Studio",
+          "provider_slug": "google-ai-studio/priority"
+        }
+      ],
+      "benchmark_reasoning_setting": {
+        "effort": "low",
+        "exclude": true
+      },
+      "canonical_slug": "google/gemini-3.7-flash-20260813",
+      "catalog_id": "google/gemini-3.7-flash",
+      "chosen_provider": "Google AI Studio",
+      "chosen_provider_slug": "google-ai-studio",
+      "chosen_provider_status": 0,
+      "chosen_provider_uptime_5m": 98.3739837398374,
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "file",
+        "audio"
+      ],
+      "key": "gemini_3_7_flash",
+      "output_modalities": [
+        "text"
+      ],
+      "pricing_per_million": {
+        "image": 0.75,
+        "input": 0.75,
+        "output": 3.75
+      },
+      "pricing_per_token": {
+        "image": "0.00000075",
+        "input": "0.00000075",
+        "output": "0.00000375"
+      },
+      "reasoning_catalog": {
+        "default_effort": "medium",
+        "default_enabled": true,
+        "mandatory": true,
+        "supported_efforts": [
+          "high",
+          "medium",
+          "low"
+        ]
+      },
+      "reasoning_parameter_included": true,
+      "requested_slug": "google/gemini-3.7-flash",
+      "slug_exact_match": true,
+      "structured_output_supported": true
+    }
+  ],
+  "source": "https://openrouter.ai/api/v1/models"
+}

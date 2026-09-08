@@ -1,0 +1,118 @@
+{
+  "actual_openrouter_cost_usd": 0.0022365,
+  "completed_at": "2026-09-08T04:04:54.643349+00:00",
+  "error": null,
+  "experiment_id": "gemini-flash-5fps-comparison",
+  "frame_id": 438,
+  "http_429": false,
+  "input_tokens": 1462,
+  "model": "google/gemini-3.8-flash",
+  "model_key": "gemini_3_8_flash",
+  "output_tokens": 304,
+  "parsed_detection": {
+    "ball": null,
+    "frame_id": 438,
+    "players": [
+      {
+        "box": {
+          "bottom": 1.0,
+          "left": 0.25,
+          "right": 0.854,
+          "top": 0.08
+        },
+        "confidence": 0.95,
+        "detection_id": "player_01",
+        "foot": {
+          "x": 0.55,
+          "y": 1.0
+        },
+        "team": "B",
+        "team_confidence": 0.98
+      },
+      {
+        "box": {
+          "bottom": 1.0,
+          "left": 0.03,
+          "right": 0.275,
+          "top": 0.05
+        },
+        "confidence": 0.88,
+        "detection_id": "player_02",
+        "foot": {
+          "x": 0.16,
+          "y": 1.0
+        },
+        "team": "A",
+        "team_confidence": 0.95
+      }
+    ],
+    "possession": null,
+    "uncertainty_notes": [
+      "Extreme close-up shot; feet of players are heavily occluded off-screen",
+      "Ball is not visible in the frame"
+    ]
+  },
+  "raw_content": null,
+  "raw_response_body": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"frame_id\": 438,\n  \"players\": [\n    {\n      \"detection_id\": \"player_01\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 2.5e-1,\n        \"top\": 0.08,\n        \"right\": 8.54e-1,\n        \"bottom\": 1.0\n      },\n      \"foot\": {\n        \"x\": 5.5e-1,\n        \"y\": 1.0\n      },\n      \"confidence\": 0.95,\n      \"team_confidence\": 0.98\n    },\n    {\n      \"detection_id\": \"player_02\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.03,\n        \"top\": 0.05,\n        \"right\": 2.75e-1,\n        \"bottom\": 1.0\n      },\n      \"foot\": {\n        \"x\": 0.16,\n        \"y\": 1.0\n      },\n      \"confidence\": 0.88,\n      \"team_confidence\": 0.95\n    }\n  ],\n  \"ball\": null,\n  \"possession\": null,\n  \"uncertainty_notes\": [\n    \"Extreme close-up shot; feet of players are heavily occluded off-screen\",\n    \"Ball is not visible in the frame\"\n  ]\n}",
+          "reasoning_details": [
+            {
+              "format": "google-gemini-v1",
+              "index": 0,
+              "signature": "EmcKZQERTTIPVtX0RAUPV0GtB+mN3q9NXSwgLJPw9jfz8v3RDZPQKlX7wNFRjQokIY8IYO6vQ97m9CF4VTQgOmY238xoNhVIxGqY96Dr8Vt/ogGvPEfYB5l0AXFBpStwQsAyyQaTsGD7",
+              "type": "reasoning.text"
+            }
+          ],
+          "refusal": null,
+          "role": "assistant"
+        },
+        "native_finish_reason": "STOP"
+      }
+    ],
+    "created": 1788840292,
+    "id": "gen-1788840292-g2cd505GYiVfitWY3yOD",
+    "model": "google/gemini-3.8-flash",
+    "object": "chat.completion",
+    "provider": "Google AI Studio",
+    "service_tier": "default",
+    "system_fingerprint": null,
+    "usage": {
+      "completion_tokens": 304,
+      "completion_tokens_details": {
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "cost": 0.0022365,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00114,
+        "upstream_inference_cost": 0.0022365,
+        "upstream_inference_prompt_cost": 0.0010965
+      },
+      "is_byok": false,
+      "prompt_tokens": 1462,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "video_tokens": 0
+      },
+      "total_tokens": 1766
+    }
+  },
+  "reasoning_tokens": 0,
+  "request_id": "gen-1788840292-g2cd505GYiVfitWY3yOD",
+  "request_latency_seconds": 3.4895529999630526,
+  "request_wall_seconds": 6.988462799985427,
+  "retry_count": 0,
+  "returned_model": "google/gemini-3.8-flash",
+  "returned_provider": "Google AI Studio",
+  "reused_control": false,
+  "schema_validation_success": true
+}

@@ -54,3 +54,28 @@ def test_ball_declares_lost_and_recovers_on_later_vlm_anchor():
     assert result.frames[8].source == "vlm"
     assert result.stats.lost_events == 1
     assert result.stats.recovered_events == 1
+
+
+def test_hungarian_ball_association_rejects_a_teleporting_vlm_anchor():
+    frames = moving_ball_frames(6)
+    result = VLMInitializedBallTracker(BallTrackingConfig(enabled=True)).track_frames(
+        frames,
+        {0: ball(20), 3: ball(88)},
+    )
+    assert result.frames[3].source == "optical_flow"
+    assert result.frames[3].position is not None
+    assert result.frames[3].position.x == pytest.approx(26 / 96, abs=0.05)
+    assert result.stats.vlm_corrections == 1
+    assert result.stats.rejected_vlm_anchors == 1
+
+
+def test_hungarian_ball_association_matches_consistent_anchor_and_smooths_confidence():
+    frames = moving_ball_frames(6)
+    result = VLMInitializedBallTracker(BallTrackingConfig(enabled=True)).track_frames(
+        frames,
+        {0: ball(20), 3: ball(26)},
+    )
+    assert result.frames[3].source == "vlm"
+    assert result.stats.vlm_corrections == 2
+    assert result.stats.hungarian_matches == 1
+    assert result.stats.rejected_vlm_anchors == 0

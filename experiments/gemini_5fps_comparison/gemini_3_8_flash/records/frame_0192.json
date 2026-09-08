@@ -1,0 +1,258 @@
+{
+  "actual_openrouter_cost_usd": 0.0077115,
+  "completed_at": "2026-09-08T04:04:01.538232+00:00",
+  "error": null,
+  "experiment_id": "gemini-flash-5fps-comparison",
+  "frame_id": 192,
+  "http_429": false,
+  "input_tokens": 1462,
+  "model": "google/gemini-3.8-flash",
+  "model_key": "gemini_3_8_flash",
+  "output_tokens": 1764,
+  "parsed_detection": {
+    "ball": {
+      "box": {
+        "bottom": 0.6444,
+        "left": 0.1458,
+        "right": 0.1649,
+        "top": 0.6186
+      },
+      "center": {
+        "x": 0.1554,
+        "y": 0.6315
+      },
+      "confidence": 0.895
+    },
+    "frame_id": 192,
+    "players": [
+      {
+        "box": {
+          "bottom": 0.6883,
+          "left": 0.1458,
+          "right": 0.2222,
+          "top": 0.509
+        },
+        "confidence": 0.947,
+        "detection_id": "player_01",
+        "foot": {
+          "x": 0.1838,
+          "y": 0.6782
+        },
+        "team": "B",
+        "team_confidence": 0.987
+      },
+      {
+        "box": {
+          "bottom": 0.6745,
+          "left": 0.2126,
+          "right": 0.2946,
+          "top": 0.4966
+        },
+        "confidence": 0.953,
+        "detection_id": "player_02",
+        "foot": {
+          "x": 0.2664,
+          "y": 0.6643
+        },
+        "team": "A",
+        "team_confidence": 0.994
+      },
+      {
+        "box": {
+          "bottom": 0.4887,
+          "left": 0.3125,
+          "right": 0.3497,
+          "top": 0.3149
+        },
+        "confidence": 0.938,
+        "detection_id": "player_03",
+        "foot": {
+          "x": 0.325,
+          "y": 0.4793
+        },
+        "team": "B",
+        "team_confidence": 0.977
+      },
+      {
+        "box": {
+          "bottom": 0.5253,
+          "left": 0.3243,
+          "right": 0.3659,
+          "top": 0.3413
+        },
+        "confidence": 0.955,
+        "detection_id": "player_04",
+        "foot": {
+          "x": 0.3412,
+          "y": 0.5167
+        },
+        "team": "A",
+        "team_confidence": 0.991
+      },
+      {
+        "box": {
+          "bottom": 0.7158,
+          "left": 0.3394,
+          "right": 0.3822,
+          "top": 0.5034
+        },
+        "confidence": 0.961,
+        "detection_id": "player_05",
+        "foot": {
+          "x": 0.3524,
+          "y": 0.7076
+        },
+        "team": "A",
+        "team_confidence": 0.994
+      },
+      {
+        "box": {
+          "bottom": 0.7643,
+          "left": 0.3903,
+          "right": 0.4512,
+          "top": 0.5438
+        },
+        "confidence": 0.962,
+        "detection_id": "player_06",
+        "foot": {
+          "x": 0.4159,
+          "y": 0.7498
+        },
+        "team": "B",
+        "team_confidence": 0.992
+      },
+      {
+        "box": {
+          "bottom": 0.6222,
+          "left": 0.4956,
+          "right": 0.5617,
+          "top": 0.4382
+        },
+        "confidence": 0.957,
+        "detection_id": "player_07",
+        "foot": {
+          "x": 0.5247,
+          "y": 0.6101
+        },
+        "team": "A",
+        "team_confidence": 0.992
+      },
+      {
+        "box": {
+          "bottom": 0.5309,
+          "left": 0.5378,
+          "right": 0.5864,
+          "top": 0.3513
+        },
+        "confidence": 0.953,
+        "detection_id": "player_08",
+        "foot": {
+          "x": 0.563,
+          "y": 0.5213
+        },
+        "team": "A",
+        "team_confidence": 0.991
+      },
+      {
+        "box": {
+          "bottom": 0.6953,
+          "left": 0.663,
+          "right": 0.7214,
+          "top": 0.4743
+        },
+        "confidence": 0.966,
+        "detection_id": "player_09",
+        "foot": {
+          "x": 0.6938,
+          "y": 0.6842
+        },
+        "team": "B",
+        "team_confidence": 0.993
+      },
+      {
+        "box": {
+          "bottom": 0.5642,
+          "left": 0.951,
+          "right": 0.9998,
+          "top": 0.3424
+        },
+        "confidence": 0.887,
+        "detection_id": "player_10",
+        "foot": {
+          "x": 0.987,
+          "y": 0.5549
+        },
+        "team": "B",
+        "team_confidence": 0.948
+      }
+    ],
+    "possession": {
+      "confidence": 0.865,
+      "player_detection_id": "player_01"
+    },
+    "uncertainty_notes": []
+  },
+  "raw_content": null,
+  "raw_response_body": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"frame_id\": 192,\n  \"players\": [\n    {\n      \"detection_id\": \"player_01\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 1.458e-1,\n        \"top\": 5.09e-1,\n        \"right\": 2.222e-1,\n        \"bottom\": 6.883e-1\n      },\n      \"foot\": {\n        \"x\": 1.838e-1,\n        \"y\": 6.782e-1\n      },\n      \"confidence\": 9.47e-1,\n      \"team_confidence\": 9.87e-1\n    },\n    {\n      \"detection_id\": \"player_02\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 2.126e-1,\n        \"top\": 4.966e-1,\n        \"right\": 2.946e-1,\n        \"bottom\": 6.745e-1\n      },\n      \"foot\": {\n        \"x\": 2.664e-1,\n        \"y\": 6.643e-1\n      },\n      \"confidence\": 9.53e-1,\n      \"team_confidence\": 9.94e-1\n    },\n    {\n      \"detection_id\": \"player_03\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 3.125e-1,\n        \"top\": 3.149e-1,\n        \"right\": 3.497e-1,\n        \"bottom\": 4.887e-1\n      },\n      \"foot\": {\n        \"x\": 3.25e-1,\n        \"y\": 4.793e-1\n      },\n      \"confidence\": 9.38e-1,\n      \"team_confidence\": 9.77e-1\n    },\n    {\n      \"detection_id\": \"player_04\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 3.243e-1,\n        \"top\": 3.413e-1,\n        \"right\": 3.659e-1,\n        \"bottom\": 5.253e-1\n      },\n      \"foot\": {\n        \"x\": 3.412e-1,\n        \"y\": 5.167e-1\n      },\n      \"confidence\": 9.55e-1,\n      \"team_confidence\": 9.91e-1\n    },\n    {\n      \"detection_id\": \"player_05\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 3.394e-1,\n        \"top\": 5.034e-1,\n        \"right\": 3.822e-1,\n        \"bottom\": 7.158e-1\n      },\n      \"foot\": {\n        \"x\": 3.524e-1,\n        \"y\": 7.076e-1\n      },\n      \"confidence\": 9.61e-1,\n      \"team_confidence\": 9.94e-1\n    },\n    {\n      \"detection_id\": \"player_06\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 3.903e-1,\n        \"top\": 5.438e-1,\n        \"right\": 4.512e-1,\n        \"bottom\": 7.643e-1\n      },\n      \"foot\": {\n        \"x\": 4.159e-1,\n        \"y\": 7.498e-1\n      },\n      \"confidence\": 9.62e-1,\n      \"team_confidence\": 9.92e-1\n    },\n    {\n      \"detection_id\": \"player_07\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 4.956e-1,\n        \"top\": 4.382e-1,\n        \"right\": 5.617e-1,\n        \"bottom\": 6.222e-1\n      },\n      \"foot\": {\n        \"x\": 5.247e-1,\n        \"y\": 6.101e-1\n      },\n      \"confidence\": 9.57e-1,\n      \"team_confidence\": 9.92e-1\n    },\n    {\n      \"detection_id\": \"player_08\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 5.378e-1,\n        \"top\": 3.513e-1,\n        \"right\": 5.864e-1,\n        \"bottom\": 5.309e-1\n      },\n      \"foot\": {\n        \"x\": 5.63e-1,\n        \"y\": 5.213e-1\n      },\n      \"confidence\": 9.53e-1,\n      \"team_confidence\": 9.91e-1\n    },\n    {\n      \"detection_id\": \"player_09\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 6.63e-1,\n        \"top\": 4.743e-1,\n        \"right\": 7.214e-1,\n        \"bottom\": 6.953e-1\n      },\n      \"foot\": {\n        \"x\": 6.938e-1,\n        \"y\": 6.842e-1\n      },\n      \"confidence\": 9.66e-1,\n      \"team_confidence\": 9.93e-1\n    },\n    {\n      \"detection_id\": \"player_10\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 9.51e-1,\n        \"top\": 3.424e-1,\n        \"right\": 9.998e-1,\n        \"bottom\": 5.642e-1\n      },\n      \"foot\": {\n        \"x\": 9.87e-1,\n        \"y\": 5.549e-1\n      },\n      \"confidence\": 8.87e-1,\n      \"team_confidence\": 9.48e-1\n    }\n  ],\n  \"ball\": {\n    \"center\": {\n      \"x\": 1.554e-1,\n      \"y\": 6.315e-1\n    },\n    \"box\": {\n      \"left\": 1.458e-1,\n      \"top\": 6.186e-1,\n      \"right\": 1.649e-1,\n      \"bottom\": 6.444e-1\n    },\n    \"confidence\": 8.95e-1\n  },\n  \"possession\": {\n    \"player_detection_id\": \"player_01\",\n    \"confidence\": 8.65e-1\n  },\n  \"uncertainty_notes\": []\n}",
+          "reasoning_details": [
+            {
+              "format": "google-gemini-v1",
+              "index": 0,
+              "signature": "EmcKZQERTTIP/lIpAvnujMv/h2yI7NVMDDROZ6U9obD09nUzMfQ6bjUEFbbBdzEdEs6hZg/NxG6ehpDXw5CC9OiPlbJ0ARvC+AcNfl0H8RlPaFU80t/Oqn0eEgFEKrUbWPWjgExOXbZ1",
+              "type": "reasoning.text"
+            }
+          ],
+          "refusal": null,
+          "role": "assistant"
+        },
+        "native_finish_reason": "STOP"
+      }
+    ],
+    "created": 1788840235,
+    "id": "gen-1788840235-iVL2Fd6fOKWiMJ10xPFG",
+    "model": "google/gemini-3.8-flash",
+    "object": "chat.completion",
+    "provider": "Google AI Studio",
+    "service_tier": "default",
+    "system_fingerprint": null,
+    "usage": {
+      "completion_tokens": 1764,
+      "completion_tokens_details": {
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0
+      },
+      "cost": 0.0077115,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.006615,
+        "upstream_inference_cost": 0.0077115,
+        "upstream_inference_prompt_cost": 0.0010965
+      },
+      "is_byok": false,
+      "prompt_tokens": 1462,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "video_tokens": 0
+      },
+      "total_tokens": 3226
+    }
+  },
+  "reasoning_tokens": 0,
+  "request_id": "gen-1788840235-iVL2Fd6fOKWiMJ10xPFG",
+  "request_latency_seconds": 7.596228400012478,
+  "request_wall_seconds": 12.28911050001625,
+  "retry_count": 0,
+  "returned_model": "google/gemini-3.8-flash",
+  "returned_provider": "Google AI Studio",
+  "reused_control": false,
+  "schema_validation_success": true
+}

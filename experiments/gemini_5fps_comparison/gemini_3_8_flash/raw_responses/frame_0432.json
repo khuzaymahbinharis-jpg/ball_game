@@ -1,0 +1,53 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"frame_id\": 432,\n  \"players\": [\n    {\n      \"detection_id\": \"player_01\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.244,\n        \"top\": 0.126,\n        \"right\": 0.84,\n        \"bottom\": 1.0\n      },\n      \"foot\": {\n        \"x\": 0.55,\n        \"y\": 1.0\n      },\n      \"confidence\": 0.95,\n      \"team_confidence\": 0.99\n    }\n  ],\n  \"ball\": null,\n  \"possession\": null,\n  \"uncertainty_notes\": [\n    \"Close-up broadcast shot; lower body is cut off by the camera frame.\"\n  ]\n}",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "signature": "EowFCokFARFNMg8uSKVd+SmV3tElAS8mjkZn4vJhGWt21TntgeI2qTGSaTMWkEDAGvxlM23Sqm1Xqm1E/+aggg09Dghq1GjdAEFSP80GjfK2MyUBsO+3SbXAfKeV4jLu4LJwl+OBx9KocLT88l5OR0fyCzrBH/RovjFy5a7zfaN6pIT5M9PeICdZFAvnZj+Zc6s4zS+J5gZoZe9McgWQZNtQrtmg2OQzlRlzPRSbQ5AFJ6GO7tSeqU1RAWC4mMjGV6kH+c1t/ZXtpkoxHmrJoUfTNgI+NU7vNxHhQsk+qEfX606aVKmvLVEYazl3ulG6R45yfxY4D2n3CE/S1Db+uCDy+kYVTlFi9Dszi2RVAn4AS+Ma9gMGu695vKZDYxwMGo1YIYSEsY+p30uJQF+WhtH4NzA9xNTjt9e7vj5GMuE2XbDl1NvG6oftVHyHRn+I0y57iLIOzGJ/vNBYaXl7i9KQGqbjtxA6x+sHkty/oWPjs+tFLF7Wfu+LKocg3WfjelTiRT/X5tqXXzI8fZLSZDz+xQr0sI12xzU4CuJeXN6UnNI0IBONbPmZrKJHXVrL1BYIw73T0tj2VKw7uxuctzbOwBNceGYyzvbxNcxXsy5IcUGRoQl32K111AifmrfEl80OGQiAZAuEAVhS6W+nlXxFAmLgKNL1XMqA6Iy/HxZc3RszNLbEDNQO0LHK4oQfEOSmu7Zt3F98HeRSWNLMB80BnStm8u2DRMrtjqKHrgHGreWpu3cXPRDQun/GwBQg8ELGHtruSn15BcbTMvxhCNpwgo9B/NgxHxq0wBc6XTS107OZPk55+DbmJ8asfqNRWI3p9N9r6wD/aIxbvlMwDmU/N4860DiM79EdzAWqHA==",
+            "type": "reasoning.text"
+          }
+        ],
+        "refusal": null,
+        "role": "assistant"
+      },
+      "native_finish_reason": "STOP"
+    }
+  ],
+  "created": 1788840291,
+  "id": "gen-1788840291-5ZeI552Trm3ysq7FkoWu",
+  "model": "google/gemini-3.8-flash",
+  "object": "chat.completion",
+  "provider": "Google AI Studio",
+  "service_tier": "default",
+  "system_fingerprint": null,
+  "usage": {
+    "completion_tokens": 261,
+    "completion_tokens_details": {
+      "audio_tokens": 0,
+      "image_tokens": 0,
+      "reasoning_tokens": 140
+    },
+    "cost": 0.00207525,
+    "cost_details": {
+      "upstream_inference_completions_cost": 0.00097875,
+      "upstream_inference_cost": 0.00207525,
+      "upstream_inference_prompt_cost": 0.0010965
+    },
+    "is_byok": false,
+    "prompt_tokens": 1462,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": 0,
+      "cached_tokens": 0,
+      "video_tokens": 0
+    },
+    "total_tokens": 1723
+  }
+}

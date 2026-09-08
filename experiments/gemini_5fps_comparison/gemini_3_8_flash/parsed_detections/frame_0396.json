@@ -1,0 +1,29 @@
+{
+  "ball": null,
+  "frame_id": 396,
+  "players": [
+    {
+      "box": {
+        "bottom": 1.0,
+        "left": 0.28,
+        "right": 0.742,
+        "top": 0.148
+      },
+      "confidence": 0.99,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.511,
+        "y": 1.0
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    }
+  ],
+  "possession": null,
+  "uncertainty_notes": [
+    "Extreme close-up shot focused on one Team B player.",
+    "Lower body and feet are cut off by the bottom of the frame.",
+    "The referee on the far right is excluded.",
+    "Ball is not visible."
+  ]
+}

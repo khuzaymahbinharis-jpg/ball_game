@@ -1,0 +1,169 @@
+{
+  "ball": {
+    "box": {
+      "bottom": 0.668,
+      "left": 0.211,
+      "right": 0.226,
+      "top": 0.643
+    },
+    "center": {
+      "x": 0.218,
+      "y": 0.655
+    },
+    "confidence": 0.8
+  },
+  "frame_id": 180,
+  "players": [
+    {
+      "box": {
+        "bottom": 0.608,
+        "left": 0.505,
+        "right": 0.573,
+        "top": 0.428
+      },
+      "confidence": 0.95,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.547,
+        "y": 0.603
+      },
+      "team": "A",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.534,
+        "left": 0.554,
+        "right": 0.606,
+        "top": 0.354
+      },
+      "confidence": 0.95,
+      "detection_id": "player_02",
+      "foot": {
+        "x": 0.584,
+        "y": 0.528
+      },
+      "team": "A",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.672,
+        "left": 0.64,
+        "right": 0.689,
+        "top": 0.463
+      },
+      "confidence": 0.95,
+      "detection_id": "player_03",
+      "foot": {
+        "x": 0.66,
+        "y": 0.665
+      },
+      "team": "B",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.741,
+        "left": 0.347,
+        "right": 0.401,
+        "top": 0.527
+      },
+      "confidence": 0.94,
+      "detection_id": "player_04",
+      "foot": {
+        "x": 0.366,
+        "y": 0.732
+      },
+      "team": "B",
+      "team_confidence": 0.97
+    },
+    {
+      "box": {
+        "bottom": 0.718,
+        "left": 0.316,
+        "right": 0.37,
+        "top": 0.518
+      },
+      "confidence": 0.93,
+      "detection_id": "player_05",
+      "foot": {
+        "x": 0.334,
+        "y": 0.711
+      },
+      "team": "A",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.526,
+        "left": 0.342,
+        "right": 0.384,
+        "top": 0.335
+      },
+      "confidence": 0.92,
+      "detection_id": "player_06",
+      "foot": {
+        "x": 0.362,
+        "y": 0.519
+      },
+      "team": "A",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.495,
+        "left": 0.329,
+        "right": 0.362,
+        "top": 0.309
+      },
+      "confidence": 0.91,
+      "detection_id": "player_07",
+      "foot": {
+        "x": 0.344,
+        "y": 0.487
+      },
+      "team": "B",
+      "team_confidence": 0.97
+    },
+    {
+      "box": {
+        "bottom": 0.724,
+        "left": 0.171,
+        "right": 0.244,
+        "top": 0.55
+      },
+      "confidence": 0.93,
+      "detection_id": "player_08",
+      "foot": {
+        "x": 0.198,
+        "y": 0.718
+      },
+      "team": "B",
+      "team_confidence": 0.97
+    },
+    {
+      "box": {
+        "bottom": 0.686,
+        "left": 0.197,
+        "right": 0.252,
+        "top": 0.486
+      },
+      "confidence": 0.91,
+      "detection_id": "player_09",
+      "foot": {
+        "x": 0.231,
+        "y": 0.678
+      },
+      "team": "A",
+      "team_confidence": 0.98
+    }
+  ],
+  "possession": {
+    "confidence": 0.75,
+    "player_detection_id": "player_08"
+  },
+  "uncertainty_notes": [
+    "Dribble collision near player_08 and player_09 partially occluding ball."
+  ]
+}

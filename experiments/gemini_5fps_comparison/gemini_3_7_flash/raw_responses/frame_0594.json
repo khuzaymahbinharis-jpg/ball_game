@@ -1,0 +1,53 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"frame_id\": 594,\n  \"players\": [\n    {\"detection_id\": \"player_01\", \"team\": \"A\", \"box\": {\"left\": 0.185, \"top\": 0.354, \"right\": 0.232, \"bottom\": 0.589}, \"foot\": {\"x\": 0.203, \"y\": 0.584}, \"confidence\": 0.96, \"team_confidence\": 0.98},\n    {\"detection_id\": \"player_02\", \"team\": \"A\", \"box\": {\"left\": 0.294, \"top\": 0.334, \"right\": 0.324, \"bottom\": 0.492}, \"foot\": {\"x\": 0.312, \"y\": 0.486}, \"confidence\": 0.93, \"team_confidence\": 0.97},\n    {\"detection_id\": \"player_03\", \"team\": \"A\", \"box\": {\"left\": 0.398, \"top\": 0.344, \"right\": 0.432, \"bottom\": 0.505}, \"foot\": {\"x\": 0.413, \"y\": 0.499}, \"confidence\": 0.95, \"team_confidence\": 0.98},\n    {\"detection_id\": \"player_04\", \"team\": \"A\", \"box\": {\"left\": 0.489, \"top\": 0.482, \"right\": 0.563, \"bottom\": 0.709}, \"foot\": {\"x\": 0.508, \"y\": 0.704}, \"confidence\": 0.95, \"team_confidence\": 0.98},\n    {\"detection_id\": \"player_05\", \"team\": \"B\", \"box\": {\"left\": 0.238, \"top\": 0.391, \"right\": 0.309, \"bottom\": 0.627}, \"foot\": {\"x\": 0.263, \"y\": 0.619}, \"confidence\": 0.96, \"team_confidence\": 0.98},\n    {\"detection_id\": \"player_06\", \"team\": \"B\", \"box\": {\"left\": 0.324, \"top\": 0.334, \"right\": 0.360, \"bottom\": 0.499}, \"foot\": {\"x\": 0.346, \"y\": 0.494}, \"confidence\": 0.93, \"team_confidence\": 0.97},\n    {\"detection_id\": \"player_07\", \"team\": \"B\", \"box\": {\"left\": 0.437, \"top\": 0.366, \"right\": 0.473, \"bottom\": 0.543}, \"foot\": {\"x\": 0.453, \"y\": 0.536}, \"confidence\": 0.94, \"team_confidence\": 0.98},\n    {\"detection_id\": \"player_08\", \"team\": \"B\", \"box\": {\"left\": 0.486, \"top\": 0.327, \"right\": 0.514, \"bottom\": 0.478}, \"foot\": {\"x\": 0.498, \"y\": 0.474}, \"confidence\": 0.91, \"team_confidence\": 0.96},\n    {\"detection_id\": \"player_09\", \"team\": \"B\", \"box\": {\"left\": 0.565, \"top\": 0.413, \"right\": 0.608, \"bottom\": 0.638}, \"foot\": {\"x\": 0.590, \"y\": 0.631}, \"confidence\": 0.96, \"team_confidence\": 0.98}\n  ],\n  \"ball\": null,\n  \"possession\": null,\n  \"uncertainty_notes\": [\"The basketball is not clearly distinguishable against the background during the shot attempt.\"]\n}",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "signature": "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",
+            "type": "reasoning.text"
+          }
+        ],
+        "refusal": null,
+        "role": "assistant"
+      },
+      "native_finish_reason": "STOP"
+    }
+  ],
+  "created": 1788840958,
+  "id": "gen-1788840958-8uKKWbOUY7ocUWnNdjen",
+  "model": "google/gemini-3.7-flash",
+  "object": "chat.completion",
+  "provider": "Google AI Studio",
+  "service_tier": "default",
+  "system_fingerprint": null,
+  "usage": {
+    "completion_tokens": 1655,
+    "completion_tokens_details": {
+      "audio_tokens": 0,
+      "image_tokens": 0,
+      "reasoning_tokens": 721
+    },
+    "cost": 0.00730275,
+    "cost_details": {
+      "upstream_inference_completions_cost": 0.00620625,
+      "upstream_inference_cost": 0.00730275,
+      "upstream_inference_prompt_cost": 0.0010965
+    },
+    "is_byok": false,
+    "prompt_tokens": 1462,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": 0,
+      "cached_tokens": 0,
+      "video_tokens": 0
+    },
+    "total_tokens": 3117
+  }
+}

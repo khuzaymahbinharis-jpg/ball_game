@@ -1,0 +1,137 @@
+{
+  "ball": {
+    "box": {
+      "bottom": 0.532,
+      "left": 0.68,
+      "right": 0.693,
+      "top": 0.509
+    },
+    "center": {
+      "x": 0.686,
+      "y": 0.52
+    },
+    "confidence": 0.85
+  },
+  "frame_id": 702,
+  "players": [
+    {
+      "box": {
+        "bottom": 0.844,
+        "left": 0.154,
+        "right": 0.205,
+        "top": 0.607
+      },
+      "confidence": 0.98,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.183,
+        "y": 0.835
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.746,
+        "left": 0.189,
+        "right": 0.258,
+        "top": 0.512
+      },
+      "confidence": 0.98,
+      "detection_id": "player_02",
+      "foot": {
+        "x": 0.229,
+        "y": 0.737
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.717,
+        "left": 0.292,
+        "right": 0.356,
+        "top": 0.509
+      },
+      "confidence": 0.98,
+      "detection_id": "player_03",
+      "foot": {
+        "x": 0.312,
+        "y": 0.707
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.696,
+        "left": 0.447,
+        "right": 0.505,
+        "top": 0.444
+      },
+      "confidence": 0.99,
+      "detection_id": "player_04",
+      "foot": {
+        "x": 0.472,
+        "y": 0.684
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.592,
+        "left": 0.282,
+        "right": 0.323,
+        "top": 0.409
+      },
+      "confidence": 0.97,
+      "detection_id": "player_05",
+      "foot": {
+        "x": 0.297,
+        "y": 0.586
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.586,
+        "left": 0.222,
+        "right": 0.264,
+        "top": 0.396
+      },
+      "confidence": 0.96,
+      "detection_id": "player_06",
+      "foot": {
+        "x": 0.237,
+        "y": 0.579
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.622,
+        "left": 0.68,
+        "right": 0.737,
+        "top": 0.439
+      },
+      "confidence": 0.97,
+      "detection_id": "player_07",
+      "foot": {
+        "x": 0.71,
+        "y": 0.613
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    }
+  ],
+  "possession": {
+    "confidence": 0.8,
+    "player_detection_id": "player_07"
+  },
+  "uncertainty_notes": [
+    "Player 07 has slight occlusion near the ball and basket area."
+  ]
+}

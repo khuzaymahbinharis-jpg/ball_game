@@ -1,0 +1,53 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"frame_id\": 420,\n  \"players\": [\n    {\n      \"detection_id\": \"player_01\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.222,\n        \"top\": 0.165,\n        \"right\": 0.829,\n        \"bottom\": 1.0\n      },\n      \"foot\": {\n        \"x\": 0.525,\n        \"y\": 1.0\n      },\n      \"confidence\": 0.95,\n      \"team_confidence\": 0.99\n    }\n  ],\n  \"ball\": null,\n  \"possession\": null,\n  \"uncertainty_notes\": [\n    \"Foreground close-up shot; lower body and feet are cut off by the frame bottom.\",\n    \"Ball is out of frame.\"\n  ]\n}",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "signature": "EskFCsYFARFNMg/4R3sQ4Fni+fJIwNXbAwA/tzaKgKOXPRDXA5qlEFCcauUn7KdENAGnsCl2tNQhSRflGbqaJFtsrFQZLmxPyW6w0wDKX2pB/ESj09tqWc1xuVaSlZsN/REVa8Fl0hkrFegTVO/EH3tv9oWqU+syU+9QSDRhbGEjF+NB2xWi7c9HCYUEbCROA8C0ccGq5Q+gXwmxmobOvingC4mKrgqMn+npYNBzAgYziUbDdH9CIvA5hkLuyMQ41UEk094d2Zoq1K7X/NFbQYwHvum8Mhl7eId1veN587+fRvgBRUrPCaE23y79KhYZXRmf5O3FzH87Fqp3URPOrApYX6Po+g5EUFsbrcG5sClKh+59E1yRR9VFoqmVK+IilZpbsG4Wx/8phKVZ3yRYzAc6dMbIqyeyeEjEsTBzk82P8wZZbKRaS5HKjjoh74c7Wgl7Wy7mpLld5gc5Z7DSOc1VYUz+lIqixhgjcJ+tr9dCv4TRchQAzuj1clmP+HN75ESJNPZdsfNoU/mxGMMiP2FD5K5XbQ7G8hXXSpINoawT/HY4xWCzvW697TPHLtxrTKh7bCOGSX3cCVEkcd3/VMyUVsjShFqAm5/mo57aG+DgeDxHucJwab2A9BB2gPTWfHMAFd0E1vIWGCkk84nulGDJiSo+h8r1hGYM3TDvjgsECPky4iZGZEuw0PeTzZCLAlM2DtS7/y0YDnsbac8e+yhmkbliwErug86ZI8OvnlnuMtbMGTf642I9f48UojozvqIgBWHWIVmSt2xfYMA/YE6OdjyUYjpl6xfoWrL+qOFGr1OE1cb6T2x3RKU2TTQPNrOw/01GYOGAmJlPQXBDCrLoBoxj6xr8B5hGMIKkRg8QMqOZxmCRZcJ/IWU7O6T82UUrUnJRxR/2cudx2xmpO2pkwxcPZUMcHgPCTsmIzDjZ+Pecm2LKfpP9Eh4=",
+            "type": "reasoning.text"
+          }
+        ],
+        "refusal": null,
+        "role": "assistant"
+      },
+      "native_finish_reason": "STOP"
+    }
+  ],
+  "created": 1788840912,
+  "id": "gen-1788840912-FhBiu8Y0DaGDKWP3iXeH",
+  "model": "google/gemini-3.7-flash",
+  "object": "chat.completion",
+  "provider": "Google AI Studio",
+  "service_tier": "default",
+  "system_fingerprint": null,
+  "usage": {
+    "completion_tokens": 296,
+    "completion_tokens_details": {
+      "audio_tokens": 0,
+      "image_tokens": 0,
+      "reasoning_tokens": 156
+    },
+    "cost": 0.0022065,
+    "cost_details": {
+      "upstream_inference_completions_cost": 0.00111,
+      "upstream_inference_cost": 0.0022065,
+      "upstream_inference_prompt_cost": 0.0010965
+    },
+    "is_byok": false,
+    "prompt_tokens": 1462,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": 0,
+      "cached_tokens": 0,
+      "video_tokens": 0
+    },
+    "total_tokens": 1758
+  }
+}

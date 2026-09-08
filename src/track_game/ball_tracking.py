@@ -1,7 +1,7 @@
 """Classical ball tracking initialized and corrected only by VLM detections."""
 
 from dataclasses import dataclass, replace
-from math import hypot
+from math import hypot, log
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -11,7 +11,7 @@ from PIL import Image
 
 from .config import BallTrackingConfig
 from .schema import BallDetection, Point
-from .tracking import TrackedFrame
+from .tracking import TrackedFrame, _hungarian_minimize
 
 
 @dataclass(frozen=True)
@@ -26,6 +26,8 @@ class BallTrackFrame:
 @dataclass(frozen=True)
 class BallTrackingStats:
     vlm_corrections: int = 0
+    hungarian_matches: int = 0
+    rejected_vlm_anchors: int = 0
     optical_flow_updates: int = 0
     predicted_updates: int = 0
     possession_prior_updates: int = 0
@@ -42,7 +44,7 @@ class BallTrackingResult:
 
 
 class VLMInitializedBallTracker:
-    """Pyramidal LK with optional Kalman smoothing and explicit lost state."""
+    """VLM-only ball anchors with Hungarian gating, LK/Kalman, and lost state."""
 
     def __init__(self, config: BallTrackingConfig | None = None):
         self.config = config or BallTrackingConfig(enabled=True)
@@ -156,6 +158,93 @@ class VLMInitializedBallTracker:
         )
         return observation.astype(np.float32), new_valid.reshape(-1, 1, 2), quality
 
+    @staticmethod
+    def _predicted_center(center: np.ndarray, kalman: Any | None) -> np.ndarray:
+        if kalman is None:
+            return center.copy()
+        predicted_state = kalman.transitionMatrix @ kalman.statePost
+        return predicted_state[:2].reshape(-1).astype(np.float32)
+
+    @staticmethod
+    def _box_size_change(
+        previous: BallDetection | None, current: BallDetection
+    ) -> float:
+        if previous is None or previous.box is None or current.box is None:
+            return 0.0
+        previous_area = (
+            (previous.box.right - previous.box.left)
+            * (previous.box.bottom - previous.box.top)
+        )
+        current_area = (
+            (current.box.right - current.box.left)
+            * (current.box.bottom - current.box.top)
+        )
+        if previous_area <= 0 or current_area <= 0:
+            return 1.0
+        return min(abs(log(current_area / previous_area)), 2.0) / 2.0
+
+    def _association_cost(
+        self,
+        center: np.ndarray,
+        predicted: np.ndarray,
+        detection: BallDetection,
+        previous_detection: BallDetection | None,
+        width: int,
+        height: int,
+    ) -> float:
+        """Score a VLM candidate against the persistent ball trajectory."""
+
+        settings = self.config.hungarian
+        candidate = np.array(
+            [detection.center.x * width, detection.center.y * height],
+            dtype=np.float32,
+        )
+        diagonal = hypot(width, height)
+        center_distance = hypot(
+            float(candidate[0] - center[0]), float(candidate[1] - center[1])
+        ) / (diagonal * settings.distance_scale)
+        motion_distance = hypot(
+            float(candidate[0] - predicted[0]), float(candidate[1] - predicted[1])
+        ) / (diagonal * settings.distance_scale)
+        return (
+            settings.center_distance_weight * center_distance
+            + settings.motion_distance_weight * motion_distance
+            + settings.size_change_weight
+            * self._box_size_change(previous_detection, detection)
+            + settings.detection_confidence_weight * (1.0 - detection.confidence)
+        )
+
+    def _hungarian_match_cost(
+        self,
+        center: np.ndarray,
+        predicted: np.ndarray,
+        detection: BallDetection,
+        previous_detection: BallDetection | None,
+        width: int,
+        height: int,
+    ) -> float | None:
+        """Return an accepted global-assignment cost, or None for the dummy match.
+
+        There is currently one semantic ball candidate per VLM response, so this is
+        a 1x1 real assignment plus an unmatched dummy column. Keeping the same
+        Hungarian formulation as player tracking makes the gate deterministic and
+        ready for a future schema that can expose multiple VLM ball candidates.
+        """
+
+        cost = self._association_cost(
+            center,
+            predicted,
+            detection,
+            previous_detection,
+            width,
+            height,
+        )
+        limit = self.config.hungarian.max_assignment_cost
+        pairs = _hungarian_minimize([[cost, limit + 1e-6]])
+        if pairs == [(0, 0)] and cost <= limit:
+            return cost
+        return None
+
     def track_frames(
         self,
         frames: Iterable[Any],
@@ -178,6 +267,7 @@ class VLMInitializedBallTracker:
         coast_frames = 0
         lost = True
         ever_initialized = False
+        last_vlm_detection: BallDetection | None = None
         cut_frames = scene_cut_frames or set()
 
         for frame_id, frame in enumerate(frames):
@@ -193,6 +283,7 @@ class VLMInitializedBallTracker:
                 confidence = 0.0
                 coast_frames = 0
                 lost = True
+                last_vlm_detection = None
                 stats = replace(
                     stats, scene_cut_resets=stats.scene_cut_resets + 1
                 )
@@ -201,31 +292,67 @@ class VLMInitializedBallTracker:
                 anchor_center = np.array(
                     [anchor.center.x * width, anchor.center.y * height], dtype=np.float32
                 )
-                if kalman is None or not self.config.use_kalman:
-                    kalman = self._kalman(anchor_center) if self.config.use_kalman else None
-                else:
-                    velocity = kalman.statePost[2:4].copy() if not was_lost else np.zeros((2, 1), np.float32)
-                    kalman.statePost = np.array(
-                        [[anchor_center[0]], [anchor_center[1]], [velocity[0, 0]], [velocity[1, 0]]],
-                        dtype=np.float32,
+                assignment_cost: float | None = None
+                accept_anchor = was_lost or center is None
+                if not accept_anchor and self.config.association_method == "direct":
+                    accept_anchor = True
+                elif not accept_anchor and center is not None:
+                    assignment_cost = self._hungarian_match_cost(
+                        center,
+                        self._predicted_center(center, kalman),
+                        anchor,
+                        last_vlm_detection,
+                        width,
+                        height,
                     )
-                    kalman.errorCovPost = np.diag([1.0, 1.0, 5.0, 5.0]).astype(np.float32)
-                center = anchor_center
-                features = self._features(gray, center, anchor)
-                confidence = anchor.confidence
-                coast_frames = 0
-                lost = False
+                    accept_anchor = assignment_cost is not None
+                if accept_anchor:
+                    if kalman is None or not self.config.use_kalman or was_lost:
+                        kalman = self._kalman(anchor_center) if self.config.use_kalman else None
+                        center = anchor_center
+                    else:
+                        kalman.predict()
+                        corrected = kalman.correct(anchor_center.reshape(2, 1)).reshape(-1)
+                        center = corrected[:2].astype(np.float32)
+                    features = self._features(gray, center, anchor)
+                    if assignment_cost is None:
+                        confidence = anchor.confidence
+                    else:
+                        settings = self.config.hungarian
+                        assignment_quality = max(
+                            0.0,
+                            1.0 - assignment_cost / settings.max_assignment_cost,
+                        )
+                        total_weight = (
+                            settings.anchor_detection_weight + settings.assignment_weight
+                        )
+                        confidence = (
+                            settings.anchor_detection_weight * anchor.confidence
+                            + settings.assignment_weight * assignment_quality
+                        ) / total_weight
+                    coast_frames = 0
+                    lost = False
+                    last_vlm_detection = anchor
+                    stats = replace(
+                        stats,
+                        vlm_corrections=stats.vlm_corrections + 1,
+                        hungarian_matches=stats.hungarian_matches
+                        + int(assignment_cost is not None),
+                        recovered_events=stats.recovered_events
+                        + int(was_lost and ever_initialized),
+                    )
+                    ever_initialized = True
+                    point = Point(
+                        min(1.0, max(0.0, float(center[0]) / width)),
+                        min(1.0, max(0.0, float(center[1]) / height)),
+                    )
+                    output.append(BallTrackFrame(frame_id, point, confidence, "vlm", False))
+                    previous_gray = gray
+                    continue
                 stats = replace(
                     stats,
-                    vlm_corrections=stats.vlm_corrections + 1,
-                    recovered_events=stats.recovered_events + int(was_lost and ever_initialized),
+                    rejected_vlm_anchors=stats.rejected_vlm_anchors + 1,
                 )
-                ever_initialized = True
-                output.append(
-                    BallTrackFrame(frame_id, anchor.center, confidence, "vlm", False)
-                )
-                previous_gray = gray
-                continue
 
             predicted: np.ndarray | None = None
             if not lost and center is not None:

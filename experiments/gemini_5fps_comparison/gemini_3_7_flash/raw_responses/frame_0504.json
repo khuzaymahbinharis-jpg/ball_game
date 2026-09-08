@@ -1,0 +1,53 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"frame_id\": 504,\n  \"players\": [\n    {\"detection_id\": \"player_01\", \"team\": \"B\", \"box\": {\"left\": 2.11e-01, \"top\": 4.54e-01, \"right\": 2.74e-01, \"bottom\": 6.16e-01}, \"foot\": {\"x\": 2.45e-01, \"y\": 6.11e-01}, \"confidence\": 9.80e-01, \"team_confidence\": 9.90e-01},\n    {\"detection_id\": \"player_02\", \"team\": \"A\", \"box\": {\"left\": 2.41e-01, \"top\": 4.69e-01, \"right\": 3.19e-01, \"bottom\": 6.32e-01}, \"foot\": {\"x\": 2.79e-01, \"y\": 6.27e-01}, \"confidence\": 9.90e-01, \"team_confidence\": 9.90e-01},\n    {\"detection_id\": \"player_03\", \"team\": \"A\", \"box\": {\"left\": 2.87e-01, \"top\": 4.39e-01, \"right\": 3.36e-01, \"bottom\": 5.62e-01}, \"foot\": {\"x\": 3.09e-01, \"y\": 5.56e-01}, \"confidence\": 9.60e-01, \"team_confidence\": 9.70e-01},\n    {\"detection_id\": \"player_04\", \"team\": \"B\", \"box\": {\"left\": 3.65e-01, \"top\": 4.22e-01, \"right\": 4.32e-01, \"bottom\": 5.92e-01}, \"foot\": {\"x\": 4.09e-01, \"y\": 5.86e-01}, \"confidence\": 9.90e-01, \"team_confidence\": 9.90e-01},\n    {\"detection_id\": \"player_05\", \"team\": \"B\", \"box\": {\"left\": 4.74e-01, \"top\": 3.31e-01, \"right\": 5.32e-01, \"bottom\": 4.90e-01}, \"foot\": {\"x\": 5.06e-01, \"y\": 4.84e-01}, \"confidence\": 9.80e-01, \"team_confidence\": 9.90e-01},\n    {\"detection_id\": \"player_06\", \"team\": \"A\", \"box\": {\"left\": 4.45e-01, \"top\": 3.01e-01, \"right\": 4.76e-01, \"bottom\": 4.48e-01}, \"foot\": {\"x\": 4.60e-01, \"y\": 4.43e-01}, \"confidence\": 9.80e-01, \"team_confidence\": 9.90e-01},\n    {\"detection_id\": \"player_07\", \"team\": \"A\", \"box\": {\"left\": 3.76e-01, \"top\": 2.91e-01, \"right\": 4.19e-01, \"bottom\": 4.43e-01}, \"foot\": {\"x\": 3.99e-01, \"y\": 4.38e-01}, \"confidence\": 9.70e-01, \"team_confidence\": 9.90e-01},\n    {\"detection_id\": \"player_08\", \"team\": \"B\", \"box\": {\"left\": 5.67e-01, \"top\": 4.99e-01, \"right\": 6.17e-01, \"bottom\": 6.55e-01}, \"foot\": {\"x\": 5.93e-01, \"y\": 6.51e-01}, \"confidence\": 9.80e-01, \"team_confidence\": 9.90e-01},\n    {\"detection_id\": \"player_09\", \"team\": \"A\", \"box\": {\"left\": 5.46e-01, \"top\": 5.94e-01, \"right\": 6.00e-01, \"bottom\": 7.07e-01}, \"foot\": {\"x\": 5.76e-01, \"y\": 7.03e-01}, \"confidence\": 9.50e-01, \"team_confidence\": 9.80e-01}\n  ],\n  \"ball\": {\n    \"center\": {\"x\": 3.27e-01, \"y\": 5.48e-01},\n    \"box\": {\"left\": 3.20e-01, \"top\": 5.38e-01, \"right\": 3.34e-01, \"bottom\": 5.58e-01},\n    \"confidence\": 9.10e-01\n  },\n  \"possession\": {\n    \"player_detection_id\": \"player_03\",\n    \"confidence\": 8.70e-01\n  },\n  \"uncertainty_notes\": []\n}",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "signature": "Em0KawERTTIP7vZWs37F7IT9w0n/p+vGcySloQkOeo8ADweC+Np3SD4+aJtUnaW8wOmpDioCHdcYuCul8vD5+i0g4MxP62tX2MyjDXsHytlodNN2Hk0j7pZWx9iQ+DG4jwwWF51y4h2W188qBy8F",
+            "type": "reasoning.text"
+          }
+        ],
+        "refusal": null,
+        "role": "assistant"
+      },
+      "native_finish_reason": "STOP"
+    }
+  ],
+  "created": 1788840935,
+  "id": "gen-1788840935-l3krFykjtykyKQm7EiaO",
+  "model": "google/gemini-3.7-flash",
+  "object": "chat.completion",
+  "provider": "Google AI Studio",
+  "service_tier": "default",
+  "system_fingerprint": null,
+  "usage": {
+    "completion_tokens": 1285,
+    "completion_tokens_details": {
+      "audio_tokens": 0,
+      "image_tokens": 0,
+      "reasoning_tokens": 0
+    },
+    "cost": 0.00591525,
+    "cost_details": {
+      "upstream_inference_completions_cost": 0.00481875,
+      "upstream_inference_cost": 0.00591525,
+      "upstream_inference_prompt_cost": 0.0010965
+    },
+    "is_byok": false,
+    "prompt_tokens": 1462,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": 0,
+      "cached_tokens": 0,
+      "video_tokens": 0
+    },
+    "total_tokens": 2747
+  }
+}

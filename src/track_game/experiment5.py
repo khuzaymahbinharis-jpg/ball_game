@@ -24,6 +24,7 @@ from .provider import OpenRouterResult, OpenRouterValidationError, OpenRouterVLM
 from .ruler import add_normalized_rulers
 from .sampling import sample_frame_indices
 from .schema import SCHEMA_VERSION, FrameDetection, frame_detection_json_schema
+from .shot_context import trackable_ball_anchors
 from .test1 import _detection_as_dict
 from .tracking import build_player_tracker
 from .video import extract_video_frames, probe_video, render_tracked_video
@@ -314,7 +315,7 @@ def run_approved_experiment5(
     ball_started = perf_counter()
     ball_result = VLMInitializedBallTracker(variant.pipeline.ball_tracking).track_video(
         paths["clip"],
-        {frame_id: item.ball_detection for frame_id, item in detections.items()},
+        trackable_ball_anchors(detections, player_result.shot_context),
         timeline,
         scene_cut_frames=cut_frames,
     )

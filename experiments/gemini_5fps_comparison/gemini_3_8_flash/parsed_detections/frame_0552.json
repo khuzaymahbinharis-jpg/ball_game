@@ -1,0 +1,186 @@
+{
+  "ball": {
+    "box": {
+      "bottom": 0.399,
+      "left": 0.343,
+      "right": 0.358,
+      "top": 0.373
+    },
+    "center": {
+      "x": 0.35,
+      "y": 0.386
+    },
+    "confidence": 0.85
+  },
+  "frame_id": 552,
+  "players": [
+    {
+      "box": {
+        "bottom": 0.764,
+        "left": 0.137,
+        "right": 0.205,
+        "top": 0.564
+      },
+      "confidence": 0.97,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.168,
+        "y": 0.757
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.684,
+        "left": 0.396,
+        "right": 0.481,
+        "top": 0.507
+      },
+      "confidence": 0.95,
+      "detection_id": "player_02",
+      "foot": {
+        "x": 0.467,
+        "y": 0.675
+      },
+      "team": "B",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.622,
+        "left": 0.501,
+        "right": 0.572,
+        "top": 0.454
+      },
+      "confidence": 0.96,
+      "detection_id": "player_03",
+      "foot": {
+        "x": 0.537,
+        "y": 0.613
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.556,
+        "left": 0.355,
+        "right": 0.42,
+        "top": 0.386
+      },
+      "confidence": 0.93,
+      "detection_id": "player_04",
+      "foot": {
+        "x": 0.373,
+        "y": 0.548
+      },
+      "team": "B",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.546,
+        "left": 0.342,
+        "right": 0.383,
+        "top": 0.365
+      },
+      "confidence": 0.88,
+      "detection_id": "player_05",
+      "foot": {
+        "x": 0.363,
+        "y": 0.543
+      },
+      "team": "A",
+      "team_confidence": 0.97
+    },
+    {
+      "box": {
+        "bottom": 0.49,
+        "left": 0.445,
+        "right": 0.497,
+        "top": 0.332
+      },
+      "confidence": 0.94,
+      "detection_id": "player_06",
+      "foot": {
+        "x": 0.457,
+        "y": 0.484
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.494,
+        "left": 0.501,
+        "right": 0.541,
+        "top": 0.396
+      },
+      "confidence": 0.89,
+      "detection_id": "player_07",
+      "foot": {
+        "x": 0.525,
+        "y": 0.488
+      },
+      "team": "B",
+      "team_confidence": 0.92
+    },
+    {
+      "box": {
+        "bottom": 0.454,
+        "left": 0.394,
+        "right": 0.449,
+        "top": 0.323
+      },
+      "confidence": 0.91,
+      "detection_id": "player_08",
+      "foot": {
+        "x": 0.439,
+        "y": 0.445
+      },
+      "team": "A",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.497,
+        "left": 0.27,
+        "right": 0.312,
+        "top": 0.329
+      },
+      "confidence": 0.94,
+      "detection_id": "player_09",
+      "foot": {
+        "x": 0.291,
+        "y": 0.49
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.506,
+        "left": 0.298,
+        "right": 0.344,
+        "top": 0.339
+      },
+      "confidence": 0.93,
+      "detection_id": "player_10",
+      "foot": {
+        "x": 0.329,
+        "y": 0.499
+      },
+      "team": "B",
+      "team_confidence": 0.97
+    }
+  ],
+  "possession": {
+    "confidence": 0.75,
+    "player_detection_id": "player_05"
+  },
+  "uncertainty_notes": [
+    "Cluster of players 04 and 05 creates partial body overlap near the ball.",
+    "Player 07 partially occluded by player 03."
+  ]
+}

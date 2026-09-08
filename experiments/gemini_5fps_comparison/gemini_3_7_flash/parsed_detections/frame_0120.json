@@ -1,0 +1,169 @@
+{
+  "ball": {
+    "box": {
+      "bottom": 0.6676,
+      "left": 0.316,
+      "right": 0.336,
+      "top": 0.6333
+    },
+    "center": {
+      "x": 0.326,
+      "y": 0.6505
+    },
+    "confidence": 0.94
+  },
+  "frame_id": 120,
+  "players": [
+    {
+      "box": {
+        "bottom": 0.7426,
+        "left": 0.316,
+        "right": 0.387,
+        "top": 0.5568
+      },
+      "confidence": 0.95,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.354,
+        "y": 0.7394
+      },
+      "team": "B",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.6381,
+        "left": 0.209,
+        "right": 0.297,
+        "top": 0.481
+      },
+      "confidence": 0.96,
+      "detection_id": "player_02",
+      "foot": {
+        "x": 0.237,
+        "y": 0.6309
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.6064,
+        "left": 0.298,
+        "right": 0.351,
+        "top": 0.3883
+      },
+      "confidence": 0.97,
+      "detection_id": "player_03",
+      "foot": {
+        "x": 0.33,
+        "y": 0.5992
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.5617,
+        "left": 0.33,
+        "right": 0.375,
+        "top": 0.3639
+      },
+      "confidence": 0.93,
+      "detection_id": "player_04",
+      "foot": {
+        "x": 0.347,
+        "y": 0.5545
+      },
+      "team": "A",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.5973,
+        "left": 0.375,
+        "right": 0.443,
+        "top": 0.443
+      },
+      "confidence": 0.96,
+      "detection_id": "player_05",
+      "foot": {
+        "x": 0.407,
+        "y": 0.5865
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.5874,
+        "left": 0.435,
+        "right": 0.488,
+        "top": 0.3793
+      },
+      "confidence": 0.97,
+      "detection_id": "player_06",
+      "foot": {
+        "x": 0.456,
+        "y": 0.5802
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.5928,
+        "left": 0.485,
+        "right": 0.537,
+        "top": 0.4027
+      },
+      "confidence": 0.97,
+      "detection_id": "player_07",
+      "foot": {
+        "x": 0.499,
+        "y": 0.5856
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.5613,
+        "left": 0.613,
+        "right": 0.687,
+        "top": 0.3712
+      },
+      "confidence": 0.97,
+      "detection_id": "player_08",
+      "foot": {
+        "x": 0.65,
+        "y": 0.5532
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.6847,
+        "left": 0.03,
+        "right": 0.77,
+        "top": 0.5117
+      },
+      "confidence": 0.75,
+      "detection_id": "player_09",
+      "foot": {
+        "x": 0.039,
+        "y": 0.6775
+      },
+      "team": "uncertain",
+      "team_confidence": 0.5
+    }
+  ],
+  "possession": {
+    "confidence": 0.88,
+    "player_detection_id": "player_01"
+  },
+  "uncertainty_notes": [
+    "Player on the far left edge is heavily truncated by frame boundary."
+  ]
+}

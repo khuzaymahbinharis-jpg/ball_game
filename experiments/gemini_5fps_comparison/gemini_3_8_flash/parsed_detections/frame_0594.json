@@ -1,0 +1,155 @@
+{
+  "ball": null,
+  "frame_id": 594,
+  "players": [
+    {
+      "box": {
+        "bottom": 0.5922123,
+        "left": 0.1831505,
+        "right": 0.2272186,
+        "top": 0.3705146
+      },
+      "confidence": 0.938,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.2029803,
+        "y": 0.5867909
+      },
+      "team": "A",
+      "team_confidence": 0.987
+    },
+    {
+      "box": {
+        "bottom": 0.6305607,
+        "left": 0.2378946,
+        "right": 0.3090623,
+        "top": 0.3978931
+      },
+      "confidence": 0.942,
+      "detection_id": "player_02",
+      "foot": {
+        "x": 0.2632128,
+        "y": 0.6223595
+      },
+      "team": "B",
+      "team_confidence": 0.985
+    },
+    {
+      "box": {
+        "bottom": 0.4965415,
+        "left": 0.2946399,
+        "right": 0.3250555,
+        "top": 0.3324838
+      },
+      "confidence": 0.927,
+      "detection_id": "player_03",
+      "foot": {
+        "x": 0.3120762,
+        "y": 0.4908006
+      },
+      "team": "A",
+      "team_confidence": 0.979
+    },
+    {
+      "box": {
+        "bottom": 0.5048997,
+        "left": 0.3242398,
+        "right": 0.3606277,
+        "top": 0.3321689
+      },
+      "confidence": 0.933,
+      "detection_id": "player_04",
+      "foot": {
+        "x": 0.3444983,
+        "y": 0.4981881
+      },
+      "team": "B",
+      "team_confidence": 0.977
+    },
+    {
+      "box": {
+        "bottom": 0.5074495,
+        "left": 0.4004457,
+        "right": 0.4341496,
+        "top": 0.3454228
+      },
+      "confidence": 0.939,
+      "detection_id": "player_05",
+      "foot": {
+        "x": 0.4148566,
+        "y": 0.5020297
+      },
+      "team": "A",
+      "team_confidence": 0.984
+    },
+    {
+      "box": {
+        "bottom": 0.5432859,
+        "left": 0.4364402,
+        "right": 0.4747377,
+        "top": 0.3630456
+      },
+      "confidence": 0.938,
+      "detection_id": "player_06",
+      "foot": {
+        "x": 0.4544772,
+        "y": 0.5381395
+      },
+      "team": "B",
+      "team_confidence": 0.983
+    },
+    {
+      "box": {
+        "bottom": 0.4805175,
+        "left": 0.4856942,
+        "right": 0.516369,
+        "top": 0.3292983
+      },
+      "confidence": 0.92,
+      "detection_id": "player_07",
+      "foot": {
+        "x": 0.5011883,
+        "y": 0.4767119
+      },
+      "team": "B",
+      "team_confidence": 0.97
+    },
+    {
+      "box": {
+        "bottom": 0.7151877,
+        "left": 0.4887413,
+        "right": 0.5666879,
+        "top": 0.4819779
+      },
+      "confidence": 0.935,
+      "detection_id": "player_08",
+      "foot": {
+        "x": 0.5132924,
+        "y": 0.7073452
+      },
+      "team": "A",
+      "team_confidence": 0.985
+    },
+    {
+      "box": {
+        "bottom": 0.6381156,
+        "left": 0.562688,
+        "right": 0.6064506,
+        "top": 0.4148128
+      },
+      "confidence": 0.935,
+      "detection_id": "player_09",
+      "foot": {
+        "x": 0.5908253,
+        "y": 0.6309097
+      },
+      "team": "B",
+      "team_confidence": 0.981
+    }
+  ],
+  "possession": null,
+  "uncertainty_notes": [
+    "Ball is likely occluded or outside the field of view.",
+    "Bench and referee personnel excluded."
+  ]
+}

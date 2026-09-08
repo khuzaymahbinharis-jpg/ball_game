@@ -1,0 +1,53 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"frame_id\": 48,\n  \"players\": [\n    {\n      \"detection_id\": \"player_01\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 1.626e-1,\n        \"top\": 3.097e-1,\n        \"right\": 2.451e-1,\n        \"bottom\": 5.485e-1\n      },\n      \"foot\": {\n        \"x\": 1.839e-1,\n        \"y\": 5.438e-1\n      },\n      \"confidence\": 9.773e-1,\n      \"team_confidence\": 9.897e-1\n    },\n    {\n      \"detection_id\": \"player_02\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 4.258e-1,\n        \"top\": 3.737e-1,\n        \"right\": 4.863e-1,\n        \"bottom\": 5.405e-1\n      },\n      \"foot\": {\n        \"x\": 4.509e-1,\n        \"y\": 5.309e-1\n      },\n      \"confidence\": 9.728e-1,\n      \"team_confidence\": 9.874e-1\n    },\n    {\n      \"detection_id\": \"player_03\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 5.679e-1,\n        \"top\": 3.491e-1,\n        \"right\": 6.331e-1,\n        \"bottom\": 5.176e-1\n      },\n      \"foot\": {\n        \"x\": 6.096e-1,\n        \"y\": 5.088e-1\n      },\n      \"confidence\": 9.684e-1,\n      \"team_confidence\": 9.878e-1\n    },\n    {\n      \"detection_id\": \"player_04\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 7.425e-1,\n        \"top\": 3.766e-1,\n        \"right\": 8.169e-1,\n        \"bottom\": 5.923e-1\n      },\n      \"foot\": {\n        \"x\": 7.822e-1,\n        \"y\": 5.795e-1\n      },\n      \"confidence\": 9.689e-1,\n      \"team_confidence\": 9.89e-1\n    },\n    {\n      \"detection_id\": \"player_05\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 2.859e-1,\n        \"top\": 5.228e-1,\n        \"right\": 3.729e-1,\n        \"bottom\": 7.447e-1\n      },\n      \"foot\": {\n        \"x\": 3.48e-1,\n        \"y\": 7.23e-1\n      },\n      \"confidence\": 9.674e-1,\n      \"team_confidence\": 9.851e-1\n    },\n    {\n      \"detection_id\": \"player_06\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 2.308e-1,\n        \"top\": 6.136e-1,\n        \"right\": 3.125e-1,\n        \"bottom\": 8.653e-1\n      },\n      \"foot\": {\n        \"x\": 2.748e-1,\n        \"y\": 8.525e-1\n      },\n      \"confidence\": 9.697e-1,\n      \"team_confidence\": 9.883e-1\n    },\n    {\n      \"detection_id\": \"player_07\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 5.344e-1,\n        \"top\": 5.394e-1,\n        \"right\": 6.273e-1,\n        \"bottom\": 7.641e-1\n      },\n      \"foot\": {\n        \"x\": 5.733e-1,\n        \"y\": 7.502e-1\n      },\n      \"confidence\": 9.715e-1,\n      \"team_confidence\": 9.888e-1\n    }\n  ],\n  \"ball\": null,\n  \"possession\": null,\n  \"uncertainty_notes\": [\"Ball not clearly visible on court due to rapid movement or occlusion.\"]\n}",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "signature": "Em0KawERTTIPQAByfBWBAt6+CAJ12xXYSDLUzk24KaoWnHeK3usyHd9ZsAuixGPIqpFJabDkz40mDeLC5wevMqps1px+iqdwltTNyvx4CJBMqJGZiQlI13Ib9BfLaaLFboTd2FPVegOKARmXPi9C",
+            "type": "reasoning.text"
+          }
+        ],
+        "refusal": null,
+        "role": "assistant"
+      },
+      "native_finish_reason": "STOP"
+    }
+  ],
+  "created": 1788840825,
+  "id": "gen-1788840825-dSU0evBDEePeq5NKCW2q",
+  "model": "google/gemini-3.7-flash",
+  "object": "chat.completion",
+  "provider": "Google AI Studio",
+  "service_tier": "default",
+  "system_fingerprint": null,
+  "usage": {
+    "completion_tokens": 1132,
+    "completion_tokens_details": {
+      "audio_tokens": 0,
+      "image_tokens": 0,
+      "reasoning_tokens": 0
+    },
+    "cost": 0.00534075,
+    "cost_details": {
+      "upstream_inference_completions_cost": 0.004245,
+      "upstream_inference_cost": 0.00534075,
+      "upstream_inference_prompt_cost": 0.00109575
+    },
+    "is_byok": false,
+    "prompt_tokens": 1461,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": 0,
+      "cached_tokens": 0,
+      "video_tokens": 0
+    },
+    "total_tokens": 2593
+  }
+}

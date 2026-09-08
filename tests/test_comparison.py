@@ -24,5 +24,6 @@ def test_new_features_are_independently_toggled_for_ablation():
     assert not current.tracking.confidence.enabled
     assert upgraded.player_cv_tracking.enabled
     assert upgraded.camera_motion.enabled
+    assert upgraded.camera_motion.transform_type == "partial_affine"
     assert upgraded.scene_cut.enabled
     assert upgraded.tracking.confidence.enabled

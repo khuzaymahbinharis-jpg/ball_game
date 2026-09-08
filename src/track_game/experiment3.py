@@ -36,7 +36,7 @@ VLM_CALLS = len(ANCHOR_FRAMES)
 MAX_CONCURRENCY = 8
 MAX_OUTPUT_TOKENS = 4096
 REASONING_SETTING = {"effort": "minimal", "exclude": True}
-PROMPT_VERSION = "fullclip-ruler-v1-unchanged"
+PROMPT_VERSION = "fullclip-ruler-v2-closeup-filter"
 
 PRIOR_VALID_ANCHOR_COSTS = (
     0.000981,

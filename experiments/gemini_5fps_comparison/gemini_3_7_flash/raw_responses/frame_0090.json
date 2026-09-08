@@ -1,0 +1,53 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"frame_id\": 90,\n  \"players\": [\n    {\n      \"detection_id\": \"player_01\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.075,\n        \"top\": 0.422,\n        \"right\": 0.12,\n        \"bottom\": 0.64\n      },\n      \"foot\": {\n        \"x\": 0.093,\n        \"y\": 0.63\n      },\n      \"confidence\": 0.95,\n      \"team_confidence\": 0.98\n    },\n    {\n      \"detection_id\": \"player_02\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.292,\n        \"top\": 0.34,\n        \"right\": 0.37,\n        \"bottom\": 0.56\n      },\n      \"foot\": {\n        \"x\": 0.33,\n        \"y\": 0.545\n      },\n      \"confidence\": 0.96,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_03\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.393,\n        \"top\": 0.455,\n        \"right\": 0.457,\n        \"bottom\": 0.655\n      },\n      \"foot\": {\n        \"x\": 0.415,\n        \"y\": 0.647\n      },\n      \"confidence\": 0.89,\n      \"team_confidence\": 0.94\n    },\n    {\n      \"detection_id\": \"player_04\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.49,\n        \"top\": 0.383,\n        \"right\": 0.552,\n        \"bottom\": 0.545\n      },\n      \"foot\": {\n        \"x\": 0.528,\n        \"y\": 0.536\n      },\n      \"confidence\": 0.95,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_05\",\n      \"team\": \"A\",\n      \"box\": {\n        \"left\": 0.7,\n        \"top\": 0.358,\n        \"right\": 0.755,\n        \"bottom\": 0.555\n      },\n      \"foot\": {\n        \"x\": 0.729,\n        \"y\": 0.546\n      },\n      \"confidence\": 0.96,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_06\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.233,\n        \"top\": 0.542,\n        \"right\": 0.301,\n        \"bottom\": 0.758\n      },\n      \"foot\": {\n        \"x\": 0.265,\n        \"y\": 0.75\n      },\n      \"confidence\": 0.97,\n      \"team_confidence\": 0.99\n    },\n    {\n      \"detection_id\": \"player_07\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.393,\n        \"top\": 0.448,\n        \"right\": 0.456,\n        \"bottom\": 0.671\n      },\n      \"foot\": {\n        \"x\": 0.435,\n        \"y\": 0.662\n      },\n      \"confidence\": 0.95,\n      \"team_confidence\": 0.98\n    },\n    {\n      \"detection_id\": \"player_08\",\n      \"team\": \"B\",\n      \"box\": {\n        \"left\": 0.58,\n        \"top\": 0.412,\n        \"right\": 0.66,\n        \"bottom\": 0.595\n      },\n      \"foot\": {\n        \"x\": 0.612,\n        \"y\": 0.586\n      },\n      \"confidence\": 0.95,\n      \"team_confidence\": 0.98\n    }\n  ],\n  \"ball\": null,\n  \"possession\": null,\n  \"uncertainty_notes\": [\n    \"Basketball occluded within drive contact between players player_03 and player_07.\"\n  ]\n}",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "signature": "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",
+            "type": "reasoning.text"
+          }
+        ],
+        "refusal": null,
+        "role": "assistant"
+      },
+      "native_finish_reason": "STOP"
+    }
+  ],
+  "created": 1788840833,
+  "id": "gen-1788840833-QubQLdOf5Ywrq3kMMg93",
+  "model": "google/gemini-3.7-flash",
+  "object": "chat.completion",
+  "provider": "Google AI Studio",
+  "service_tier": "default",
+  "system_fingerprint": null,
+  "usage": {
+    "completion_tokens": 1735,
+    "completion_tokens_details": {
+      "audio_tokens": 0,
+      "image_tokens": 0,
+      "reasoning_tokens": 597
+    },
+    "cost": 0.007602,
+    "cost_details": {
+      "upstream_inference_completions_cost": 0.00650625,
+      "upstream_inference_cost": 0.007602,
+      "upstream_inference_prompt_cost": 0.00109575
+    },
+    "is_byok": false,
+    "prompt_tokens": 1461,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cache_write_tokens": 0,
+      "cached_tokens": 0,
+      "video_tokens": 0
+    },
+    "total_tokens": 3196
+  }
+}

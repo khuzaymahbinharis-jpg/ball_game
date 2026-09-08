@@ -26,6 +26,7 @@ track-game-experiment3 = "track_game.experiment3:main"
 track-game-experiment4 = "track_game.experiment4:main"
 track-game-experiment5 = "track_game.experiment5:main"
 track-game-model-bakeoff = "track_game.model_bakeoff:main"
+track-game-gemini-5fps = "track_game.gemini_5fps:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

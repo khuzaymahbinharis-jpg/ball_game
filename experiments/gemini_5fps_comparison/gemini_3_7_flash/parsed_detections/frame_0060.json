@@ -1,0 +1,135 @@
+{
+  "ball": {
+    "box": {
+      "bottom": 0.465,
+      "left": 0.579,
+      "right": 0.597,
+      "top": 0.436
+    },
+    "center": {
+      "x": 0.588,
+      "y": 0.45
+    },
+    "confidence": 0.9
+  },
+  "frame_id": 60,
+  "players": [
+    {
+      "box": {
+        "bottom": 0.512,
+        "left": 0.576,
+        "right": 0.638,
+        "top": 0.363
+      },
+      "confidence": 0.94,
+      "detection_id": "player_01",
+      "foot": {
+        "x": 0.607,
+        "y": 0.506
+      },
+      "team": "B",
+      "team_confidence": 0.98
+    },
+    {
+      "box": {
+        "bottom": 0.514,
+        "left": 0.479,
+        "right": 0.527,
+        "top": 0.367
+      },
+      "confidence": 0.93,
+      "detection_id": "player_02",
+      "foot": {
+        "x": 0.501,
+        "y": 0.508
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.737,
+        "left": 0.511,
+        "right": 0.622,
+        "top": 0.513
+      },
+      "confidence": 0.95,
+      "detection_id": "player_03",
+      "foot": {
+        "x": 0.562,
+        "y": 0.724
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.684,
+        "left": 0.376,
+        "right": 0.454,
+        "top": 0.469
+      },
+      "confidence": 0.94,
+      "detection_id": "player_04",
+      "foot": {
+        "x": 0.429,
+        "y": 0.674
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.878,
+        "left": 0.219,
+        "right": 0.291,
+        "top": 0.599
+      },
+      "confidence": 0.95,
+      "detection_id": "player_05",
+      "foot": {
+        "x": 0.253,
+        "y": 0.868
+      },
+      "team": "B",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.548,
+        "left": 0.249,
+        "right": 0.303,
+        "top": 0.323
+      },
+      "confidence": 0.95,
+      "detection_id": "player_06",
+      "foot": {
+        "x": 0.276,
+        "y": 0.542
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    },
+    {
+      "box": {
+        "bottom": 0.579,
+        "left": 0.757,
+        "right": 0.832,
+        "top": 0.371
+      },
+      "confidence": 0.95,
+      "detection_id": "player_07",
+      "foot": {
+        "x": 0.797,
+        "y": 0.568
+      },
+      "team": "A",
+      "team_confidence": 0.99
+    }
+  ],
+  "possession": {
+    "confidence": 0.88,
+    "player_detection_id": "player_01"
+  },
+  "uncertainty_notes": []
+}
