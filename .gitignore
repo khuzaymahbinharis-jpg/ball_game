@@ -5,6 +5,7 @@ __pycache__/
 .venv/
 dist/
 build/
+reports/.qa/
 *.egg-info/
 .env
 outputs/
@@ -12,5 +13,12 @@ clips/
 experiments/*/artifacts/
 experiments/*.jsonl
 experiments/*/*.jsonl
+experiments/**/artifacts/
+experiments/**/records/
+experiments/**/raw_responses/
+experiments/**/parsed_detections/
+experiments/**/review_overlays/
+experiments/**/*.jsonl
+experiments/**/approval.json
 !experiments/.gitkeep
 

@@ -26,7 +26,10 @@ class BallTrackFrame:
 @dataclass(frozen=True)
 class BallTrackingStats:
     vlm_corrections: int = 0
+    hungarian_evaluations: int = 0
     hungarian_matches: int = 0
+    hungarian_dummy_assignments: int = 0
+    reacquisitions_without_assignment: int = 0
     rejected_vlm_anchors: int = 0
     optical_flow_updates: int = 0
     predicted_updates: int = 0
@@ -297,6 +300,10 @@ class VLMInitializedBallTracker:
                 if not accept_anchor and self.config.association_method == "direct":
                     accept_anchor = True
                 elif not accept_anchor and center is not None:
+                    stats = replace(
+                        stats,
+                        hungarian_evaluations=stats.hungarian_evaluations + 1,
+                    )
                     assignment_cost = self._hungarian_match_cost(
                         center,
                         self._predicted_center(center, kalman),
@@ -306,6 +313,13 @@ class VLMInitializedBallTracker:
                         height,
                     )
                     accept_anchor = assignment_cost is not None
+                    if not accept_anchor:
+                        stats = replace(
+                            stats,
+                            hungarian_dummy_assignments=(
+                                stats.hungarian_dummy_assignments + 1
+                            ),
+                        )
                 if accept_anchor:
                     if kalman is None or not self.config.use_kalman or was_lost:
                         kalman = self._kalman(anchor_center) if self.config.use_kalman else None
@@ -340,6 +354,10 @@ class VLMInitializedBallTracker:
                         + int(assignment_cost is not None),
                         recovered_events=stats.recovered_events
                         + int(was_lost and ever_initialized),
+                        reacquisitions_without_assignment=(
+                            stats.reacquisitions_without_assignment
+                            + int(was_lost and ever_initialized)
+                        ),
                     )
                     ever_initialized = True
                     point = Point(

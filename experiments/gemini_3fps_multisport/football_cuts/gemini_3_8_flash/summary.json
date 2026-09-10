@@ -1,0 +1,73 @@
+{
+  "actual_total_cost_usd": 0.76768725,
+  "automatic_retries": 0,
+  "average_player_detections": 13.686046511627907,
+  "ball_returned_anchors": 56,
+  "batch_wall_seconds": 474.37309670000104,
+  "calls_attempted": 91,
+  "calls_planned": 91,
+  "configured_concurrency": 2,
+  "cost_complete": true,
+  "experiment_id": "gemini-3.8-flash-3fps-multisport-football_cuts",
+  "http_429_count": 0,
+  "invalid_responses": 5,
+  "known_cost_usd": 0.76768725,
+  "latency_seconds": {
+    "max": 11.697653999995964,
+    "mean": 7.187842284615557,
+    "median": 7.542446399995242,
+    "min": 2.8647901000003912,
+    "p95": 9.845652999996673
+  },
+  "model": "google/gemini-3.8-flash",
+  "model_key": "gemini_3_8_flash",
+  "output_video": "outputs\\gemini_3fps_multisport\\football_cuts\\gemini_3_8_flash.mp4",
+  "possession_returned_anchors": 39,
+  "request_errors": 5,
+  "schema_valid_percentage": 94.50549450549451,
+  "total_input_tokens": 144588,
+  "total_output_tokens": 175799,
+  "tracking": {
+    "ball_tracking": {
+      "hungarian_dummy_assignments": 0,
+      "hungarian_evaluations": 19,
+      "hungarian_matches": 19,
+      "lost_events": 35,
+      "lost_frames": 319,
+      "optical_flow_updates": 409,
+      "possession_prior_updates": 91,
+      "predicted_updates": 153,
+      "reacquisitions_without_assignment": 34,
+      "recovered_events": 34,
+      "rejected_vlm_anchors": 0,
+      "scene_cut_resets": 1,
+      "vlm_corrections": 54
+    },
+    "closeup_suppressed_anchors": 3,
+    "empty_player_frames": 60,
+    "local_processing_seconds": 839.4228872999956,
+    "scene_cut_frames": [
+      650
+    ],
+    "status": "completed",
+    "tracks_created": 53,
+    "tracks_expired": 45,
+    "tracks_lost": 59,
+    "tracks_recovered": 6,
+    "trajectory_quality": {
+      "anchor_steps": 1295,
+      "consecutive_steps": 13347,
+      "median_acceleration": 0.0006006528651303622,
+      "median_anchor_step": 0.0029321811396593707,
+      "median_jerk": 0.0005296678190638536,
+      "median_step": 0.001941523098315962,
+      "p95_acceleration": 0.004882388914960041,
+      "p95_anchor_step": 0.012123359025023924,
+      "p95_jerk": 0.006839117730119242,
+      "p95_step": 0.008945201084046657
+    },
+    "visible_player_marker_frames": 13400
+  },
+  "updated_at": "2026-09-10T04:03:43.730113+00:00",
+  "valid_responses": 86
+}

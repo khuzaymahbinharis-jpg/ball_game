@@ -211,11 +211,32 @@ def test_anchor_geometry_eases_from_prediction_instead_of_snapping():
     predicted_x = result.timeline[1].players[0].foot.x
     anchor_x = result.timeline[2].players[0].foot.x
     raw_vlm_x = 0.40
-    expected = predicted_x + tracker._ANCHOR_GEOMETRY_WEIGHT * (
+    raw_corrected_x = predicted_x + tracker._ANCHOR_GEOMETRY_WEIGHT * (
         raw_vlm_x - predicted_x
+    )
+    expected = predicted_x + config.player_cv_tracking.visual_position_gain * (
+        raw_corrected_x - predicted_x
     )
     assert anchor_x == pytest.approx(expected, abs=1e-6)
     assert abs(anchor_x - predicted_x) < abs(raw_vlm_x - predicted_x)
+
+
+def test_visual_geometry_eases_large_anchor_correction_across_frames():
+    config = cv_config()
+    tracker = VLMInitializedPlayerCVTracker(
+        config, HungarianPlayerTracker(config.tracking)
+    )
+    result = tracker.track_frames(
+        [textured_player_frame() for _ in range(7)],
+        {0: detection(0, left=0.20), 2: detection(2, left=0.36)},
+    )
+
+    positions = [frame.players[0].foot.x for frame in result.timeline]
+    anchor_jump = positions[2] - positions[1]
+    raw_anchor_jump = tracker._ANCHOR_GEOMETRY_WEIGHT * (0.46 - positions[1])
+    assert 0 < anchor_jump < raw_anchor_jump
+    assert positions[3] > positions[2]
+    assert positions[4] > positions[3]
 
 
 def test_continuity_horizon_uses_normal_cadence_not_short_final_gap():

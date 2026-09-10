@@ -1,0 +1,28 @@
+{
+  "basis": "Gemini 3.8 Flash measured 4 FPS records on the prior 1080p clip.",
+  "calls_per_clip": 91,
+  "captured_at": "2026-09-10T03:28:17.831873+00:00",
+  "catalog_fingerprint": "7aa328b3f258f708434515b2e15f56a8ff652a4d49936f3044342add20346eae",
+  "clip_count": 5,
+  "combined": {
+    "absolute_ceiling_usd": 7.52353875,
+    "expected_usd": 2.776480506,
+    "observed_high_usd": 5.00511375,
+    "observed_low_usd": 0.6279
+  },
+  "expected_cost_per_call_usd": 0.006102154959,
+  "model": "google/gemini-3.8-flash",
+  "paid_calls_requiring_approval": 455,
+  "per_clip": {
+    "absolute_ceiling_usd": 1.50470775,
+    "expected_usd": 0.555296101,
+    "observed_high_usd": 1.00102275,
+    "observed_low_usd": 0.12558
+  },
+  "pricing_per_million_usd": {
+    "image": 0.75,
+    "input": 0.75,
+    "output": 3.75
+  },
+  "provider": "Google AI Studio"
+}

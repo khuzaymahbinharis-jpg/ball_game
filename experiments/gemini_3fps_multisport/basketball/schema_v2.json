@@ -1,0 +1,222 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "ball": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "box": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "bottom": {
+                      "maximum": 1,
+                      "minimum": 0,
+                      "type": "number"
+                    },
+                    "left": {
+                      "maximum": 1,
+                      "minimum": 0,
+                      "type": "number"
+                    },
+                    "right": {
+                      "maximum": 1,
+                      "minimum": 0,
+                      "type": "number"
+                    },
+                    "top": {
+                      "maximum": 1,
+                      "minimum": 0,
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "left",
+                    "top",
+                    "right",
+                    "bottom"
+                  ],
+                  "type": "object"
+                }
+              ]
+            },
+            "center": {
+              "additionalProperties": false,
+              "properties": {
+                "x": {
+                  "maximum": 1,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                "y": {
+                  "maximum": 1,
+                  "minimum": 0,
+                  "type": "number"
+                }
+              },
+              "required": [
+                "x",
+                "y"
+              ],
+              "type": "object"
+            },
+            "confidence": {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "center",
+            "box",
+            "confidence"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "frame_id": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "players": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "box": {
+            "additionalProperties": false,
+            "properties": {
+              "bottom": {
+                "maximum": 1,
+                "minimum": 0,
+                "type": "number"
+              },
+              "left": {
+                "maximum": 1,
+                "minimum": 0,
+                "type": "number"
+              },
+              "right": {
+                "maximum": 1,
+                "minimum": 0,
+                "type": "number"
+              },
+              "top": {
+                "maximum": 1,
+                "minimum": 0,
+                "type": "number"
+              }
+            },
+            "required": [
+              "left",
+              "top",
+              "right",
+              "bottom"
+            ],
+            "type": "object"
+          },
+          "confidence": {
+            "maximum": 1,
+            "minimum": 0,
+            "type": "number"
+          },
+          "detection_id": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "foot": {
+            "additionalProperties": false,
+            "properties": {
+              "x": {
+                "maximum": 1,
+                "minimum": 0,
+                "type": "number"
+              },
+              "y": {
+                "maximum": 1,
+                "minimum": 0,
+                "type": "number"
+              }
+            },
+            "required": [
+              "x",
+              "y"
+            ],
+            "type": "object"
+          },
+          "team": {
+            "enum": [
+              "A",
+              "B",
+              "uncertain"
+            ],
+            "type": "string"
+          },
+          "team_confidence": {
+            "maximum": 1,
+            "minimum": 0,
+            "type": "number"
+          }
+        },
+        "required": [
+          "detection_id",
+          "team",
+          "box",
+          "foot",
+          "confidence",
+          "team_confidence"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "possession": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "confidence": {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            "player_detection_id": {
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "player_detection_id",
+            "confidence"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "uncertainty_notes": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "frame_id",
+    "players",
+    "ball",
+    "possession",
+    "uncertainty_notes"
+  ],
+  "type": "object"
+}

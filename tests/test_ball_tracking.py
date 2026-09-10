@@ -66,6 +66,9 @@ def test_hungarian_ball_association_rejects_a_teleporting_vlm_anchor():
     assert result.frames[3].position is not None
     assert result.frames[3].position.x == pytest.approx(26 / 96, abs=0.05)
     assert result.stats.vlm_corrections == 1
+    assert result.stats.hungarian_evaluations == 1
+    assert result.stats.hungarian_matches == 0
+    assert result.stats.hungarian_dummy_assignments == 1
     assert result.stats.rejected_vlm_anchors == 1
 
 
@@ -77,5 +80,20 @@ def test_hungarian_ball_association_matches_consistent_anchor_and_smooths_confid
     )
     assert result.frames[3].source == "vlm"
     assert result.stats.vlm_corrections == 2
+    assert result.stats.hungarian_evaluations == 1
     assert result.stats.hungarian_matches == 1
+    assert result.stats.hungarian_dummy_assignments == 0
     assert result.stats.rejected_vlm_anchors == 0
+
+
+def test_lost_ball_reacquisition_is_explicitly_ungated():
+    frames = moving_ball_frames(2) + [np.zeros((64, 96), dtype=np.uint8) for _ in range(8)]
+    cv2.circle(frames[8], (50, 32), 5, 255, -1)
+    config = BallTrackingConfig(enabled=True, max_coast_frames=1)
+    result = VLMInitializedBallTracker(config).track_frames(
+        frames, {0: ball(20), 8: ball(50)}
+    )
+
+    assert result.stats.reacquisitions_without_assignment == 1
+    assert result.stats.hungarian_evaluations == 0
+    assert result.stats.hungarian_matches == 0

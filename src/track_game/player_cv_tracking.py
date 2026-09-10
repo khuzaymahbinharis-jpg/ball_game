@@ -57,6 +57,9 @@ class _LocalPlayerState:
     player: TrackedPlayer
     box_px: np.ndarray
     foot_px: np.ndarray
+    visual_box_px: np.ndarray
+    visual_foot_px: np.ndarray
+    visual_velocity: np.ndarray
     features: np.ndarray
     confidence: float
     coast_frames: int = 0
@@ -180,8 +183,14 @@ class VLMInitializedPlayerCVTracker:
     def _tracked_player(
         self, state: _LocalPlayerState, width: int, height: int
     ) -> TrackedPlayer:
-        box, foot = self._clip_geometry(state.box_px, state.foot_px, width, height)
-        state.box_px, state.foot_px = box, foot
+        raw_box, raw_foot = self._clip_geometry(
+            state.box_px, state.foot_px, width, height
+        )
+        box, foot = self._clip_geometry(
+            state.visual_box_px, state.visual_foot_px, width, height
+        )
+        state.box_px, state.foot_px = raw_box, raw_foot
+        state.visual_box_px, state.visual_foot_px = box, foot
         confidence = min(1.0, max(0.0, state.confidence))
         tracking_state = self._state_name(confidence)
         return TrackedPlayer(
@@ -198,6 +207,58 @@ class VLMInitializedPlayerCVTracker:
             state.player.possesses_ball,
             confidence,
             tracking_state,
+        )
+
+    def _raw_player(
+        self, state: _LocalPlayerState, width: int, height: int
+    ) -> TrackedPlayer:
+        """Expose unsmoothed CV geometry only to logical data association."""
+
+        box, foot = self._clip_geometry(state.box_px, state.foot_px, width, height)
+        state.box_px, state.foot_px = box, foot
+        confidence = min(1.0, max(0.0, state.confidence))
+        return TrackedPlayer(
+            state.player.track_id,
+            state.player.team,
+            Box(
+                float(box[0]) / width,
+                float(box[1]) / height,
+                float(box[2]) / width,
+                float(box[3]) / height,
+            ),
+            Point(float(foot[0]) / width, float(foot[1]) / height),
+            state.player.confidence,
+            state.player.possesses_ball,
+            confidence,
+            self._state_name(confidence),
+        )
+
+    def _smooth_visual_geometry(
+        self, state: _LocalPlayerState, width: int, height: int
+    ) -> None:
+        """Advance a bounded alpha-beta display filter toward raw CV geometry."""
+
+        settings = self.config.player_cv_tracking
+        previous_foot = state.visual_foot_px.copy()
+        predicted_foot = previous_foot + state.visual_velocity
+        residual = state.foot_px - predicted_foot
+        correction = settings.visual_position_gain * residual
+        correction_norm = hypot(float(correction[0]), float(correction[1]))
+        maximum = settings.max_visual_correction_fraction * hypot(width, height)
+        if correction_norm > maximum:
+            correction *= maximum / correction_norm
+        state.visual_foot_px = predicted_foot + correction
+        state.visual_velocity = settings.visual_velocity_decay * (
+            state.visual_velocity + settings.visual_velocity_gain * residual
+        )
+
+        translation = state.visual_foot_px - previous_foot
+        predicted_box = state.visual_box_px + np.array(
+            [translation[0], translation[1], translation[0], translation[1]],
+            dtype=np.float32,
+        )
+        state.visual_box_px = predicted_box + settings.visual_position_gain * (
+            state.box_px - predicted_box
         )
 
     def initialize(
@@ -224,12 +285,18 @@ class VLMInitializedPlayerCVTracker:
             if previous_state is None:
                 box, foot = detected_box, detected_foot
                 last_displacement = None
+                visual_box = box.copy()
+                visual_foot = foot.copy()
+                visual_velocity = np.zeros(2, dtype=np.float32)
             else:
                 weight = self._ANCHOR_GEOMETRY_WEIGHT
                 box = (1.0 - weight) * previous_state.box_px + weight * detected_box
                 foot = (1.0 - weight) * previous_state.foot_px + weight * detected_foot
                 box, foot = self._clip_geometry(box, foot, width, height)
                 last_displacement = previous_state.last_displacement
+                visual_box = previous_state.visual_box_px.copy()
+                visual_foot = previous_state.visual_foot_px.copy()
+                visual_velocity = previous_state.visual_velocity.copy()
             confidence = (
                 player.tracking_confidence
                 if self.config.tracking.confidence.enabled
@@ -254,14 +321,21 @@ class VLMInitializedPlayerCVTracker:
                 confidence,
                 tracking_state,
             )
-            new_states[player.track_id] = _LocalPlayerState(
+            state = _LocalPlayerState(
                 initialized,
                 box,
                 foot,
+                visual_box,
+                visual_foot,
+                visual_velocity,
                 self._features(gray, box),
                 confidence,
                 last_displacement=last_displacement,
             )
+            if previous_state is not None:
+                self._smooth_visual_geometry(state, width, height)
+                state.player = self._tracked_player(state, width, height)
+            new_states[player.track_id] = state
             self._previous_visual_state[player.track_id] = tracking_state
             self._anchor_reinitializations += 1
 
@@ -452,6 +526,7 @@ class VLMInitializedPlayerCVTracker:
                 self._previous_visual_state[track_id] = "lost"
                 del self._states[track_id]
                 continue
+            self._smooth_visual_geometry(state, width, height)
             tracked = self._tracked_player(state, width, height)
             state.player = tracked
             self._previous_visual_state[track_id] = tracked.tracking_state
@@ -550,7 +625,12 @@ class VLMInitializedPlayerCVTracker:
                     current = TrackedFrame(frame_id, (), None, None)
                 else:
                     if predicted:
-                        self.logical_tracker.apply_predictions(predicted, frame_id)
+                        height, width = gray.shape
+                        raw_predictions = tuple(
+                            self._raw_player(self._states[track_id], width, height)
+                            for track_id in sorted(self._states)
+                        )
+                        self.logical_tracker.apply_predictions(raw_predictions, frame_id)
                     tracked = self.logical_tracker.update(detection)
                     self.initialize(tracked.players, gray)
                     current = TrackedFrame(

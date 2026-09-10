@@ -36,6 +36,7 @@ from .sampling import sample_frame_indices
 from .schema import FrameDetection, frame_detection_json_schema
 from .shot_context import trackable_ball_anchors
 from .tracking import build_player_tracker
+from .trajectory_quality import player_trajectory_quality
 from .video import (
     extract_video_frames,
     mute_video_in_place,
@@ -46,6 +47,7 @@ from .video import (
 
 
 EXPERIMENT_ID = "gemini-flash-5fps-comparison"
+COMMAND_MODULE = "track_game.gemini_5fps"
 FRAME_INTERVAL = 6
 SAMPLING_FPS = 5.0
 ANCHOR_FRAMES = tuple(sample_frame_indices(900, FRAME_INTERVAL, include_last=True))
@@ -185,9 +187,9 @@ def build_cost_preflight(
                 "historical_mean_output_tokens_per_request": round(
                     statistics.mean(outputs), 3
                 ),
-                "low_151_frame_cost_usd": round(low, 9),
-                "expected_151_frame_cost_usd": round(expected, 9),
-                "high_151_frame_cost_usd": round(high, 9),
+                "low_cost_usd": round(low, 9),
+                "expected_cost_usd": round(expected, 9),
+                "high_cost_usd": round(high, 9),
             }
         )
     return {
@@ -200,16 +202,16 @@ def build_cost_preflight(
         "catalog_fingerprint": _catalog_fingerprint(catalog_snapshot),
         "models": estimates,
         "combined": {
-            "low_usd": round(sum(row["low_151_frame_cost_usd"] for row in estimates), 9),
+            "low_usd": round(sum(row["low_cost_usd"] for row in estimates), 9),
             "expected_usd": round(
-                sum(row["expected_151_frame_cost_usd"] for row in estimates), 9
+                sum(row["expected_cost_usd"] for row in estimates), 9
             ),
-            "high_usd": round(sum(row["high_151_frame_cost_usd"] for row in estimates), 9),
+            "high_usd": round(sum(row["high_cost_usd"] for row in estimates), 9),
         },
         "scenario_definitions": {
-            "low": "151 requests priced at that model's observed 2 FPS minimum input and output tokens.",
-            "expected": "151 requests priced at that model's observed 2 FPS mean input and output tokens.",
-            "high": "151 requests priced at observed maximum input and the fixed 4,096 output-token ceiling.",
+            "low": f"{ANCHORS_PER_MODEL} requests priced at that model's observed 2 FPS minimum input and output tokens.",
+            "expected": f"{ANCHORS_PER_MODEL} requests priced at that model's observed 2 FPS mean input and output tokens.",
+            "high": f"{ANCHORS_PER_MODEL} requests priced at observed maximum input and the fixed 4,096 output-token ceiling.",
         },
         "warning": "These are planning estimates. Actual image tokenization, output length, and returned usage can vary.",
     }
@@ -240,7 +242,9 @@ def prepare(repository_root: str | Path) -> FiveFpsPaths:
         or info.width != 1920
         or info.height != 1080
     ):
-        raise RuntimeError("5 FPS comparison requires the verified 900-frame 1080p clip")
+        raise RuntimeError(
+            f"{SAMPLING_FPS:g} FPS comparison requires the verified 900-frame 1080p clip"
+        )
     if video_has_audio(paths.clip):
         raise RuntimeError("source clip must be silent before test preparation")
     _prepare_anchor_images(paths)
@@ -314,7 +318,7 @@ def prepare(repository_root: str | Path) -> FiveFpsPaths:
                 "larger filled supersampled player and ball markers",
             ],
             "exact_run_command": (
-                ".venv\\Scripts\\python.exe -m track_game.gemini_5fps run "
+                f".venv\\Scripts\\python.exe -m {COMMAND_MODULE} run "
                 f"--approved-call-count {PAID_CALLS}"
             ),
             "approval_gate": (
@@ -498,6 +502,11 @@ def _render_pipeline(
     lifecycle = tracker.lifecycle
     visible_player_marker_frames = sum(len(frame.players) for frame in timeline)
     empty_player_frames = sum(not frame.players for frame in timeline)
+    trajectory_quality = player_trajectory_quality(
+        timeline,
+        anchor_frames=ANCHOR_FRAMES,
+        scene_cut_frames=cuts,
+    )
     summary["output_video"] = str(output.relative_to(paths.root))
     summary["tracking"] = {
         "status": "completed",
@@ -510,6 +519,7 @@ def _render_pipeline(
         "closeup_suppressed_anchors": player_result.stats.closeup_suppressed_anchors,
         "visible_player_marker_frames": visible_player_marker_frames,
         "empty_player_frames": empty_player_frames,
+        "trajectory_quality": trajectory_quality,
         "ball_tracking": asdict(ball_result.stats),
     }
     _write_json(paths.model_dir(model) / "summary.json", summary)
@@ -517,7 +527,7 @@ def _render_pipeline(
 
 def _write_results(paths: FiveFpsPaths, summaries: dict[str, dict[str, Any]]) -> None:
     lines = [
-        "# Gemini Flash 5 FPS comparison",
+        f"# Gemini Flash {SAMPLING_FPS:g} FPS comparison",
         "",
         "| Model | Valid | Players/frame | Ball anchors | Possession anchors | Cost | Mean latency | Batch time |",
         "|---|---:|---:|---:|---:|---:|---:|---:|",
@@ -541,7 +551,7 @@ def _write_results(paths: FiveFpsPaths, summaries: dict[str, dict[str, Any]]) ->
 def run(repository_root: str | Path, approved_call_count: int) -> FiveFpsPaths:
     if approved_call_count != PAID_CALLS:
         raise PermissionError(
-            f"5 FPS comparison requires explicit approval for exactly {PAID_CALLS} calls"
+            f"{SAMPLING_FPS:g} FPS comparison requires explicit approval for exactly {PAID_CALLS} calls"
         )
     paths = five_fps_paths(repository_root)
     if not paths.manifest.is_file() or not paths.catalog_snapshot.is_file():

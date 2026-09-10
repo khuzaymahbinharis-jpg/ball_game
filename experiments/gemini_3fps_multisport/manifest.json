@@ -1,0 +1,28 @@
+{
+  "automatic_retries": 0,
+  "balance_checks": "before and after every clip",
+  "clips": [
+    "football_amateur",
+    "allstars_fr_eng",
+    "basketball",
+    "football_cuts",
+    "volleyball"
+  ],
+  "completed_at": "2026-09-10T04:43:58.330041+00:00",
+  "experiment_id": "gemini-3.8-flash-3fps-multisport",
+  "known_cost_usd": 3.8247075,
+  "model": {
+    "control_reuse": false,
+    "include_reasoning_parameter": true,
+    "key": "gemini_3_8_flash",
+    "provider_slug": "google-ai-studio",
+    "reasoning_setting": {
+      "effort": "low",
+      "exclude": true
+    },
+    "slug": "google/gemini-3.8-flash"
+  },
+  "paid_calls_requiring_approval": 455,
+  "paid_inference_calls_attempted": 455,
+  "status": "completed"
+}

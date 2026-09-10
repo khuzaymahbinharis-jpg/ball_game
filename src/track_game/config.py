@@ -132,6 +132,10 @@ class PlayerCVTrackingConfig:
     max_displacement_fraction: float = 0.08
     max_coast_frames: int = 3
     box_padding_fraction: float = 0.08
+    visual_position_gain: float = 0.28
+    visual_velocity_gain: float = 0.06
+    visual_velocity_decay: float = 0.88
+    max_visual_correction_fraction: float = 0.012
 
     def __post_init__(self) -> None:
         if self.enabled and self.method != "sparse_lk":
@@ -154,6 +158,16 @@ class PlayerCVTrackingConfig:
             raise ValueError("max_displacement_fraction must be in (0, 1]")
         if self.max_coast_frames < 0 or not 0 <= self.box_padding_fraction <= 1:
             raise ValueError("invalid player tracking lifecycle settings")
+        smoothing_values = (
+            self.visual_position_gain,
+            self.visual_velocity_gain,
+            self.visual_velocity_decay,
+            self.max_visual_correction_fraction,
+        )
+        if any(value < 0 or value > 1 for value in smoothing_values):
+            raise ValueError("visual smoothing values must be in [0, 1]")
+        if self.visual_position_gain <= 0 or self.max_visual_correction_fraction <= 0:
+            raise ValueError("visual smoothing gains must be positive")
 
 
 @dataclass(frozen=True)

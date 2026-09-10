@@ -1,0 +1,50 @@
+{
+  "anchor_count_per_model": 61,
+  "captured_at": "2026-09-08T20:58:43.129909+00:00",
+  "catalog_fingerprint": "0670e01790fa8ceef04c76d07bfec2c794473d26834b0e4252609888f801bc54",
+  "combined": {
+    "expected_usd": 0.75471225,
+    "high_usd": 2.007693,
+    "low_usd": 0.2099925
+  },
+  "currency": "USD",
+  "frame_interval": 15,
+  "models": [
+    {
+      "expected_cost_usd": 0.37156425,
+      "high_cost_usd": 1.0038465,
+      "historical_2fps_requests": 61,
+      "historical_mean_input_tokens_per_request": 1461.869,
+      "historical_mean_output_tokens_per_request": 1331.951,
+      "input_per_million_usd": 0.75,
+      "key": "gemini_3_8_flash",
+      "low_cost_usd": 0.105225,
+      "model": "google/gemini-3.8-flash",
+      "output_per_million_usd": 3.75,
+      "provider": "Google AI Studio",
+      "provider_slug": "google-ai-studio"
+    },
+    {
+      "expected_cost_usd": 0.383148,
+      "high_cost_usd": 1.0038465,
+      "historical_2fps_requests": 61,
+      "historical_mean_input_tokens_per_request": 1461.869,
+      "historical_mean_output_tokens_per_request": 1382.59,
+      "input_per_million_usd": 0.75,
+      "key": "gemini_3_7_flash",
+      "low_cost_usd": 0.1047675,
+      "model": "google/gemini-3.7-flash",
+      "output_per_million_usd": 3.75,
+      "provider": "Google AI Studio",
+      "provider_slug": "google-ai-studio"
+    }
+  ],
+  "paid_calls_requiring_approval": 122,
+  "sampling_fps": 2.0,
+  "scenario_definitions": {
+    "expected": "61 requests priced at that model's observed 2 FPS mean input and output tokens.",
+    "high": "61 requests priced at observed maximum input and the fixed 4,096 output-token ceiling.",
+    "low": "61 requests priced at that model's observed 2 FPS minimum input and output tokens."
+  },
+  "warning": "These are planning estimates. Actual image tokenization, output length, and returned usage can vary."
+}
